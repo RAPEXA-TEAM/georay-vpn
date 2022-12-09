@@ -1,0 +1,101 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: vazir;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  border-top: 6px solid #f77bac;
+  border-bottom: 1px solid rgb(243, 243, 243);
+}
+
+.navbar-arrow {
+  position: relative;
+  top: -2px;
+}
+
+.main-container {
+  width: 100%;
+  padding: 4rem 2rem;
+}
+
+.chart-container {
+  width: 80%;
+  height: 480px;
+  margin: 0 auto;
+}
+
+.pie-chart-container,
+.doughnut-chart-container {
+  height: 210px;
+  width: 210px;
+}
+
+.footer {
+  width: 100%;
+  padding: 0 3.5rem;
+  padding-top: 3rem;
+  background-color: #252f3f;
+}
+
+.footer-bottom {
+  color: #9fa6b2;
+  border-top: 1px solid #9fa6b2;
+}
+
+.footer-dark-gray {
+  color: #9fa6b2;
+}
+
+.footer-light-gray {
+  color: #d2d6dc;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar {
+    padding: 0.75rem 7rem;
+  }
+
+  .main-container {
+    padding: 4rem 7rem;
+  }
+
+  .pie-chart-container,
+  .doughnut-chart-container {
+    height: 360px;
+    width: 360px;
+  }
+
+  .footer {
+    padding: 0 8.5rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .navbar {
+    padding: 0.75rem 12rem;
+  }
+
+  .main-container {
+    padding: 4rem 12rem;
+  }
+
+  .footer {
+    padding: 0 13.5rem;
+  }
+}
+
+@font-face {
+  font-family: vazir;
+  src: url(./Vazirmatn-Regular.ttf);
+}
