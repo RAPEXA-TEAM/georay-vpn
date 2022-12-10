@@ -25,7 +25,7 @@ def read_users_from_database():
     '''this function return all users informations'''
     db = connect_to_database()
     cur = db.cursor()
-    qury = f' select * from users;'
+    qury = f'SELECT * FROM users;'
     cur.execute(qury)
     db.close()
     return cur.fetchall()
