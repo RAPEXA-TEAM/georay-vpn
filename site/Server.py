@@ -26,6 +26,14 @@ def handle_admin_page():
 def handle_dashbourd_page():
     return render_template("dashbourd.html")
 
+#TODO
+@app.route("/Server_list",methods=["GET","POST"])
+def handle_dashbourd_page():
+    if request.method == 'POST':
+        ret = {"1" : {"url" : "" , "user" : "" , "pass" : ""} , }
+        return jsonify(ret)
+    return 200
+
 @app.route('/register',methods=["GET", "POST"])
 def handle_create_user():
     if request.method == 'POST':
@@ -66,16 +74,19 @@ def handle_login_user():
                 user_db, password_db, phone_number, email, days, token = user
                 list_of_users_dic[user_db] = {'password' : password_db,'phone' : phone_number, 'email' : email, 'days' : days, 'token' : token} 
             
-            if (username in list_of_users_dic and password == list_of_users_dic[username]['password'] and token_in == list_of_users_dic[username]['token']):
+            if (username in list_of_users_dic and token_in == list_of_users_dic[username]['token'] and password == list_of_users_dic[username]['password']):
 
                 ret = {'code' : '200', 'data' : list_of_users_dic[username]}
                 return jsonify(ret)
 
+            else :
+                return render_template("login.html")
+
         except Exception as error:
-            ret = {'code' : '404', 'error' : error}
-            return jsonify(ret)
-    else :
-        return render_template("login.html")
+                    ret = {'code' : '404', 'error' : error}
+                    return jsonify(ret)
+
+    return render_template("login.html")
 
 def Check_User(token):
     
