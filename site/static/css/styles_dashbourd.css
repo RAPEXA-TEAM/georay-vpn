@@ -41,6 +41,72 @@ body {
   width: 210px;
 }
 
+.services-container {
+  width: 100%;
+  padding: 4rem 2rem;
+  background-color: #efefef;
+}
+
+.service-time {
+  background-color: #222;
+}
+
+.service-time-bold {
+  background-color: #d4145a;
+}
+
+.service-price {
+  background-color: #282828;
+}
+
+.service-price-bold {
+  background-color: #e7296f;
+}
+
+.price-number {
+  color: #d4145a;
+}
+
+.price-number-bold {
+  color: #fff;
+}
+
+.pricingtables ul li {
+  color: #5a5a5a;
+  padding: 10px 0;
+}
+
+.pricingtables ul li:nth-child(odd) {
+  background: #fff;
+}
+
+.pricingtables ul li:nth-child(even) {
+  background: #e1e3e4;
+}
+
+.pricingtables-bold ul li {
+  color: #5a5a5a;
+  padding: 13px 0;
+}
+
+.pricingtables-bold ul li:nth-child(odd) {
+  background: #fff;
+}
+
+.pricingtables-bold ul li:nth-child(even) {
+  background: #e1e3e4;
+}
+
+.panel-footer {
+  border-top: 1px solid #ddd;
+  background-color: #f5f5f5;
+}
+
+.buy-service-button {
+  background-color: #d4145a;
+}
+
+
 .footer {
   width: 100%;
   padding: 0 3.5rem;
@@ -70,6 +136,12 @@ body {
     padding: 4rem 7rem;
   }
 
+
+  .services-container {
+    padding: 4rem 7rem;
+  }
+
+
   .pie-chart-container,
   .doughnut-chart-container {
     height: 360px;
@@ -89,6 +161,12 @@ body {
   .main-container {
     padding: 4rem 12rem;
   }
+
+
+  .services-container {
+    padding: 4rem 12rem;
+  }
+
 
   .footer {
     padding: 0 13.5rem;
