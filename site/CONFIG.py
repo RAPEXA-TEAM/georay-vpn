@@ -11,6 +11,8 @@ MYSQL_USER = "selleruser"
 MYSQL_PASS = "sellerpass"
 MYSQL_DATABAS = "sells"
 
+#
+
 # CREATE DATABASE sells;
 # CREATE USER 'selleruser'@'localhost' IDENTIFIED BY 'sellerpass';
 # GRANT ALL PRIVILEGES ON sells.* TO 'selleruser'@'localhost';

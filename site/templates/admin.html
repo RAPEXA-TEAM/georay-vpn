@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="static/assets/img/apple-icon.png"
+    />
+    <link rel="icon" type="image/png" href="static/assets/img/favicon.png" />
+    <title>Admin</title>
+    <!--     Fonts and icons     -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+    />
+    <!-- Nucleo Icons -->
+    <link href="static/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="static/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+    <!-- CSS Files -->
+    <link
+      id="pagestyle"
+      href="static/assets/css/material-dashboard.css?v=3.0.4"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="g-sidenav-show bg-gray-200">
+    <main
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
+    >
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="card my-4">
+              <div
+                class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+              >
+                <div
+                  class="d-flex flex-row justify-content-between align-items-center bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 px-4"
+                >
+                  <h6 class="text-white text-capitalize ps-3">Users</h6>
+                  <span class="res-alert d-none btn btn-light"></span>
+                  <a type="button" class="btn btn-light" href="/">Logout</a>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th
+                          class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          User
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Token
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Days
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Phone
+                        </th>
+                        <th class="text-secondary opacity-7"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <h6 class="mb-0 text-sm">mmd</h6>
+                              <p class="text-xs text-secondary mb-0">
+                                mmd@gmail.com
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-xs font-weight-bold mb-0">
+                            mgstudio884
+                          </p>
+                          <p class="user-token text-xs text-secondary mb-0">
+                            a5ceb1d0d6d3d0210af417c879303d69179b8674ba35e60877dd18331fb624e6
+                          </p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span
+                            class="day-container badge badge-sm bg-gradient-success"
+                            >7</span
+                          >
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold"
+                            >09155520952</span
+                          >
+                        </td>
+                        <td class="align-middle">
+                          <button
+                            id="edit-user-btn"
+                            class="text-secondary font-weight-bold text-xs"
+                            data-toggle="tooltip"
+                            data-original-title="Edit user"
+                            data-type="edit"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--   Core JS Files   -->
+    <script src="static/assets/js/core/popper.min.js"></script>
+    <script src="static/assets/js/core/bootstrap.min.js"></script>
+    <script src="static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const allEditUserButtons = document.querySelectorAll("#edit-user-btn");
+        for (const btn of allEditUserButtons) {
+          btn.addEventListener("click", (e) => {
+            const dataType = e.target.getAttribute("data-type");
+            if (dataType === "edit") {
+              // change button text
+              e.target.innerHTML = "Submit";
+              e.target.setAttribute("data-type", "submit");
+
+              // get days info
+              const days =
+                e.target.parentElement.parentElement.querySelector(
+                  ".day-container"
+                );
+              const daysParent = days.parentElement;
+              const daysText = days.textContent;
+
+              // create input
+              const input = document.createElement("input");
+              input.type = "number";
+              input.value = daysText;
+              input.className = "day-container";
+              input.style.width = "40px";
+
+              // remove and add elements
+              days.remove();
+              daysParent.appendChild(input);
+            } else if (dataType === "submit") {
+              // change button text
+              e.target.innerHTML = "Edit";
+              e.target.setAttribute("data-type", "edit");
+
+              // get days info
+              const days =
+                e.target.parentElement.parentElement.querySelector(
+                  ".day-container"
+                );
+              const daysParent = days.parentElement;
+
+              // create span
+              const span = document.createElement("span");
+              span.innerHTML = days.value;
+              span.className =
+                "day-container badge badge-sm bg-gradient-success";
+
+              // remove and add elements
+              days.remove();
+              daysParent.appendChild(span);
+
+              // post data to backend
+              const fetchOptions = {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                headers: new Headers({ "Content-Type": "application/json" }),
+                body: JSON.stringify({
+                  days: days.value,
+                  data: document.querySelector(".user-token").textContent,
+                }),
+              };
+              //TODO
+              fetch("http://127.0.0.1:5550/admin", fetchOptions)
+                .then((response) => {
+                  if (response.ok) {
+                    return response.json();
+                  }
+                })
+                .then((res) => {
+                  if (res.code === 200) {
+                    const alert = document.querySelector(".res-alert");
+                    alert.innerHTML = res.data;
+                    alert.classList.remove("d-none");
+
+                    setTimeout(() => {
+                      alert.innerHTML = "";
+                      alert.classList.add("d-none");
+                    }, 3000);
+                  }
+                });
+            }
+          });
+        }
+      });
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="static/assets/js/material-dashboard.min.js?v=3.0.4"></script>
+  </body>
+</html>

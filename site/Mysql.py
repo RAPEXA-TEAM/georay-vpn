@@ -10,7 +10,17 @@ def connect_to_database():
                        passwd=CONFIG.MYSQL_PASS,
                        db=CONFIG.MYSQL_DATABAS)
     return(db)
-    
+
+def update_user(token, days):
+    '''this function update user expired time on database'''
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'UPDATE users SET days = "{days}" where token = "{token}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
 def write_user_to_database(username, password, phone, email, days, token):
     '''this function create user on database'''
     db = connect_to_database()

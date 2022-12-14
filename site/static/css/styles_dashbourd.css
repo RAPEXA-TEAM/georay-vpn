@@ -26,7 +26,7 @@ body {
 
 .main-container {
   width: 100%;
-  padding: 4rem 2rem;
+  padding: 0 2rem;
 }
 
 .chart-container {
@@ -43,7 +43,7 @@ body {
 
 .services-container {
   width: 100%;
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   background-color: #efefef;
 }
 
@@ -106,7 +106,6 @@ body {
   background-color: #d4145a;
 }
 
-
 .footer {
   width: 100%;
   padding: 0 3.5rem;
@@ -133,7 +132,7 @@ body {
   }
 
   .main-container {
-    padding: 4rem 7rem;
+    padding: 0 7rem;
   }
 
 
@@ -159,7 +158,7 @@ body {
   }
 
   .main-container {
-    padding: 4rem 12rem;
+    padding: 0 12rem;
   }
 
 

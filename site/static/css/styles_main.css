@@ -59,6 +59,11 @@ body {
   color: #fff;
 }
 
+.pricingtables,
+.pricingtables-bold {
+  width: 100%;
+}
+
 .pricingtables ul li {
   color: #5a5a5a;
   padding: 10px 0;
