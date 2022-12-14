@@ -88,36 +88,37 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {% for user in data.users %}
                       <tr>
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div
                               class="d-flex flex-column justify-content-center"
                             >
-                              <h6 class="mb-0 text-sm">mmd</h6>
+                              <h6 class="mb-0 text-sm">{{user.username}}</h6>
                               <p class="text-xs text-secondary mb-0">
-                                mmd@gmail.com
+                                {{user.email}}
                               </p>
                             </div>
                           </div>
                         </td>
                         <td>
                           <p class="text-xs font-weight-bold mb-0">
-                            mgstudio884
+                            {{user.password}}
                           </p>
                           <p class="user-token text-xs text-secondary mb-0">
-                            a5ceb1d0d6d3d0210af417c879303d69179b8674ba35e60877dd18331fb624e6
+                            {{user.token}}
                           </p>
                         </td>
                         <td class="align-middle text-center text-sm">
                           <span
                             class="day-container badge badge-sm bg-gradient-success"
-                            >7</span
+                            >{{user.days}}</span
                           >
                         </td>
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"
-                            >09155520952</span
+                            >{{user.phone}}</span
                           >
                         </td>
                         <td class="align-middle">
@@ -132,6 +133,7 @@
                           </button>
                         </td>
                       </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                 </div>

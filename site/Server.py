@@ -27,8 +27,13 @@ def handle_admin_page():
         else:
             ret = {"code" : 501, "data" : "'مشکل اتصال به دیتابیس'"}
             return jsonify(ret)
-
-    return render_template("admin.html")
+            
+    all_users = Mysql.read_users_from_database()
+    users = []
+    for user in all_users:
+        user_db, password_db, phone_number, email, days, token = user
+        users.append({'username' : user_db, 'password' : password_db,'phone' : phone_number, 'email' : email, 'days' : days, 'token' : token})
+    return render_template("admin.html", data = {"users" : users})   
 
 @app.route('/register',methods=["GET", "POST"])
 def handle_create_user():
