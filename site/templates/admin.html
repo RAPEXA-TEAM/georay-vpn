@@ -216,7 +216,7 @@
                 headers: new Headers({ "Content-Type": "application/json" }),
                 body: JSON.stringify({
                   days: days.value,
-                  data: document.querySelector(".user-token").textContent,
+                  data: daysParent.parentElement.children[1].lastElementChild.textContent,
                 }),
               };
               //TODO
