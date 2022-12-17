@@ -1,0 +1,13 @@
+TODO : replace url with buyed domain 
+
+Url : 127.0.0.1:5550/register
+Method : POST
+
+Body : {"user" : "mmd" , "pass" : "Mmm1234!!" , "rpass" : ""Mmmm1234!! , "phone" : "09304910631" , "email" : "test@gmail.com" , "answer" : "programmer"}
+
+Responses :
+
+{"code" : 200, "data" : "یوزر با موفقیت ساخته شد"}
+{"code" : 501, "data" : "'مشکل اتصال به دیتابیس'"}
+{"code" : 404, "data" : "یوزری با مشخصات ذیل موجود میباشد"}
+{"code" : 406, "data" : "error"}

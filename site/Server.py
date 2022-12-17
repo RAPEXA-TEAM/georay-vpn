@@ -72,7 +72,6 @@ def handle_main_page():
 def handle_login_user():
 
     if request.method == 'POST':
-        password = request.json["pass"]
         username = request.json["user"]
         token_in = request.json["token"]
 
@@ -86,12 +85,13 @@ def handle_login_user():
 
         Servers = Read_servers()
 
-        if (username in list_of_users_dic and token_in == list_of_users_dic[username]["token"] and password == list_of_users_dic[username]["password"]):
+        if (username in list_of_users_dic and token_in == list_of_users_dic[username]["token"]):
             
             ret = {"code" : 200, "data" : list_of_users_dic[username], "Servers" : Servers}
             return jsonify(ret)
         
         else:
+            print(list_of_users_dic)
             ret = {"code" : 401, "data" : "Error"}
             return jsonify(ret)    
     
