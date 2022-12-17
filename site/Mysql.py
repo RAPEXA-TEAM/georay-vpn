@@ -31,6 +31,25 @@ def write_user_to_database(username, password, phone, email, days, token):
     db.close()    
     return True
 
+def write_date_to_database(date):
+    '''this function create user on database'''
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'INSERT INTO dates (date) VALUES ("{date}");'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
+def read_dates_from_database():
+    '''this function return all working dates'''
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'SELECT * FROM dates;'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchall()
+
 def read_users_from_database():
     '''this function return all users informations'''
     db = connect_to_database()
@@ -50,11 +69,20 @@ def Make_Database():
     cur.execute(qury)
     db.commit()
     db.close()
+    db = connect_to_database()
+    print("[+] Start creating Users table...")
     qury = "CREATE TABLE users (user VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, phone VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, days VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, PRIMARY KEY (token), UNIQUE (token));"
     cur.execute(qury)
     db.commit()
     db.close()
-    print("[+] Create Users table")
+    print("[+] Create Users table done.")
+    db = connect_to_database()
+    print("[+] Start creating date table...")
+    qury = "CREATE TABLE dates (date VARCHAR(255) NOT NULL, UNIQUE (date));"
+    cur.execute(qury)
+    db.commit()
+    db.close()
+    print("[+] Create date table done.")
     return True
 
 try:
