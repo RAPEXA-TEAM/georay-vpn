@@ -1,0 +1,12 @@
+TODO : replace url with buyed domain 
+
+Url : 127.0.0.1:5550/checkpayment
+Method : POST
+
+Body : {"txid" : "0x31c79cd23eb9410ab7a0a52e6d389eed909d7835e14cec90c7ecd9a50a293c5c"}
+
+Responses :
+
+{"code" : 200, "data" : "txid (0x31c79cd23eb9410ab7a0a52e6d389eed909d7835e14cec90c7ecd9a50a293c5c) is valid"}
+{"code" : 404, "data" : "txid (0x31c79cd23eb9410ab7a0a52e6d389eed909d7835e14cec90c7ecd9a50a293c5c) is not valid"}
+{"code" : 500, "data" : "Request not valid"}
