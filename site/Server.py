@@ -4,6 +4,7 @@ from flask_cors import CORS
 import Mysql
 import csv
 import hashlib
+import requests
 import CONFIG     #SERVER CONGIG
 
 app = Flask(__name__)
@@ -14,8 +15,24 @@ app.config.update(
     SECRET_KEY = CONFIG.SECRET_KEY
 )
 
+@app.route("/checkpayment",methods=["GET","POST"])
+def handle_check_payment():
+    if request.method == "POST":
+        
+        txid = request.json["txid"]
+        
+        if Check_Payment(txid):
+            ret = ret = {"code" : 200, "data" : f"txid ({txid}) is valid"}
+            return jsonify(ret)
+        
+        else:
+            ret = {"code" : 404, "data" : f"txid ({txid}) is not valid"}
+            return jsonify(ret)
+        
+    ret = {"code" : 500, "data" : "Request not valid"}
+    return jsonify(ret)
 
-@app.route('/admin',methods=["GET", "POST"])
+@app.route('/d08ec689aef988a788aa6b5f6ed04a0efe57ca919d7d9d863d6322edd47f2d81',methods=["GET", "POST"])
 def handle_admin_page():
     if request.method == "POST":
         days = request.json["days"]
@@ -121,6 +138,30 @@ def Check_User(token):
                 
     else:
         return True
+
+def Check_Payment(txid):
+    '''This function check txid is valid or not'''
+    
+    apikey = CONFIG.APIKEY
+    baseurl = CONFIG.APIURL
+    query = f"?module=transaction&action=getstatus&txhash={txid}&apikey={apikey}"
+
+    url = baseurl + query
+    response = requests.get(url)
+
+    try:
+
+        if int(response.json()['result']['isError']) == 0 : 
+            return True
+
+        if int(response.json()['result']['isError']) == 1 :
+            return False
+
+        else:
+            return False
+
+    except:
+        return False
 
 if __name__ == "__main__":
     app.run("0.0.0.0",5550,debug=True)
