@@ -219,8 +219,7 @@
                   data: daysParent.parentElement.children[1].lastElementChild.textContent,
                 }),
               };
-              //TODO
-              fetch("http://127.0.0.1:5550/admin", fetchOptions)
+              fetch("http://georay.xyz/admin", fetchOptions)
                 .then((response) => {
                   if (response.ok) {
                     return response.json();
