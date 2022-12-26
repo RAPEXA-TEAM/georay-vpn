@@ -31,6 +31,16 @@ def write_user_to_database(username, password, phone, email, days, token):
     db.close()    
     return True
 
+def write_txid_to_database(txid, days):
+    '''this function write txid on database'''
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'INSERT INTO txids (txid, days, time) VALUES ("{txid}", "{days}", now());'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
 def write_date_to_database(date):
     '''this function create user on database'''
     db = connect_to_database()
@@ -46,6 +56,15 @@ def read_dates_from_database():
     db = connect_to_database()
     cur = db.cursor()
     qury = f'SELECT * FROM dates;'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchall()
+
+def read_txids_from_database():
+    '''this function return all working dates'''
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'SELECT * FROM txids;'
     cur.execute(qury)
     db.close()
     return cur.fetchall()
