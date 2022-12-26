@@ -3,16 +3,17 @@ v2ray vpn
 
 ## Todo
 
-[+] git pull latest project on rapexa.ir server
-[+] buying domain for site and connect to rapexa.ir:5550
-[ ] run v2ray on iran and thefarameta.com site
-[ ] run openconnect on iran and thefarameta.com site
-[ ] v2ray ui on server for creating accounts
-[ ] config rapexa.ir for an other vpn selling site
-[ ] config Mysql
-[ ] config site to run always on background (supervisor and port forwarding on 5550)
-[ ] config Expiration.py to run daily once (https://www.geeksforgeeks.org/scheduling-python-scripts-on-linux/)
-[ ] buying iran vps for v2ray vpn and run boilshit site
+- [x] git pull latest project on rapexa.ir server
+- [x] buying domain for site and connect to rapexa.ir:5550
+
+- [ ] run v2ray on iran and thefarameta.com site
+- [ ] run openconnect on iran and thefarameta.com site
+- [ ] v2ray ui on server for creating accounts
+- [ ] config rapexa.ir for an other vpn selling site
+- [ ] config Mysql
+- [ ] config site to run always on background (supervisor and port forwarding on 5550)
+- [ ] config Expiration.py to run daily once (https://www.geeksforgeeks.org/scheduling-python-scripts-on-linux/)
+- [ ] buying iran vps for v2ray vpn and run boilshit site
 
 ## Mysql 
 
