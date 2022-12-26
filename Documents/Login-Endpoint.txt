@@ -1,6 +1,4 @@
-TODO : replace url with buyed domain 
-
-Url : 127.0.0.1:5550/login
+Url : georay.xyz/login
 Method : POST
 Body : {"user" : "mmd" , "token" : "c134d809929a6fdfa0eac9166b4db3c835cbf1dcd38e9a9fa81f14aea57be4f7"}
 

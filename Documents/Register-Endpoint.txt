@@ -1,6 +1,4 @@
-TODO : replace url with buyed domain 
-
-Url : 127.0.0.1:5550/register
+Url : georay.xyz/register
 Method : POST
 
 Body : {"user" : "mmd" , "pass" : "Mmm1234!!" , "rpass" : ""Mmmm1234!! , "phone" : "09304910631" , "email" : "test@gmail.com" , "answer" : "programmer"}
