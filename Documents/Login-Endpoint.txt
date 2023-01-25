@@ -1,6 +1,6 @@
 Url : georay.xyz/login
 Method : POST
-Body : {"user" : "mmd" , "token" : "c134d809929a6fdfa0eac9166b4db3c835cbf1dcd38e9a9fa81f14aea57be4f7"}
+Body : {"user" : "mmd" , "pass" : "Mmm1234!!"}
 
 Responses :
 
