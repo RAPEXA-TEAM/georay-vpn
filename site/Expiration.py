@@ -23,8 +23,10 @@ try:
         Mysql.write_date_to_database(date)
         for user in List_Of_Users:
 
-            user_db, password_db, phone_number, email, days, token = user
+            user_db, password_db, phone_number, email, days, token, verify = user
             Mysql.update_user(token,int(days)-1)
+        
+        print(f"127.0.0.1 - - [{current_time}] \"Run Expiration.py HTTP/1.1\" 200 -")
 
 except Exception as error:
         pass
