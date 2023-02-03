@@ -21,11 +21,31 @@ def update_user(token, days):
     db.close()    
     return True
 
-def write_user_to_database(username, password, phone, email, days, token):
+def update_user_registration(Token):
+    '''this function update user registration status on database'''
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'UPDATE users SET verified = "1" where token = "{Token}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
+def write_user_to_database(username, password, phone, email, days, token, verified):
     '''this function create user on database'''
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'INSERT INTO users (user, password, phone, email, days, token) VALUES ("{username}", "{password}", "{phone}", "{email}", "{days}", "{token}");'
+    qury = f'INSERT INTO users (user, password, phone, email, days, token, verified) VALUES ("{username}", "{password}", "{phone}", "{email}", "{days}", "{token}", "{verified}");'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
+def write_user_from_seller_to_database(username, password, Token_seller, token):
+    '''this function create user on database'''
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'INSERT INTO users (user, password, phone, email, days, token, verified) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "30", "{token}", "1");'
     cur.execute(qury)
     db.commit()
     db.close()    
@@ -74,6 +94,15 @@ def read_users_from_database():
     db = connect_to_database()
     cur = db.cursor()
     qury = f'SELECT * FROM users;'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchall()
+
+def read_users_for_seller_from_database(Token_seller):
+    '''this function return all users informations'''
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f"SELECT * FROM users WHERE phone = '{Token_seller}' AND email = '{Token_seller}';"
     cur.execute(qury)
     db.close()
     return cur.fetchall()
