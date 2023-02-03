@@ -220,7 +220,7 @@
               answer,
             }),
           };
-          fetch("http://georay.xyz/register", fetchOptions)
+          fetch("http://127.0.0.1:5550/register", fetchOptions)
             .then((response) => {
               if (response.ok) {
                 return response.json();
@@ -230,7 +230,7 @@
               if (res.code === 200) {
                 showAlert(res.data, "alert-warning");
                 setTimeout(() => {
-                  window.location.href = "http://georay.xyz/";
+                  window.location.href = "http://127.0.0.1:5550";
                 }, 3000);
               } else {
                 showAlert(res.data);
