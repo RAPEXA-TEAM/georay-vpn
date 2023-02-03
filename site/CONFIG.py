@@ -11,10 +11,16 @@ MYSQL_USER = "selleruser"
 MYSQL_PASS = "sellerpass"
 MYSQL_DATABAS = "sells"
 
+# Smtp Email
+
+SMTP_PORT = 587
+SMTP_SERVER = "smtp.gmail.com"
+SENDER_EMAIL = "georayvpn@gmail.com"
+PASSWORD = "gwdbyekqgityxywa"
+
 # Web3
 
-APIKEY = "J2JEBNHS6UY8M86SN5K1Y4GUINF58M7VXG"
-APIURL = "https://api.etherscan.io/api"
+NODE_URL = "https://ethereum.publicnode.com"
 
 #prices
 
