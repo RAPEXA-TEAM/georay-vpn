@@ -1,27 +1,26 @@
 # georay-vpn
-v2ray vpn
+
+Pro v2ray vpn with user management and resseler management
 
 ## Todo
 
-- [x] git pull latest project on rapexa.ir server
-- [x] buying domain for site and connect to rapexa.ir:5550
+- [ ] code front of add sell from seller panel
+- [ ] code front of edit sell from seller panel
+- [ ] document all code and write new documentation for apis for other developers
 
-- [ ] run v2ray on iran and thefarameta.com site
-- [ ] run openconnect on iran and thefarameta.com site
-- [ ] v2ray ui on server for creating accounts
-- [ ] config rapexa.ir for an other vpn selling site
+- [ ] git pull latest project on server
+- [ ] config domain for server
 - [ ] config Mysql
-- [ ] config site to run always on background (supervisor and port forwarding on 5550)
-- [ ] config Expiration.py to run daily once (https://www.geeksforgeeks.org/scheduling-python-scripts-on-linux/)
-- [ ] buying iran vps for v2ray vpn and run boilshit site
+- [ ] config site to run always on background (supervisor)
 
-## Mysql 
+## Mysql
 
-1. CREATE DATABASE sells;
+1. CREATE DATABASE sells; USE sells;
 2. CREATE USER 'selleruser'@'localhost' IDENTIFIED BY 'sellerpass';
 3. GRANT ALL PRIVILEGES ON sells.* TO 'selleruser'@'localhost';
-4. CREATE TABLE users (user VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, phone VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, days VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, PRIMARY KEY (token), UNIQUE (token));
-5. DROP TABLE dates;
-6. CREATE TABLE dates (date VARCHAR(255) NOT NULL, UNIQUE (date));
-7. DROP TABLE txids;
-8. CREATE TABLE txids (txid VARCHAR(255) NOT NULL, days VARCHAR(255) NOT NULL, time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE (txid));
+4. DROP TABLE users;
+5. CREATE TABLE users (user VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, phone VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, days VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, verified VARCHAR(10) NOT NULL, PRIMARY KEY (token), UNIQUE (token));
+6. DROP TABLE dates;
+7. CREATE TABLE dates (date VARCHAR(255) NOT NULL, UNIQUE (date));
+8. DROP TABLE txids;
+9. CREATE TABLE txids (txid VARCHAR(255) NOT NULL, days VARCHAR(255) NOT NULL, time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE (txid));
