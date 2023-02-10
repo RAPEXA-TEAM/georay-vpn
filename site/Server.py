@@ -203,7 +203,6 @@ def Handle_Sellers():
     else:
         return redirect(url_for('Handle_Seller'))
 
-
 @app.route('/makepaymenthash', methods=['POST','GET'])
 def handle_make_payment_hash():
 
@@ -445,7 +444,7 @@ def Check_Payment(txid,payment_hash):
             json_result = json.loads(web3.toJSON(result))
             hash = bytes.fromhex(json_result['input'][2:]).decode('utf-8')
             
-            if payment_hash == hash and Mysql.write_txid_to_database(txid, days):
+            if payment_hash == hash:
                 return True
 
             else:
