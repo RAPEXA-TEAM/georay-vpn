@@ -68,8 +68,8 @@ def handle_add_sell():
         Sellers = Read_Sellers()
         Tokens = []
 
-        for username, password in Sellers.items():  
-            Tokens.append(hashlib.sha256(("{"+str(username)+"}{"+str(password)+"}-georay").encode("utf-8")).hexdigest())
+        for username_db, password_db in Sellers.items():  
+            Tokens.append(hashlib.sha256(("{"+str(username_db)+"}{"+str(password_db)+"}-georay").encode("utf-8")).hexdigest())
 
         try :
             if Check_User(token) and Token_seller in Tokens:
@@ -80,7 +80,7 @@ def handle_add_sell():
                     ret = {"code" : 501, "data" : "error creating user"}
                     return jsonify(ret)
             else:
-                ret = {"code" : 404, "data" : "error user already exists"}
+                ret = {"code" : 401, "data" : "error user already exists"}
                 return jsonify(ret)
 
         except Exception as error:
@@ -89,26 +89,12 @@ def handle_add_sell():
 
     ret = {"code" : 500, "data" : "Request not valid"}
     return jsonify(ret)
-    
 
-@app.route('/sells', methods=['POST','GET'])
+@app.route('/sells_json', methods=['POST','GET'])
 @limiter.limit("100 per day")
-def Handle_Sellers():
+def Handle_Sellers_json():
     
-    exec(open('Expiration.py').read())
-
-    if request.method == 'POST':
-
-        days = request.json["days"]
-        token = str(request.json["data"])
-
-        if (Mysql.update_user(token.strip(),days)):
-            ret = {"code" : 200, "data" : f"update {token.strip()} expired days to {days} days!"}
-            return jsonify(ret)
-
-        else:
-            ret = {"code" : 501, "data" : "error connecting to database"}
-            return jsonify(ret)      
+    exec(open('Expiration.py').read())      
 
     Token = request.args.get('Token')
     Sellers = Read_Sellers()
@@ -118,6 +104,76 @@ def Handle_Sellers():
         Tokens.append(hashlib.sha256(("{"+str(username)+"}{"+str(password)+"}-georay").encode("utf-8")).hexdigest())
 
     if Token in Tokens:
+
+        if request.method == 'POST':
+
+            days = request.json["days"]
+            token = str(request.json["data"])
+
+            if (Mysql.update_user(token.strip(),days)):
+                ret = {"code" : 200, "data" : f"update {token.strip()} expired days to {days} days!"}
+                return jsonify(ret)
+
+            else:
+                ret = {"code" : 501, "data" : "error connecting to database"}
+                return jsonify(ret)
+
+        users = []
+        all_users = Mysql.read_users_for_seller_from_database(Token)
+        user_counter = 0
+        total_sell = 0
+
+        Sellers = Read_Sellers()
+        Seller = {}
+
+        for username_new, password_new in Sellers.items():
+
+            if hashlib.sha256(("{"+str(username_new)+"}{"+str(password_new)+"}-georay").encode("utf-8")).hexdigest() == Token:
+                Seller[username_new] = password_new
+
+            else:
+                continue
+
+        for user in all_users:
+            user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified = user
+            users.append({'username' : user_db, 'password' : password_db, 'days' : days, 'token' : token_db})
+            user_counter += 1
+            total_sell = user_counter * CONFIG.PRICE_ONE_MONTH
+
+        json_data = {"code" : 200, "users" : users, "sells" : total_sell, "count" : user_counter, "seller" : Seller}
+        return jsonify(json_data)
+
+    else:
+        ret = {"code" : 500, "data" : "Token did not exist"}
+        return jsonify(ret)
+
+@app.route('/sells', methods=['POST','GET'])
+@limiter.limit("100 per day")
+def Handle_Sellers():
+    
+    exec(open('Expiration.py').read())      
+
+    Token = request.args.get('Token')
+    Sellers = Read_Sellers()
+    Tokens = []
+
+    for username, password in Sellers.items():  
+        Tokens.append(hashlib.sha256(("{"+str(username)+"}{"+str(password)+"}-georay").encode("utf-8")).hexdigest())
+
+    if Token in Tokens:
+
+        if request.method == 'POST':
+
+            days = request.json["days"]
+            token = str(request.json["data"])
+
+            if (Mysql.update_user(token.strip(),days)):
+                ret = {"code" : 200, "data" : f"update {token.strip()} expired days to {days} days!"}
+                return jsonify(ret)
+
+            else:
+                ret = {"code" : 501, "data" : "error connecting to database"}
+                return jsonify(ret)
 
         users = []
         all_users = Mysql.read_users_for_seller_from_database(Token)
@@ -150,17 +206,28 @@ def Handle_Sellers():
 
 @app.route('/makepaymenthash', methods=['POST','GET'])
 def handle_make_payment_hash():
-    
+
     if request.method == 'POST':
+
+        List_Of_Users = Mysql.read_users_from_database()
+        List_of_tokens = []
+        for user in List_Of_Users:
+            user_db, password_db, phone_number, email, days, token_db, verified = user 
+            List_of_tokens.append(token_db)
 
         user = request.json['user']
         value = request.json['value']
         token = request.json['token']
 
         payment_hash = hashlib.sha256(f"{user}-{value}-{token}-georay".encode('utf-8')).hexdigest()
+    
+        if token in List_of_tokens:
+            ret = {"code" : 200, "payment_hash" : payment_hash}
+            return jsonify(ret)
 
-        ret = {"code" : 200, "payment_hash" : payment_hash}
-        return jsonify(ret)
+        else:
+            ret = {"code" : 401, "data" : "user dont exist"}
+            return jsonify(ret)
 
     ret = {"code" : 500, "data" : "Request not valid"}
     return jsonify(ret)
@@ -173,7 +240,7 @@ def handle_check_payment():
         user = request.json['user']
         value = request.json['value']
         token = request.json['token']
-        days = int(value) / 50000
+        days = int((int(value) / 50000) * 30)
         payment_hash = hashlib.sha256(f"{user}-{value}-{token}-georay".encode('utf-8')).hexdigest()
 
         if Check_Payment(txid,payment_hash):
@@ -187,7 +254,7 @@ def handle_check_payment():
                 return jsonify(ret)
         
         else:
-            ret = {"code" : 404, "data" : "txid or payment_hash is not valid"}
+            ret = {"code" : 404, "data" : "tx-id or payment-hash is not valid"}
             return jsonify(ret)
 
     ret = {"code" : 401, "data" : "request not valid"}
@@ -259,10 +326,12 @@ def handle_Authentication_new_user():
     if Mysql.update_user_registration(Token):
     
         ret = {"code" : 200, "data" : "User verified successfully"}
-        render_template("index.html", data = ret)
+        return render_template("index.html", data = ret)
+
 
     ret = {"code" : 501, "data" : "error verifying user"}
     return jsonify(ret)
+
 
 @app.route('/',methods=["GET", "POST"])
 def handle_main_page():
