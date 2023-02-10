@@ -1,0 +1,69 @@
+Url : 127.0.0.1:5550/sells_json?Token=<token-seller>
+
+Method : GET
+
+Headers:
+
+    Content-Type:application/json
+    method:POST
+    mode:cors
+    cache:no-cache
+
+Responses :
+
+{
+  "code": 200,
+  "count": 4,
+  "seller": {
+    "aa": "aa"
+  },
+  "sells": 200000,
+  "users": [
+    {
+      "days": "30",
+      "password": "tsfurzvrxjzx",
+      "token": "d489a7e9455ddbbb538ebc7c3e1c840c944bb789f12b1b76e9eb0757131336ac",
+      "username": "lucy"
+    },
+    {
+      "days": "30",
+      "password": "aa",
+      "token": "f1caa7cff38259530b4737b2056a0aea42b9e3791b1560460f791dc54871a558",
+      "username": "aa"
+    },
+    {
+      "days": "60",
+      "password": "sellerpass",
+      "token": "tokentest",
+      "username": "sellertest"
+    },
+    {
+      "days": "30",
+      "password": "sellerpass1",
+      "token": "tokentest1",
+      "username": "sellertest1"
+    }
+  ]
+}
+
+{"code" : 500, "data" : "Token did not exist"}
+
+----------------------------------------------------------------
+
+Url : 127.0.0.1:5550/sells_json
+
+Method : POST
+
+Body : {"days" : "<new-days-for-selected-user>" , "data" : "<sell-user-token>"}
+
+Headers:
+
+    Content-Type:application/json
+    method:POST
+    mode:cors
+    cache:no-cache
+
+Responses :
+
+{"code" : 200, "data" : "update <sell-user-token> expired days to <new-days-for-selected-user> days!"}
+{"code" : 501, "data" : "error connecting to database"}

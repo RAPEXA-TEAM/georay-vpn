@@ -1,0 +1,18 @@
+Url : 127.0.0.1:5550/makepaymenthash
+
+Method : POST
+
+Body : {"user" : "<user-username>" , "token" : "<user-token>" , "value" : "<payment-value>"}
+
+Headers:
+
+    Content-Type:application/json
+    method:POST
+    mode:cors
+    cache:no-cache
+
+Responses :
+
+{"code" : 200, "payment_hash" : "<payment_hash>"}
+{"code" : 401, "data" : "user dont exist"}
+{"code" : 500, "data" : "Request not valid"}

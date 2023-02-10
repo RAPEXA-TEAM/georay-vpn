@@ -1,0 +1,450 @@
+{
+	"info": {
+		"_postman_id": "efe6ba93-344f-4e90-8516-24ded7079a55",
+		"name": "Georay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "login-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"usertest\",\n    \"pass\": \"Mmgstudio884!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5550/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5550",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"mmd\",\n    \"pass\": \"1234\",\n    \"rpass\": \"1234\",\n    \"phone\": \"09304910631\",\n    \"email\": \"mohammadgharehbagh@gmail.com\",\n    \"answer\": \"web\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5550/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5550",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "makepaymenthash-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"mmd\",\n    \"token\": \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"value\": \"100000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5550/makepaymenthash",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5550",
+							"path": [
+								"makepaymenthash"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"txid\" : \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"user\": \"mmd\",\n    \"token\": \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"value\": \"100000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5550/payment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5550",
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sellers",
+			"item": [
+				{
+					"name": "login-seller",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"aa\",\n    \"password\": \"aa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5550/seller",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5550",
+							"path": [
+								"seller"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-user-seller",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"hossien\",\n    \"seller\": \"6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5550/add_sell",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5550",
+							"path": [
+								"add_sell"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sells-seller",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"days\": \"60\",\n    \"data\": \"tokentest\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5550/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5550",
+							"path": [
+								"sells_json"
+							],
+							"query": [
+								{
+									"key": "Token",
+									"value": "6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sells-seller",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5550/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5550",
+							"path": [
+								"sells_json"
+							],
+							"query": [
+								{
+									"key": "Token",
+									"value": "6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

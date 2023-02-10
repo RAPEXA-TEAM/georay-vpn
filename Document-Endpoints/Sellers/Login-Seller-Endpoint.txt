@@ -1,0 +1,17 @@
+Url : 127.0.0.1:5550/seller
+
+Method : POST
+
+Body : {"username" : "<seller-username>" , "password" : "<seller-password>"}
+
+Headers:
+
+    Content-Type:application/json
+    method:POST
+    mode:cors
+    cache:no-cache
+
+Responses :
+
+{"code" : 200 , "Token": "<seller-token>"}
+{"code" : 401 , "data" : "Premission denied"}

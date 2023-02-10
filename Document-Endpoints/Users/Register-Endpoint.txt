@@ -1,0 +1,19 @@
+Url : 127.0.0.1:5550/register
+
+Method : POST
+
+Body : {"user" : "<user-username>" , "pass" : "<user-password>" , "rpass" : "<user-password>" , "phone" : "<user-phone>" , "email" : "<user-email>" , "answer" : "<user-job>"}
+
+Headers:
+
+    Content-Type:application/json
+    method:POST
+    mode:cors
+    cache:no-cache
+
+Responses :
+
+{"code" : 200, "data" : "user created successfully but not verified for verification check email that you received"}
+{"code" : 501, "data" : "error creating user"}
+{"code" : 404, "data" : "error user already exists"}
+{"code" : 406, "data" : "error"}
