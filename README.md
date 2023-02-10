@@ -6,7 +6,6 @@ Pro v2ray vpn with user management and resseler management
 
 - [ ] code front of add sell from seller panel
 - [ ] code front of edit sell from seller panel
-- [ ] document all code and write new documentation for apis for other developers
 
 - [ ] git pull latest project on server
 - [ ] config domain for server
