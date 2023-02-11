@@ -1,28 +1,28 @@
 #!/usr/bin/env
 
-# Flask
+# Flask Secret key
 
 SECRET_KEY = "secret!"
 
-# MySQL config
+# MySQL Configs
 
 MYSQL_HOST = "127.0.0.1"
 MYSQL_USER = "selleruser"
 MYSQL_PASS = "sellerpass"
 MYSQL_DATABAS = "sells"
 
-# Smtp Email
+# Smtp Email Configs
 
 SMTP_PORT = 587
 SMTP_SERVER = "smtp.gmail.com"
 SENDER_EMAIL = "georayvpn@gmail.com"
 PASSWORD = "gwdbyekqgityxywa"
 
-# Web3
+# Web3 Configs
 
 NODE_URL = "https://ethereum.publicnode.com"
 
-#prices
+# VPN Prices
 
 PRICE_ONE_MONTH = 50000
 PRICE_TWO_MONTH = 100000

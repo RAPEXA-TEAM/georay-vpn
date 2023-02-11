@@ -1,5 +1,6 @@
 #!/usr/bin/env
 
+# import libraries that required for the service
 from web3 import Web3
 from flask import Flask, jsonify, request, render_template, redirect, url_for
 from flask_cors import CORS
@@ -17,6 +18,8 @@ import hashlib
 import json
 import CONFIG     #SERVER CONGIG
 
+# Flask app configuration
+
 app = Flask(__name__)
 limiter = Limiter(
     get_remote_address,
@@ -31,13 +34,18 @@ app.config.update(
     SECRET_KEY = CONFIG.SECRET_KEY
 )
 
+# routes
+
 @app.route("/logout")
 def logout():
+    '''this function is used to logout the user'''
+
     return redirect(url_for('handle_main_page'))
 
 @app.route('/seller', methods=['POST','GET'])
 @limiter.limit("50 per day")
 def Handle_Seller():
+    '''this function is used to handle the seller login page'''
 
     if request.method == 'POST':
 
@@ -59,6 +67,8 @@ def Handle_Seller():
 @app.route('/add_sell', methods=['POST', 'GET'])
 @limiter.limit("100 per day")
 def handle_add_sell():
+    '''this function is used to handle the add user from seller page'''
+
     if request.method == 'POST':
         password = generate_random_password()
         username = request.json["user"]
@@ -93,7 +103,8 @@ def handle_add_sell():
 @app.route('/sells_json', methods=['POST','GET'])
 @limiter.limit("100 per day")
 def Handle_Sellers_json():
-    
+    '''this function is used to handle the sells from one seller in json format'''
+
     exec(open('Expiration.py').read())      
 
     Token = request.args.get('Token')
@@ -150,7 +161,8 @@ def Handle_Sellers_json():
 @app.route('/sells', methods=['POST','GET'])
 @limiter.limit("100 per day")
 def Handle_Sellers():
-    
+    '''this function is used to handle the sells from one seller'''
+
     exec(open('Expiration.py').read())      
 
     Token = request.args.get('Token')
@@ -205,6 +217,7 @@ def Handle_Sellers():
 
 @app.route('/makepaymenthash', methods=['POST','GET'])
 def handle_make_payment_hash():
+    '''this function is used to handle the make payment hash'''
 
     if request.method == 'POST':
 
@@ -233,6 +246,8 @@ def handle_make_payment_hash():
 
 @app.route("/payment",methods=["GET","POST"])
 def handle_check_payment():
+    '''this function is used to handle the check payment'''
+
     if request.method == "POST":
         
         txid = request.json["txid"]
@@ -261,6 +276,8 @@ def handle_check_payment():
 
 @app.route('/d08ec689aef988a788aa6b5f6ed04a0efe57ca919d7d9d863d6322edd47f2d81',methods=["GET", "POST"])
 def handle_admin_page():
+    '''this function is used to handle the admin private page to manage all users'''
+
     if request.method == "POST":
         days = request.json["days"]
         token = str(request.json["data"])
@@ -288,6 +305,8 @@ def handle_admin_page():
 
 @app.route('/register',methods=["GET", "POST"])
 def handle_create_user():
+    '''this function is used to handle the create user from rigisteration page'''
+
     if request.method == 'POST':
         password = request.json["pass"]
         rpassword = request.json["rpass"]
@@ -318,6 +337,7 @@ def handle_create_user():
 
 @app.route('/Authentication', methods=['GET', 'POST'])
 def handle_Authentication_new_user():
+    '''this function is used to handle the authentication of new user that rigistered a account but did not verify by the email'''
 
     Token = request.args.get('Token')
     exec(open('Expiration.py').read())
@@ -334,7 +354,8 @@ def handle_Authentication_new_user():
 
 @app.route('/',methods=["GET", "POST"])
 def handle_main_page():
-    
+    '''this function is used to handle the main page'''
+
     # run Expiration.py
     exec(open('Expiration.py').read())
 
@@ -342,6 +363,7 @@ def handle_main_page():
 
 @app.route('/login',methods=["GET", "POST"])
 def handle_login_user():
+    '''this function is used to handle the login users from aplication'''
 
     # run Expiration.py
     exec(open('Expiration.py').read())
@@ -380,6 +402,8 @@ def handle_login_user():
     return jsonify(ret)
 
 def Read_servers():
+    '''this function is used to read the servers from the csv file'''
+
     Servers = []
 
     with open('Servers.csv', newline='') as csvfile:
@@ -390,6 +414,8 @@ def Read_servers():
     return Servers
 
 def Read_Sellers():
+    '''this function is used to read the sellers from the csv file'''
+
     Sellers = {}
 
     with open('Sellers.csv', newline='') as csvfile:
@@ -400,7 +426,8 @@ def Read_Sellers():
     return Sellers
 
 def Check_User(token):
-    
+    '''this function is used to check if the new token is valid or not'''
+
     List_Of_Users = Mysql.read_users_from_database()
     List_of_tokens = []
     for user in List_Of_Users:
@@ -421,7 +448,7 @@ def Check_Seller(username,password):
     return False
 
 def Check_Payment(txid,payment_hash):
-    '''This function check txid is valid or not'''
+    '''This function check txid with hash made before is valid or not'''
 
     List_of_txids_db = Mysql.read_txids_from_database()
     List_of_txids = []
@@ -456,6 +483,7 @@ def Check_Payment(txid,payment_hash):
             return False
 
 def Send_Registration_Email(email,username,password,phone,answer):
+    '''this function is used to send the registration email to the user'''
 
     # create registration token
     token = hashlib.sha256(f"{username}-{password}-{password}-{phone}-{email}-{answer}-georay".encode('utf-8')).hexdigest()
@@ -466,6 +494,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     message["From"] = CONFIG.SENDER_EMAIL
     message["To"] = email
 
+    #TODO: change the message body for more complexities
 
     text = f"""\
     Hi,
@@ -505,6 +534,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     return True
 
 def generate_random_password():
+    '''this function is used to generate a random password'''
 
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(12))
