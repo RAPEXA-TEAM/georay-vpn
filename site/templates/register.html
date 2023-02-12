@@ -220,7 +220,7 @@
               answer,
             }),
           };
-          fetch("http://rapexa.ir/register", fetchOptions)
+          fetch("http://thefarameta.com/register", fetchOptions)
             .then((response) => {
               if (response.ok) {
                 return response.json();
@@ -230,7 +230,7 @@
               if (res.code === 200) {
                 showAlert(res.data, "alert-warning");
                 setTimeout(() => {
-                  window.location.href = "http://rapexa.ir";
+                  window.location.href = "http://thefarameta.com";
                 }, 3000);
               } else {
                 showAlert(res.data);

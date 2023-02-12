@@ -1,4 +1,4 @@
-Url : rapexa.ir/makepaymenthash
+Url : thefarameta.com/makepaymenthash
 
 Method : POST
 

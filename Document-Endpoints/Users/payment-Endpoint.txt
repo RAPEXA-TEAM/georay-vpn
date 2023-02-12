@@ -1,4 +1,4 @@
-Url : rapexa.ir/payment
+Url : thefarameta.com/payment
 
 Method : POST
 

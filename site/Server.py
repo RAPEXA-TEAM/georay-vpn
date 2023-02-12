@@ -105,7 +105,7 @@ def handle_add_sell():
 def Handle_Sellers_json():
     '''this function is used to handle the sells from one seller in json format'''
 
-    exec(open('Expiration.py').read())      
+    exec(open('/var/www/vpn/site/Expiration.py').read())      
 
     Token = request.args.get('Token')
     Sellers = Read_Sellers()
@@ -163,7 +163,7 @@ def Handle_Sellers_json():
 def Handle_Sellers():
     '''this function is used to handle the sells from one seller'''
 
-    exec(open('Expiration.py').read())      
+    exec(open('/var/www/vpn/site/Expiration.py').read())      
 
     Token = request.args.get('Token')
     Sellers = Read_Sellers()
@@ -340,7 +340,7 @@ def handle_Authentication_new_user():
     '''this function is used to handle the authentication of new user that rigistered a account but did not verify by the email'''
 
     Token = request.args.get('Token')
-    exec(open('Expiration.py').read())
+    exec(open('/var/www/vpn/site/Expiration.py').read())
     
     if Mysql.update_user_registration(Token):
     
@@ -357,7 +357,7 @@ def handle_main_page():
     '''this function is used to handle the main page'''
 
     # run Expiration.py
-    exec(open('Expiration.py').read())
+    exec(open('/var/www/vpn/site/Expiration.py').read())
 
     return render_template("index.html")
 
@@ -366,7 +366,7 @@ def handle_login_user():
     '''this function is used to handle the login users from aplication'''
 
     # run Expiration.py
-    exec(open('Expiration.py').read())
+    exec(open('/var/www/vpn/site/Expiration.py').read())
 
     if request.method == 'POST':
         username = request.json["user"]
@@ -406,7 +406,7 @@ def Read_servers():
 
     Servers = []
 
-    with open('Servers.csv', newline='') as csvfile:
+    with open('/var/www/vpn/site/Servers.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile)
         for row in spamreader:
             Servers.append(row[1])
@@ -418,7 +418,7 @@ def Read_Sellers():
 
     Sellers = {}
 
-    with open('Sellers.csv', newline='') as csvfile:
+    with open('/var/www/vpn/site/Sellers.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile)
         for row in spamreader:
             Sellers[row[0]] = row[1]
@@ -499,7 +499,10 @@ def Send_Registration_Email(email,username,password,phone,answer):
     text = f"""\
     Hi,
     Check out the link below To register your Georay VPN account:
-    http://rapexa.ir/Authentication?Token={token}
+    http://thefarameta.com/Authentication?Token={token}
+    \n
+    username: {username}
+    password: {password}
     """
 
     html = f"""\
@@ -507,7 +510,10 @@ def Send_Registration_Email(email,username,password,phone,answer):
     <body>
         <p>Hi,<br>
         Check out the link below To register your Georay VPN account:</p>
-        <p><a href="http://rapexa.ir/Authentication?Token={token}">Register Now!</a></p>
+        <p><a href="http://thefarameta.com/Authentication?Token={token}">Register Now!</a></p>
+        <br>
+        <p>Username: {username}</p>
+        <p>Password: {password}</p>
     </body>
     </html>
     """
@@ -541,4 +547,4 @@ def generate_random_password():
     return result_str
 
 if __name__ == "__main__":
-    app.run("0.0.0.0",5550,debug=True)
+    app.run("0.0.0.0",80,debug=False)

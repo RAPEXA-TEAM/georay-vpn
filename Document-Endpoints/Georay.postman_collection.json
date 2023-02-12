@@ -44,7 +44,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://rapexa.ir/login",
+							"raw": "http://thefarameta.com/login",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -96,7 +96,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://rapexa.ir/register",
+							"raw": "http://thefarameta.com/register",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -148,7 +148,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://rapexa.ir/makepaymenthash",
+							"raw": "http://thefarameta.com/makepaymenthash",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -200,7 +200,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://rapexa.ir/payment",
+							"raw": "http://thefarameta.com/payment",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -257,7 +257,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://rapexa.ir/seller",
+							"raw": "http://thefarameta.com/seller",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -309,7 +309,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://rapexa.ir/add_sell",
+							"raw": "http://thefarameta.com/add_sell",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -361,7 +361,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://rapexa.ir/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"raw": "http://thefarameta.com/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -422,7 +422,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://rapexa.ir/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"raw": "http://thefarameta.com/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "http",
 							"host": [
 								"127",

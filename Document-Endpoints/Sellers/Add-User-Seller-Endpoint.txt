@@ -1,4 +1,4 @@
-Url : rapexa.ir/add_sell
+Url : thefarameta.com/add_sell
 
 Method : POST
 

@@ -1,4 +1,4 @@
-Url : rapexa.ir/sells_json?Token=<token-seller>
+Url : thefarameta.com/sells_json?Token=<token-seller>
 
 Method : GET
 
@@ -50,7 +50,7 @@ Responses :
 
 ----------------------------------------------------------------
 
-Url : rapexa.ir/sells_json
+Url : thefarameta.com/sells_json
 
 Method : POST
 

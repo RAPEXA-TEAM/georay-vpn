@@ -1,4 +1,4 @@
-Url : rapexa.ir/register
+Url : thefarameta.com/register
 
 Method : POST
 
