@@ -7,8 +7,8 @@ SECRET_KEY = "secret!"
 # MySQL Configs
 
 MYSQL_HOST = "127.0.0.1"
-MYSQL_USER = "selleruser"
-MYSQL_PASS = "sellerpass"
+MYSQL_USER = "selleruserr"
+MYSQL_PASS = "Sellerpass1!"
 MYSQL_DATABAS = "sells"
 
 # Smtp Email Configs

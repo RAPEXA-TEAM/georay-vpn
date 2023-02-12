@@ -499,7 +499,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     text = f"""\
     Hi,
     Check out the link below To register your Georay VPN account:
-    http://127.0.0.1:5550/Authentication?Token={token}
+    http://rapexa.ir/Authentication?Token={token}
     """
 
     html = f"""\
@@ -507,7 +507,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     <body>
         <p>Hi,<br>
         Check out the link below To register your Georay VPN account:</p>
-        <p><a href="http://127.0.0.1:5550/Authentication?Token={token}">Register Now!</a></p>
+        <p><a href="http://rapexa.ir/Authentication?Token={token}">Register Now!</a></p>
     </body>
     </html>
     """

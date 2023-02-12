@@ -65,7 +65,7 @@
 						}),
 					};
 
-					fetch("http://127.0.0.1:5550/seller", fetchOptions)
+					fetch("http://rapexa.ir/seller", fetchOptions)
 						.then((response) => {
 							if (response.ok) {
 								return response.json();
@@ -73,10 +73,10 @@
 						})
 						.then((res) => {
 							if (res.code === 200) {
-								window.location.href = "http://127.0.0.1:5550/sells?Token="+res.Token;
+								window.location.href = "http://rapexa.ir/sells?Token="+res.Token;
 					
 							} else {
-								window.location.href = "http://127.0.0.1:5550/seller";
+								window.location.href = "http://rapexa.ir/seller";
 							}
 						})
 					});

@@ -1,4 +1,4 @@
-Url : 127.0.0.1:5550/sells_json?Token=<token-seller>
+Url : rapexa.ir/sells_json?Token=<token-seller>
 
 Method : GET
 
@@ -50,7 +50,7 @@ Responses :
 
 ----------------------------------------------------------------
 
-Url : 127.0.0.1:5550/sells_json
+Url : rapexa.ir/sells_json
 
 Method : POST
 

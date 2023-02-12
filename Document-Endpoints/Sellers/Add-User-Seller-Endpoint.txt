@@ -1,4 +1,4 @@
-Url : 127.0.0.1:5550/add_sell
+Url : rapexa.ir/add_sell
 
 Method : POST
 

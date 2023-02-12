@@ -1,4 +1,4 @@
-Url : 127.0.0.1:5550/register
+Url : rapexa.ir/register
 
 Method : POST
 

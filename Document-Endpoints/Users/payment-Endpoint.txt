@@ -1,4 +1,4 @@
-Url : 127.0.0.1:5550/payment
+Url : rapexa.ir/payment
 
 Method : POST
 
