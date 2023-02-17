@@ -36,7 +36,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"usertest\",\n    \"pass\": \"Mmgstudio884!\"\n}",
+							"raw": "{\n    \"email\": \"rapexamrs@gmail.com\",\n    \"pass\": \"bjcsnnstpewi\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -47,12 +47,9 @@
 							"raw": "http://thefarameta.com/login",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"thefarameta",
+								"com"
 							],
-							"port": "5550",
 							"path": [
 								"login"
 							]
@@ -88,7 +85,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"mmd\",\n    \"pass\": \"1234\",\n    \"rpass\": \"1234\",\n    \"phone\": \"09304910631\",\n    \"email\": \"mohammadgharehbagh@gmail.com\",\n    \"answer\": \"web\"\n}",
+							"raw": "{\n    \"email\": \"rip.charon1@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -99,12 +96,9 @@
 							"raw": "http://thefarameta.com/register",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"thefarameta",
+								"com"
 							],
-							"port": "5550",
 							"path": [
 								"register"
 							]
@@ -140,7 +134,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"mmd\",\n    \"token\": \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"value\": \"100000\"\n}",
+							"raw": "{\n    \"token\": \"d1c6cbabc16dc3eff115bd60cd6d32a280d30e263b3b9f7bd6bbeca1de89068a\",\n    \"value\": \"100000\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -151,12 +145,9 @@
 							"raw": "http://thefarameta.com/makepaymenthash",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"thefarameta",
+								"com"
 							],
-							"port": "5550",
 							"path": [
 								"makepaymenthash"
 							]
@@ -192,7 +183,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"txid\" : \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"user\": \"mmd\",\n    \"token\": \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"value\": \"100000\"\n}",
+							"raw": "{\n    \"txid\" : \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"token\": \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"value\": \"100000\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -203,12 +194,9 @@
 							"raw": "http://thefarameta.com/payment",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"thefarameta",
+								"com"
 							],
-							"port": "5550",
 							"path": [
 								"payment"
 							]
@@ -260,12 +248,9 @@
 							"raw": "http://thefarameta.com/seller",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"thefarameta",
+								"com"
 							],
-							"port": "5550",
 							"path": [
 								"seller"
 							]
@@ -301,7 +286,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"hossien\",\n    \"seller\": \"6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2\"\n}",
+							"raw": "{\n    \"email\": \"saraaa\",\n    \"seller\": \"6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -312,12 +297,9 @@
 							"raw": "http://thefarameta.com/add_sell",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"thefarameta",
+								"com"
 							],
-							"port": "5550",
 							"path": [
 								"add_sell"
 							]
@@ -364,12 +346,9 @@
 							"raw": "http://thefarameta.com/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"thefarameta",
+								"com"
 							],
-							"port": "5550",
 							"path": [
 								"sells_json"
 							],
@@ -425,12 +404,9 @@
 							"raw": "http://thefarameta.com/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "http",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"thefarameta",
+								"com"
 							],
-							"port": "5550",
 							"path": [
 								"sells_json"
 							],
