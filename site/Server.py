@@ -82,7 +82,7 @@ def handle_add_sell():
             Tokens.append(hashlib.sha256(("{"+str(username_db)+"}{"+str(password_db)+"}-georay").encode("utf-8")).hexdigest())
 
         try :
-            if Check_User(token) and Token_seller in Tokens:
+            if Check_User(token,email) and Token_seller in Tokens:
                 if Mysql.write_user_from_seller_to_database(email, password, Token_seller, token):
                     ret = {"code" : 200, "data" : "user created successfully"}
                     return jsonify(ret)
@@ -314,7 +314,7 @@ def handle_create_user():
         token = hashlib.sha256(f"{email}-{password}-{password}-{phone}-{email}-{answer}-georay".encode('utf-8')).hexdigest()
 
         try :
-            if Check_User(token) and password == rpassword:
+            if Check_User(token,email) and password == rpassword:
                 Send_Registration_Email(email,username,password,phone,answer)
                 if Mysql.write_user_to_database(username, password, phone, email, "7", token, "0"):
                     ret = {"code" : 200, "data" : "user created successfully but not verified for verification check email that you received"}
@@ -423,16 +423,18 @@ def Read_Sellers():
 
     return Sellers
 
-def Check_User(token):
+def Check_User(token,email):
     '''this function is used to check if the new token is valid or not'''
 
     List_Of_Users = Mysql.read_users_from_database()
     List_of_tokens = []
+    list_of_users = []
     for user in List_Of_Users:
         user_db, password_db, phone_number, email, days, token_db, verified = user 
         List_of_tokens.append(token_db)
-        
-    if token in List_of_tokens:
+        list_of_users.append(user_db)
+
+    if token in List_of_tokens or email in list_of_users:
         return False
                 
     else:
