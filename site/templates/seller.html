@@ -125,7 +125,7 @@
                         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center card-header py-3">
                             <h6 class="m-0 mb-4 mb-md-0 font-weight-bold text-primary">Users Table</h6>
                             <form class="d-flex flex-row justify-content-center align-items-center">
-                                <input required type="text" id="new-username-input" class="text-left mr-4" style="display: none;" placeholder="Enter new username...">
+                                <input required type="text" id="new-email-input" class="text-left mr-4" style="display: none;" placeholder="Enter new user email...">
                                 <button type="submit" id="add-new-username" data-type="show" style="text-align: center; background-color: inherit; border-radius: 4px; border: 1px solid #b8b4b4; padding: 2px 10px;">+</button>
                             </form>
                         </div>
@@ -204,7 +204,7 @@
 
             const btn = e.target;
             const btnType = btn.getAttribute("data-type");
-            const usernameInput = document.querySelector("#new-username-input");
+            const usernameInput = document.querySelector("#new-email-input");
             
             if (btnType === "show") {
                 // change button type
@@ -231,7 +231,7 @@
                     method: "post",
                     headers: new Headers({ "Content-Type": "application/json" }),
                     body: JSON.stringify({
-                        user: usernameInput.value,
+                        email: usernameInput.value,
                         seller: location.href.split("=")[1]
                     })
                 }

@@ -47,70 +47,12 @@
                 </div>
                 <form id="login-form">
                   <div class="form-group last">
-                    <label for="username">Username</label>
-                    <input
-                      required
-                      type="text"
-                      class="form-control"
-                      id="user"
-                    />
-                  </div>
-                  <div class="form-group last">
-                    <label for="password">Password</label>
-                    <input
-                      required
-                      type="password"
-                      class="form-control"
-                      id="pass"
-                    />
-                  </div>
-                  <div class="w-100 position-relative" style="z-index: 50">
-                    <div
-                      style="z-index: 50"
-                      dir="rtl"
-                      class="password-check-box w-100 d-none flex-column align-items-start position-absolute bg-danger text-white rounded p-2"
-                    >
-                      <span>- رمزعبور باید حداقل 8 کاراکتر باشد!</span>
-                      <span>- رمزعبور باید شامل حروف کوچک انگلیسی باشد!</span>
-                      <span>- رمزعبور باید شامل حروف بزرگ انگلیسی باشد!</span>
-                      <span>- رمزعبور باید شامل اعداد باشد!</span>
-                      <span>- رمزعبور شامل کاراکترهای خاص $@#&! باشد!</span>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="r-password">Repeat Password</label>
-                    <input
-                      required
-                      type="password"
-                      class="form-control"
-                      id="rpass"
-                    />
-                  </div>
-                  <div class="form-group last">
-                    <label for="phone">phone</label>
-                    <input
-                      required
-                      type="number"
-                      class="form-control"
-                      id="phone"
-                    />
-                  </div>
-                  <div class="form-group last">
                     <label for="email">email</label>
                     <input
                       required
                       type="email"
                       class="form-control"
                       id="email"
-                    />
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label for="answer">job</label>
-                    <input
-                      required
-                      type="text"
-                      class="form-control"
-                      id="answer"
                     />
                   </div>
                   <input
@@ -127,116 +69,37 @@
 
     <script>
       const form = document.querySelector("#login-form");
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const pass = document.querySelector("#pass");
-
-        // show checkbox
-        pass.addEventListener("focus", () => {
-          const passwordCheckBox = document.querySelector(
-            ".password-check-box"
-          );
-
-          passwordCheckBox.classList.remove("d-none");
-          passwordCheckBox.classList.add("d-flex");
-        });
-
-        // hide checkbox
-        pass.addEventListener("blur", () => {
-          const passwordCheckBox = document.querySelector(
-            ".password-check-box"
-          );
-
-          passwordCheckBox.classList.remove("d-flex");
-          passwordCheckBox.classList.add("d-none");
-        });
-
-        // check password
-        pass.addEventListener("input", (e) => {
-          const element = e.target;
-          const passwordCheckBox = document.querySelector(
-            ".password-check-box"
-          );
-          const pass = element.value;
-
-          if (
-            pass.length > 8 &&
-            pass.match(/[a-z]+/) &&
-            pass.match(/[A-Z]+/) &&
-            pass.match(/[0-9]+/) &&
-            pass.match(/[$@#&!]+/)
-          ) {
-            passwordCheckBox.classList.remove("bg-danger");
-            passwordCheckBox.classList.remove("text-white");
-            passwordCheckBox.classList.add("bg-warning");
-            passwordCheckBox.classList.add("text-black");
-          } else {
-            if (!passwordCheckBox.classList.contains("bg-danger")) {
-              passwordCheckBox.classList.add("bg-danger");
-            }
-            if (!passwordCheckBox.classList.contains("text-white")) {
-              passwordCheckBox.classList.add("text-white");
-            }
-          }
-        });
-      });
-
+      
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const user = document.querySelector("#user").value;
-        const pass = document.querySelector("#pass").value;
-        const rpass = document.querySelector("#rpass").value;
-        const phone = document.querySelector("#phone").value;
         const email = document.querySelector("#email").value;
-        const answer = document.querySelector("#answer").value;
 
-        if (pass !== rpass) {
-          showAlert("رمز عبور با تکرار آن یکسان نمی باشد!");
-        } else if (pass.length < 8) {
-          showAlert("رمز عبور باید حداقل شامل 8 کاراکتر باشد!");
-        } else if (!pass.match(/[a-z]+/)) {
-          showAlert("رمز عبور باید شامل حروف انگلیسی کوچک باشد!");
-        } else if (!pass.match(/[A-Z]+/)) {
-          showAlert("رمز عبور باید شامل حروف انگلیسی بزرگ باشد!");
-        } else if (!pass.match(/[0-9]+/)) {
-          showAlert("رمز عبور باید شامل اعداد باشد!");
-        } else if (!pass.match(/[$@#&!]+/)) {
-          showAlert("رمز عبور باید شامل کاراکتر های خاص $@#&! باشد!");
-        } else if (phone.length !== 11) {
-          showAlert("شماره همراه باید 11 کاراکتر باشد!");
-        } else {
-          const fetchOptions = {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            headers: new Headers({ "Content-Type": "application/json" }),
-            body: JSON.stringify({
-              user,
-              pass,
-              rpass,
-              phone,
+        const fetchOptions = {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: new Headers({ "Content-Type": "application/json" }),
+          body: JSON.stringify({
               email,
-              answer,
-            }),
-          };
-          fetch("http://thefarameta.com/register", fetchOptions)
-            .then((response) => {
-              if (response.ok) {
-                return response.json();
-              }
-            })
-            .then((res) => {
-              if (res.code === 200) {
-                showAlert(res.data, "alert-warning");
-                setTimeout(() => {
-                  window.location.href = "http://thefarameta.com";
-                }, 3000);
-              } else {
-                showAlert(res.data);
-              }
-            });
-        }
+          }),
+        };
+        fetch("http://thefarameta.com/register", fetchOptions)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+          })
+          .then((res) => {
+            if (res.code === 200) {
+              showAlert(res.data, "alert-warning");
+              setTimeout(() => {
+                window.location.href = "http://thefarameta.com";
+              }, 3000);
+            } else {
+              showAlert(res.data);
+            }
+          });
       });
 
       function showAlert(text, className) {
