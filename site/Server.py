@@ -434,7 +434,7 @@ def Check_User(token,email):
         List_of_tokens.append(token_db)
         list_of_users.append(user_db)
 
-    if token in List_of_tokens or email in list_of_users:
+    if token in List_of_tokens and email in list_of_users:
         return False
                 
     else:
