@@ -4,14 +4,6 @@ Pro v2ray vpn with user management and resseler management
 
 ## Todo
 
-- [ ] code front of add sell from seller panel
-- [ ] code front of edit sell from seller panel
-
-- [ ] git pull latest project on server
-- [ ] config domain for server
-- [ ] config Mysql
-- [ ] config site to run always on background (supervisor)
-
 ## Mysql
 
 1. CREATE DATABASE sells; USE sells;
