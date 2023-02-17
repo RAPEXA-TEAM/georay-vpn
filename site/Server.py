@@ -71,9 +71,9 @@ def handle_add_sell():
 
     if request.method == 'POST':
         password = generate_random_password()
-        username = request.json["user"]
+        email = request.json["email"]
         Token_seller = request.json["seller"]
-        token = hashlib.sha256(f"{username}-{password}-{password}-{Token_seller}-{Token_seller}-0-georay".encode('utf-8')).hexdigest()
+        token = hashlib.sha256(f"{email}-{password}-{password}-{Token_seller}-{Token_seller}-0-georay".encode('utf-8')).hexdigest()
 
         Sellers = Read_Sellers()
         Tokens = []
@@ -83,14 +83,14 @@ def handle_add_sell():
 
         try :
             if Check_User(token) and Token_seller in Tokens:
-                if Mysql.write_user_from_seller_to_database(username, password, Token_seller, token):
+                if Mysql.write_user_from_seller_to_database(email, password, Token_seller, token):
                     ret = {"code" : 200, "data" : "user created successfully"}
                     return jsonify(ret)
                 else :
                     ret = {"code" : 501, "data" : "error creating user"}
                     return jsonify(ret)
             else:
-                ret = {"code" : 401, "data" : "error user already exists"}
+                ret = {"code" : 401, "data" : "error creating user"}
                 return jsonify(ret)
 
         except Exception as error:
@@ -227,11 +227,10 @@ def handle_make_payment_hash():
             user_db, password_db, phone_number, email, days, token_db, verified = user 
             List_of_tokens.append(token_db)
 
-        user = request.json['user']
         value = request.json['value']
         token = request.json['token']
 
-        payment_hash = hashlib.sha256(f"{user}-{value}-{token}-georay".encode('utf-8')).hexdigest()
+        payment_hash = hashlib.sha256(f"{value}-{token}-georay".encode('utf-8')).hexdigest()
     
         if token in List_of_tokens:
             ret = {"code" : 200, "payment_hash" : payment_hash}
@@ -251,16 +250,15 @@ def handle_check_payment():
     if request.method == "POST":
         
         txid = request.json["txid"]
-        user = request.json['user']
         value = request.json['value']
         token = request.json['token']
         days = int((int(value) / 50000) * 30)
-        payment_hash = hashlib.sha256(f"{user}-{value}-{token}-georay".encode('utf-8')).hexdigest()
+        payment_hash = hashlib.sha256(f"{value}-{token}-georay".encode('utf-8')).hexdigest()
 
         if Check_Payment(txid,payment_hash):
             if Mysql.update_user(token, days) and Mysql.write_txid_to_database(txid, days):
 
-                ret = {"code" : 200, "data" : f"payment successful and payment hash {payment_hash} is valid and user {user} remining days update to {days}"}
+                ret = {"code" : 200, "data" : f"payment successful and payment hash {payment_hash} is valid and user remaining days update to {days}"}
                 return jsonify(ret)
 
             else:
@@ -302,19 +300,18 @@ def handle_admin_page():
 
     return render_template("admin.html", data = {"users" : users})   
 
-
 @app.route('/register',methods=["GET", "POST"])
 def handle_create_user():
     '''this function is used to handle the create user from rigisteration page'''
 
     if request.method == 'POST':
-        password = request.json["pass"]
-        rpassword = request.json["rpass"]
-        username = request.json["user"]
-        phone = request.json["phone"]
+        password = generate_random_password()
+        rpassword = password
+        phone = "0"
         email = request.json["email"]
-        answer = request.json["answer"]
-        token = hashlib.sha256(f"{username}-{password}-{password}-{phone}-{email}-{answer}-georay".encode('utf-8')).hexdigest()
+        username = email
+        answer = generate_random_password()
+        token = hashlib.sha256(f"{email}-{password}-{password}-{phone}-{email}-{answer}-georay".encode('utf-8')).hexdigest()
 
         try :
             if Check_User(token) and password == rpassword:
@@ -326,7 +323,7 @@ def handle_create_user():
                     ret = {"code" : 501, "data" : "error creating user"}
                     return jsonify(ret)
             else:
-                ret = {"code" : 404, "data" : "error user already exists"}
+                ret = {"code" : 401, "data" : "error creating user"}
                 return jsonify(ret)
 
         except Exception as error:
@@ -344,7 +341,7 @@ def handle_Authentication_new_user():
     
     if Mysql.update_user_registration(Token):
     
-        ret = {"code" : 200, "data" : "User verified successfully"}
+        ret = {"code" : 200, "data" : "User verified successfully and you can use mobile app now with out any problem"}
         return render_template("index.html", data = ret)
 
 
@@ -369,7 +366,7 @@ def handle_login_user():
     exec(open('/var/www/vpn/site/Expiration.py').read())
 
     if request.method == 'POST':
-        username = request.json["user"]
+        username = request.json["email"]
         passw = request.json["pass"]
 
         list_of_users_dic = {}
@@ -380,17 +377,18 @@ def handle_login_user():
             user_db, password_db, phone_number, email, days, token, verified = user
     
             if verified != "0":
-                list_of_users_dic[user_db] = {'password' : password_db,'phone' : phone_number, 'email' : email, 'days' : days, 'token' : token} 
+                list_of_users_dic[user_db] = {'password' : password_db, 'username' : email, 'days' : days, 'token' : token} 
 
             else:
                 continue
 
-        Servers = Read_servers()
+        Servers_v = Read_servers()
+        servers_o = [] #TODO: add it for next update
 
         if (username in list_of_users_dic and passw == list_of_users_dic[username]["password"]):
 
             prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-            ret = {"code" : 200, "data" : list_of_users_dic[username], "Servers" : Servers , "prices" : prices}
+            ret = {"code" : 200, "data" : list_of_users_dic[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices}
             return jsonify(ret)
         
         else:
@@ -486,7 +484,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     '''this function is used to send the registration email to the user'''
 
     # create registration token
-    token = hashlib.sha256(f"{username}-{password}-{password}-{phone}-{email}-{answer}-georay".encode('utf-8')).hexdigest()
+    token = hashlib.sha256(f"{email}-{password}-{password}-{phone}-{email}-{answer}-georay".encode('utf-8')).hexdigest()
 
     # creates Message
     message = MIMEMultipart("alternative")
