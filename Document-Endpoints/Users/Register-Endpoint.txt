@@ -2,7 +2,7 @@ Url : thefarameta.com/register
 
 Method : POST
 
-Body : {"user" : "<user-username>" , "pass" : "<user-password>" , "rpass" : "<user-password>" , "phone" : "<user-phone>" , "email" : "<user-email>" , "answer" : "<user-job>"}
+Body : {"email" : "<user-email>"}
 
 Headers:
 

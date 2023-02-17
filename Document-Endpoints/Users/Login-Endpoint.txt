@@ -2,7 +2,7 @@ Url : thefarameta.com/login
 
 Method : POST
 
-Body : {"user" : "<user-username>" , "pass" : "<user-password>"}
+Body : {"email" : "<user-username>" , "pass" : "<user-password>"}
 
 Headers:
 
