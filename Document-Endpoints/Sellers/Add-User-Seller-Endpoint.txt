@@ -2,7 +2,7 @@ Url : thefarameta.com/add_sell
 
 Method : POST
 
-Body : {"user" : "<new-user-username>" , "seller" : "<token-seller>"}
+Body : {"email" : "<new-user-email>" , "seller" : "<token-seller>"}
 
 Headers:
 
@@ -15,6 +15,6 @@ Responses :
 
 {"code" : 200, "data" : "user created successfully"}
 {"code" : 501, "data" : "error creating user"}
-{"code" : 401, "data" : "error user already exists"}
+{"code" : 401, "data" : "error creating user"}
 {"code" : 500, "data" : "Request not valid"}
 {"code" : 406, "data" : "error"}

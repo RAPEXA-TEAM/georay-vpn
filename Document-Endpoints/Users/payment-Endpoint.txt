@@ -2,7 +2,7 @@ Url : thefarameta.com/payment
 
 Method : POST
 
-Body : {"user" : "<user-username>" , "token" : "<user-token>" , "value" : "<payment-value>" , "txid" : "<txid-paymnet>"}
+Body : {"token" : "<user-token>" , "value" : "<payment-value>" , "txid" : "<txid-paymnet>"}
 
 Headers:
 
@@ -13,7 +13,7 @@ Headers:
 
 Responses :
 
-{"code" : 200, "data" : "payment successful and payment hash <payment-hash> is valid and user <user-username> remining days update to {days}"}
+{"code" : 200, "data" : "payment successful and payment hash {payment_hash} is valid and user remaining days update to {days}"}
 {"code" : 501, "data" : "error connecting to database"}
 {"code" : 404, "data" : "tx-id or payment-hash is not valid"}
 {"code" : 500, "data" : "Request not valid"}

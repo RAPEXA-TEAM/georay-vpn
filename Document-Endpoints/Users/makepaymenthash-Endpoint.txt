@@ -2,7 +2,7 @@ Url : thefarameta.com/makepaymenthash
 
 Method : POST
 
-Body : {"user" : "<user-username>" , "token" : "<user-token>" , "value" : "<payment-value>"}
+Body : {"token" : "<user-token>" , "value" : "<payment-value>"}
 
 Headers:
 

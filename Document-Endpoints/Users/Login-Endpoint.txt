@@ -14,16 +14,16 @@ Headers:
 Responses :
 
 {
-    "Servers": [
+    "v2ray": [
         "vmess://eyJhZGQiOiJjMS5oYWZwYS5pciIsImFpZCI6IjAiLCJhbHBuIjoiIiwiaG9zdCI6IiIsImlkIjoiYTVhNzk1NjEtOTdlMS00NTU2LTkzNDMtYmZiZjc2MTUwYzgzIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIyMTE2MiIsInBzIjoiYnJvb3o1Iiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6Im5vbmUiLCJ0eXBlIjoiIiwidiI6IjIifQ==",
         "vmess://eyJhZGQiOiJicm9vei5oYWZwYS5pciIsImFpZCI6IjAiLCJhbHBuIjoiIiwiaG9zdCI6IiIsImlkIjoiYmY5NjYxZGYtZDBlMy00Y2JiLWM2M2UtZWYwZGVmMWI2Nzg4IiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIyNDA2MCIsInBzIjoiYnJvb3o0Iiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6Im5vbmUiLCJ0eXBlIjoiIiwidiI6IjIifQ=="
     ],
+    "openconnect": [],
     "code": 200,
     "data": {
         "days": "6",
-        "email": "rapexamrs@gmail.com",
+        "username": "rapexamrs@gmail.com",
         "password": "Mmgstudio884!",
-        "phone": "09155520952",
         "token": "fdc663715e8961cc32afd0f063b894cfa627a41136be9b817b9a5026e89b66cb"
     },
     "prices": {

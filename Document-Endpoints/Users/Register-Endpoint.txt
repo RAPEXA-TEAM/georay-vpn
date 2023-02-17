@@ -15,5 +15,5 @@ Responses :
 
 {"code" : 200, "data" : "user created successfully but not verified for verification check email that you received"}
 {"code" : 501, "data" : "error creating user"}
-{"code" : 404, "data" : "error user already exists"}
+{"code" : 404, "data" : "error creating user"}
 {"code" : 406, "data" : "error"}
