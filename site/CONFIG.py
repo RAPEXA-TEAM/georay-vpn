@@ -16,7 +16,7 @@ MYSQL_DATABAS = "sells"
 SMTP_PORT = 587
 SMTP_SERVER = "smtp.gmail.com"
 SENDER_EMAIL = "georayvpn@gmail.com"
-PASSWORD = "gwdbyekqgityxywa"
+PASSWORD = "ikmajfetagfvxbfr"
 
 # Web3 Configs
 
@@ -27,3 +27,8 @@ NODE_URL = "https://ethereum.publicnode.com"
 PRICE_ONE_MONTH = 50000
 PRICE_TWO_MONTH = 100000
 PRICE_TRE_MONTH = 150000
+
+# Update version
+
+VERSION = "1.0"
+VERSION_TYPE = "compatible" #force - compatible
