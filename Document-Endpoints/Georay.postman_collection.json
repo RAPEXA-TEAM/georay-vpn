@@ -36,7 +36,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"rapexamrs@gmail.com\",\n    \"pass\": \"bjcsnnstpewi\"\n}",
+							"raw": "{\n    \"email\": \"rapexamrs@gmail.com\",\n    \"pass\": \"nqfwxjyemycm\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,7 +85,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"rip.charon1@gmail.com\"\n}",
+							"raw": "{\n    \"email\": \"rapexamrs@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +134,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"token\": \"d1c6cbabc16dc3eff115bd60cd6d32a280d30e263b3b9f7bd6bbeca1de89068a\",\n    \"value\": \"100000\"\n}",
+							"raw": "{\n    \"token\": \"4ad2030a42a38f68563f2b0f529e4b18062d9cc5544921f8d35a7b2317fc8292\",\n    \"value\": \"100000\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,7 +183,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"txid\" : \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"token\": \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"value\": \"100000\"\n}",
+							"raw": "{\n    \"txid\" : \"f91fc1e92c8f6a37ce2c9ff18f81c4f0ecaa1bf80fa37646d04f32480efc28f6\",\n    \"token\": \"4ad2030a42a38f68563f2b0f529e4b18062d9cc5544921f8d35a7b2317fc8292\",\n    \"value\": \"100000\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -199,6 +199,58 @@
 							],
 							"path": [
 								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-version",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://thefarameta.com/update",
+							"protocol": "http",
+							"host": [
+								"thefarameta",
+								"com"
+							],
+							"path": [
+								"update"
 							]
 						}
 					},
@@ -286,7 +338,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"saraaa\",\n    \"seller\": \"6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2\"\n}",
+							"raw": "{\n    \"email\": \"saraaa@gmail.com\",\n    \"seller\": \"6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
