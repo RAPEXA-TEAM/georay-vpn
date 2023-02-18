@@ -1,0 +1,16 @@
+Url : thefarameta.com/update
+
+Method : GET
+
+Headers:
+
+    Content-Type:application/json
+    method:POST
+    mode:cors
+    cache:no-cache
+
+Responses :
+
+{"code" : 200 , "version" : "v1.0" , "update_type" : "force"}
+{"code" : 200 , "version" : "v1.0" , "update_type" : "compatible"}
+
