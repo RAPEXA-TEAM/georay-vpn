@@ -46,7 +46,7 @@ def logout():
 def handle_update():
     '''this function is used to update apps'''
 
-    ret = {"code" : 200 , "version" : CONFIG.VERSION , "update_type" : CONFIG.VERSION_TYPE}
+    ret = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
     return jsonify(ret)
 
 @app.route('/seller', methods=['POST','GET'])
@@ -392,7 +392,7 @@ def handle_login_user():
         Servers_v = Read_servers()
         servers_o = [] #TODO: add it for next update
 
-        update_info = {"version" : CONFIG.VERSION , "update_type" : CONFIG.VERSION_TYPE}
+        update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
 
         if (username in list_of_users_dic and passw == list_of_users_dic[username]["password"]):
 
