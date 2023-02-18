@@ -42,6 +42,13 @@ def logout():
 
     return redirect(url_for('handle_main_page'))
 
+@app.route("/update") 
+def handle_update():
+    '''this function is used to update apps'''
+
+    ret = {"code" : 200 , "version" : CONFIG.VERSION , "update_type" : CONFIG.VERSION_TYPE}
+    return jsonify(ret)
+
 @app.route('/seller', methods=['POST','GET'])
 @limiter.limit("50 per day")
 def Handle_Seller():
