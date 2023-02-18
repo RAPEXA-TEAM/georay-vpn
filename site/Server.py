@@ -392,10 +392,12 @@ def handle_login_user():
         Servers_v = Read_servers()
         servers_o = [] #TODO: add it for next update
 
+        update_info = {"version" : CONFIG.VERSION , "update_type" : CONFIG.VERSION_TYPE}
+
         if (username in list_of_users_dic and passw == list_of_users_dic[username]["password"]):
 
             prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-            ret = {"code" : 200, "data" : list_of_users_dic[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices}
+            ret = {"code" : 200, "data" : list_of_users_dic[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
             return jsonify(ret)
         
         else:
