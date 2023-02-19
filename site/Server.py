@@ -383,7 +383,7 @@ def handle_login_user():
 
             user_db, password_db, phone_number, email, days, token, verified = user
     
-            if verified != "0":
+            if verified != "0" and days != "0":
                 list_of_users_dic[user_db] = {'password' : password_db, 'username' : email, 'days' : days, 'token' : token} 
 
             else:
@@ -500,8 +500,6 @@ def Send_Registration_Email(email,username,password,phone,answer):
     message["Subject"] = "Georay account Registertion"
     message["From"] = CONFIG.SENDER_EMAIL
     message["To"] = email
-
-    #TODO: change the message body for more complexities
 
     text = f"""\
     Hi,

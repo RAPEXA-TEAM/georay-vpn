@@ -30,6 +30,6 @@ PRICE_TRE_MONTH = 150000
 
 # Update version
 
-VERSION = "1.0.0"
+VERSION = "0.1.0"
 VERSION_TYPE = "0" # 0 : False, 1 : True
 DOWNLOAD_LINK = ""
