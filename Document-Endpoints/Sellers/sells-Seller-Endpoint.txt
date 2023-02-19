@@ -54,7 +54,7 @@ Url : thefarameta.com/sells_json
 
 Method : POST
 
-Body : {"days" : "<new-days-for-selected-user>" , "data" : "<sell-user-token>"}
+Body : {"sells" : "<selected-user-to-delete>""}
 
 Headers:
 
@@ -65,5 +65,5 @@ Headers:
 
 Responses :
 
-{"code" : 200, "data" : "update <sell-user-token> expired days to <new-days-for-selected-user> days!"}
+{"code" : 200, "data" : "delete user {sells.strip()} successfully !"}
 {"code" : 501, "data" : "error connecting to database"}
