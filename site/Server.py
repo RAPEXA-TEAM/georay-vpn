@@ -183,11 +183,10 @@ def Handle_Sellers():
 
         if request.method == 'POST':
 
-            days = request.json["days"]
-            token = str(request.json["data"])
+            sells = str(request.json["sells"])
 
-            if (Mysql.update_user(token.strip(),days)):
-                ret = {"code" : 200, "data" : f"update {token.strip()} expired days to {days} days!"}
+            if (Mysql.delete_user(sells.strip(),Token)):
+                ret = {"code" : 200, "data" : f"delete user {sells.strip()} successfully !"}
                 return jsonify(ret)
 
             else:

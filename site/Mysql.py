@@ -120,3 +120,13 @@ def read_users_for_seller_from_database(Token_seller):
     cur.execute(qury)
     db.close()
     return cur.fetchall()
+
+def delete_user(token,token_seller):
+
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'DELETE FROM users WHERE phone = "{token_seller}" AND token = "{token}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
