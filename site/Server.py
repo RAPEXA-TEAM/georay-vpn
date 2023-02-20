@@ -208,13 +208,12 @@ def Handle_Sellers():
             if hashlib.sha256(("{"+str(username_new)+"}{"+str(password_new)+"}-georay").encode("utf-8")).hexdigest() == Token:
                 
                 Seller[username_new] = password_new
-                seller_user += username_new
+                break
 
             else:
                 continue
 
-        seller_payed = Read_Sellers_payed(seller_user)
-        print(seller_payed)
+        seller_payed = Read_Sellers_payed(username_new)
 
         for user in all_users:
             user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified = user
@@ -579,4 +578,3 @@ def generate_random_password():
 
 if __name__ == "__main__":
     app.run("0.0.0.0",80,debug=False)
-    #print(Read_Sellers_payed("amirtala"))
