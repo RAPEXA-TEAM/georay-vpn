@@ -303,7 +303,7 @@ def handle_admin_page():
         user_db, password_db, phone_number, email, days, token, verified = user
     
         if verified != "0":
-            users.append({'username' : user_db, 'password' : password_db,'phone' : phone_number, 'email' : email, 'days' : days, 'token' : Read_Sellers_from_token(token)})
+            users.append({'username' : user_db, 'password' : password_db,'phone' : Read_Sellers_from_token(phone_number), 'email' : email, 'days' : days, 'token' : token})
         
         else:
             continue
