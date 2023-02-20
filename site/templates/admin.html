@@ -88,7 +88,6 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% set count = 1 %}
                       {% for user in data.users %}
                       <tr>
                         <td>
@@ -96,11 +95,10 @@
                             <div
                               class="d-flex flex-column justify-content-center"
                             >
-                              <h6 class="mb-0 text-sm">{{count}}</h6>
+                              <h6 class="mb-0 text-sm">{{ loop.index }}</h6>
                             </div>
                           </div>
                         </td>
-                        {% set count = count + 1 %}
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div
