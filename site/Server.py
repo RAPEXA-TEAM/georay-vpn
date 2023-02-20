@@ -577,5 +577,5 @@ def generate_random_password():
     return result_str
 
 if __name__ == "__main__":
-    #app.run("0.0.0.0",80,debug=False)
-    print(Read_Sellers_payed("amirtala"))
+    app.run("0.0.0.0",80,debug=False)
+    #print(Read_Sellers_payed("amirtala"))
