@@ -42,14 +42,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle"
-                                    src="static/img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="static/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="logout">
-                                    
+
                                     Logout
                                 </a>
                             </div>
@@ -71,8 +70,26 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Sells</div>
+                                                Sell accounts</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{data.count}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Payed accounts</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{data.payed}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -102,13 +119,16 @@
                             </div>
                         </div>
 
-                    </div>                    <!-- DataTales Example -->
+                    </div> <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center card-header py-3">
+                        <div
+                            class="d-flex flex-column flex-md-row justify-content-between align-items-center card-header py-3">
                             <h6 class="m-0 mb-4 mb-md-0 font-weight-bold text-primary">Users Table</h6>
                             <form class="d-flex flex-row justify-content-center align-items-center">
-                                <input required type="text" id="new-email-input" class="text-left mr-4" style="display: none;" placeholder="Enter new user email...">
-                                <button type="submit" id="add-new-username" data-type="show" style="text-align: center; background-color: inherit; border-radius: 4px; border: 1px solid #b8b4b4; padding: 2px 10px;">+</button>
+                                <input required type="text" id="new-email-input" class="text-left mr-4"
+                                    style="display: none;" placeholder="Enter new user email...">
+                                <button type="submit" id="add-new-username" data-type="show"
+                                    style="text-align: center; background-color: inherit; border-radius: 4px; border: 1px solid #b8b4b4; padding: 2px 10px;">+</button>
                             </form>
                         </div>
                         <div class="card-body">
@@ -143,7 +163,8 @@
                                                 <!-- input type="text" id="user-days-input" value="{{user.days}}" style="width: 60px; display: none;" -->
                                             </td>
                                             <td>
-                                                <button id="delete-days-button" data-type="edit" style="width: 100%; text-align: center; background-color: inherit; border-radius: 4px; border: 1px solid #b8b4b4;">delete</button>
+                                                <button id="delete-days-button" data-type="edit"
+                                                    style="width: 100%; text-align: center; background-color: inherit; border-radius: 4px; border: 1px solid #b8b4b4;">delete</button>
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -187,7 +208,7 @@
             const btn = e.target;
             const btnType = btn.getAttribute("data-type");
             const usernameInput = document.querySelector("#new-email-input");
-            
+
             if (btnType === "show") {
                 // change button type
                 btn.innerHTML = "Add";
@@ -198,6 +219,13 @@
             } else if (btnType === "add") {
                 if (usernameInput.value.length < 4) {
                     showResponse("Username must be at least 4 character!", "bg-danger")
+                    return null;
+                } else if (
+                    !usernameInput.match(
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    )
+                ) {
+                    showResponse("Email address is not correct!", "bg-danger")
                     return null;
                 }
 
@@ -211,7 +239,9 @@
                 // send new username to backend
                 const fetchOptions = {
                     method: "post",
-                    headers: new Headers({ "Content-Type": "application/json" }),
+                    headers: new Headers({
+                        "Content-Type": "application/json"
+                    }),
                     body: JSON.stringify({
                         email: usernameInput.value,
                         seller: location.href.split("=")[1]
@@ -243,10 +273,12 @@
                 const daysStatic = tableTr.querySelector("#user-days-static");
                 const daysInput = tableTr.querySelector("#user-days-input");
 
-                    // send new days to backend
+                // send new days to backend
                 const fetchOptions = {
                     method: "post",
-                    headers: new Headers({ "Content-Type": "application/json" }),
+                    headers: new Headers({
+                        "Content-Type": "application/json"
+                    }),
                     body: JSON.stringify({
                         sells: tableTr.querySelector("#user-token").innerHTML,
                     })
@@ -263,7 +295,7 @@
                         showResponse(res.data, "bg-danger")
                     }
                 });
-                
+
             })
         }
 
@@ -299,4 +331,5 @@
     <script src="static/js/demo/datatables-demo.js"></script>
 
 </body>
+
 </html>

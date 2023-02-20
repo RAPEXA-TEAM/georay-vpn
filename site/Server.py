@@ -201,13 +201,19 @@ def Handle_Sellers():
         Sellers = Read_Sellers()
         Seller = {}
 
+        seller_user = ""
+
         for username_new, password_new in Sellers.items():
 
             if hashlib.sha256(("{"+str(username_new)+"}{"+str(password_new)+"}-georay").encode("utf-8")).hexdigest() == Token:
+                
                 Seller[username_new] = password_new
+                seller_user = username_new
 
             else:
                 continue
+
+        seller_payed = Read_Sellers_payed(seller_user)
 
         for user in all_users:
             user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified = user
@@ -215,7 +221,7 @@ def Handle_Sellers():
             user_counter += 1
             total_sell = user_counter * CONFIG.PRICE_ONE_MONTH
 
-        json_data = {"users" : users, "sells" : total_sell, "count" : user_counter, "seller" : Seller}
+        json_data = {"users" : users, "sells" : total_sell, "count" : user_counter, "seller" : Seller, "payed" : seller_payed}
         return render_template('seller.html', data = json_data)
 
     else:
@@ -431,6 +437,26 @@ def Read_Sellers():
 
     return Sellers
 
+def Read_Sellers_payed(Seller):
+    '''this function is used to read the seller payed from the csv file'''
+
+    payed = ""
+
+    with open('/var/www/vpn/site/Sellers.csv', newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        
+        for row in spamreader:
+            
+            if Seller == row[0]:
+
+                payed = row[2]
+
+            else:
+
+                payed = None
+
+    return payed
+
 def Check_User(token):
     '''this function is used to check if the new token is valid or not'''
 
@@ -551,4 +577,5 @@ def generate_random_password():
     return result_str
 
 if __name__ == "__main__":
-    app.run("0.0.0.0",80,debug=False)
+    #app.run("0.0.0.0",80,debug=False)
+    print(Read_Sellers_payed("amirtala"))
