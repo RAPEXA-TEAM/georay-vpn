@@ -201,8 +201,6 @@ def Handle_Sellers():
         Sellers = Read_Sellers()
         Seller = {}
 
-        seller_user = ""
-
         for username_new, password_new in Sellers.items():
 
             if hashlib.sha256(("{"+str(username_new)+"}{"+str(password_new)+"}-georay").encode("utf-8")).hexdigest() == Token:
@@ -305,7 +303,7 @@ def handle_admin_page():
         user_db, password_db, phone_number, email, days, token, verified = user
     
         if verified != "0":
-            users.append({'username' : user_db, 'password' : password_db,'phone' : phone_number, 'email' : email, 'days' : days, 'token' : token})
+            users.append({'username' : user_db, 'password' : password_db,'phone' : phone_number, 'email' : email, 'days' : days, 'token' : Read_Sellers_from_token(token)})
         
         else:
             continue
@@ -424,6 +422,19 @@ def Read_servers():
             Servers.append(row[1])
     
     return Servers
+
+def Read_Sellers_from_token(Token):
+    '''this function is used to read the sellers from the csv file'''
+
+    with open('/var/www/vpn/site/Sellers.csv', newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+                
+            if hashlib.sha256(("{"+str(row[0])+"}{"+str(row[1])+"}-georay").encode("utf-8")).hexdigest() == Token:
+
+                return row[0]
+
+    return None
 
 def Read_Sellers():
     '''this function is used to read the sellers from the csv file'''
