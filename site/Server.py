@@ -440,22 +440,16 @@ def Read_Sellers():
 def Read_Sellers_payed(Seller):
     '''this function is used to read the seller payed from the csv file'''
 
-    payed = ""
-
     with open('/var/www/vpn/site/Sellers.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile)
         
         for row in spamreader:
-            
-            if str(Seller) == str(row[0]):
 
-                payed = str(row[2])
+            if Seller == row[0]:
 
-            else:
+                return row[2]
 
-                payed = None
-
-    return payed
+    return None
 
 def Check_User(token):
     '''this function is used to check if the new token is valid or not'''
