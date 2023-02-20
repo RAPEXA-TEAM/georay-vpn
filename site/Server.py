@@ -208,13 +208,13 @@ def Handle_Sellers():
             if hashlib.sha256(("{"+str(username_new)+"}{"+str(password_new)+"}-georay").encode("utf-8")).hexdigest() == Token:
                 
                 Seller[username_new] = password_new
-                seller_user = username_new
-                print(username_new)
+                seller_user =+ username_new
 
             else:
                 continue
 
-        seller_payed = username_new #Read_Sellers_payed(str(seller_user))
+        seller_payed = Read_Sellers_payed(seller_user)
+        print(seller_payed)
 
         for user in all_users:
             user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified = user
@@ -448,7 +448,7 @@ def Read_Sellers_payed(Seller):
         
         for row in spamreader:
             
-            if Seller == str(row[0]):
+            if str(Seller) == str(row[0]):
 
                 payed = str(row[2])
 
