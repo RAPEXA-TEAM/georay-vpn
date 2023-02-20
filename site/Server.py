@@ -209,11 +209,12 @@ def Handle_Sellers():
                 
                 Seller[username_new] = password_new
                 seller_user = username_new
+                print(username_new)
 
             else:
                 continue
 
-        seller_payed = Read_Sellers_payed(str(seller_user))
+        seller_payed = username_new #Read_Sellers_payed(str(seller_user))
 
         for user in all_users:
             user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified = user
