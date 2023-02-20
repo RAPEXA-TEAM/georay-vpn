@@ -221,7 +221,7 @@
                     showResponse("Username must be at least 4 character!", "bg-danger")
                     return null;
                 } else if (
-                    !usernameInput.match(
+                    !usernameInput.value.match(
                         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                     )
                 ) {
