@@ -208,7 +208,7 @@ def Handle_Sellers():
             if hashlib.sha256(("{"+str(username_new)+"}{"+str(password_new)+"}-georay").encode("utf-8")).hexdigest() == Token:
                 
                 Seller[username_new] = password_new
-                seller_user =+ username_new
+                seller_user += username_new
 
             else:
                 continue
