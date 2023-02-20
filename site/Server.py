@@ -213,7 +213,7 @@ def Handle_Sellers():
             else:
                 continue
 
-        seller_payed = Read_Sellers_payed(seller_user)
+        seller_payed = Read_Sellers_payed(str(seller_user))
 
         for user in all_users:
             user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified = user
@@ -447,9 +447,9 @@ def Read_Sellers_payed(Seller):
         
         for row in spamreader:
             
-            if Seller == row[0]:
+            if Seller == str(row[0]):
 
-                payed = row[2]
+                payed = str(row[2])
 
             else:
 
