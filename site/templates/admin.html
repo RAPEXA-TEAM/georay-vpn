@@ -88,8 +88,18 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {% set count = 1 %}
                       {% for user in data.users %}
                       <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <h6 class="mb-0 text-sm">{{count}}</h6>
+                            </div>
+                          </div>
+                        </td>
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div
@@ -133,6 +143,7 @@
                           </button>
                         </td>
                       </tr>
+                      {% set count = count + 1 %}
                       {% endfor %}
                     </tbody>
                   </table>
