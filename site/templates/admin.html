@@ -225,7 +225,7 @@
                 headers: new Headers({ "Content-Type": "application/json" }),
                 body: JSON.stringify({
                   days: days.value,
-                  data: daysParent.parentElement.children[1].lastElementChild.textContent,
+                  data: daysParent.parentElement.children[2].lastElementChild.textContent,
                 }),
               };
               fetch("http://thefarameta.com/d08ec689aef988a788aa6b5f6ed04a0efe57ca919d7d9d863d6322edd47f2d81", fetchOptions)
