@@ -397,7 +397,7 @@ def handle_login_user():
 
         update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
 
-        if (username in list_of_users_dic and passw == list_of_users_dic[username]["password"]):
+        if (username in list_of_users_dic and passw == list_of_users_dic[username]["password"] and int(list_of_users_dic[username]["days"]) > 0):
 
             prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
             ret = {"code" : 200, "data" : list_of_users_dic[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
