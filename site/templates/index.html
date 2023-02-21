@@ -19,7 +19,13 @@
           <a href="/">صفحه اصلی</a>
           <a href="https://drive.google.com/u/0/uc?id=1DUI6yJspJ7w1vfJrKZ_f8oUlSngObp_J&export=download" target="_blank">دانلود نرم افزار اندروید</a>
         </div>
-        <button class="flex md:hidden">
+        <div id="small-navbar" class="w-8/12 h-screen hidden fixed top-0 left-0 flex-col justify-center items-start gap-5 font-semibold relative top-1">
+          <a href="https://t.me/georay_help" target="_blank">پشتیبانی</a>
+          <a href="/register">ثبت نام</a>
+          <a href="/">صفحه اصلی</a>
+          <a href="https://drive.google.com/u/0/uc?id=1DUI6yJspJ7w1vfJrKZ_f8oUlSngObp_J&export=download" target="_blank">دانلود نرم افزار اندروید</a>
+        </div>
+        <button id="menu-button" class="flex md:hidden">
           <img
             width="30"
             height="30"
@@ -198,5 +204,19 @@
           </div>
         </div>
       </footer>
+
+      <script>
+        // show small navbar by clicking on menu button in mobile screen
+        document.querySelector("#menu-button").addEventListener("click", () => {
+          const smallNavbar = document.querySelector("#small-navbar");
+          if (smallNavbar.classList.contains("hidden")) {
+            smallNavbar.classList.remove("hidden");
+            smallNavbar.classList.add("flex");
+          } else {
+            smallNavbar.classList.remove("flex");
+            smallNavbar.classList.add("hidden");
+          }
+        })
+      </script>
 </body>
 </html>
