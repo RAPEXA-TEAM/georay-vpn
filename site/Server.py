@@ -355,8 +355,8 @@ def handle_Authentication_new_user():
         return render_template("index.html", message = message)
 
 
-    ret = {"code" : 501, "data" : "error verifying user"}
-    return jsonify(ret)
+    alert = "error verifying user"
+    return render_template("index.html", alert = alert)
 
 
 @app.route('/',methods=["GET", "POST"])
