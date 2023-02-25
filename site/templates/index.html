@@ -43,9 +43,14 @@
         />
       </nav>
       <div class="item"><div class="slidecaption"><h2></h2><h4></h4><p><a class="btn btn-slide" href="#"></a></p></div> <img width="2560" height="733" src="static/images/slide.png" alt=""></div>
+      {% if message %}
       <div class="alert alert-success" role="alert">
-        This is a success alert—check it out!
+        <h4 class="alert-heading">Activated successfully!</h4>
+        <p>Aww yeah, <strong>{{ message }}</strong></p>
+        <hr>
+        <p class="mb-0">Thank you for choosing us...</p>
       </div>
+      {% endif %}
       <!-- main content -->
       <main class="main-container">
         <!-- header  -->

@@ -351,8 +351,8 @@ def handle_Authentication_new_user():
     
     if Mysql.update_user_registration(Token):
     
-        ret = {"code" : 200, "data" : "User verified successfully and you can use mobile app now with out any problem"}
-        return render_template("index.html", data = ret)
+        message = "User verified successfully and you can use mobile app now with out any problem"
+        return render_template("index.html", message = message)
 
 
     ret = {"code" : 501, "data" : "error verifying user"}
