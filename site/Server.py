@@ -351,11 +351,11 @@ def handle_Authentication_new_user():
     
     if Mysql.update_user_registration(Token) and Check_User_Reverse(Token):
     
-        message = "User verified successfully and you can use mobile app now with out any problem"
+        message = "User verified successfully"
         return render_template("index.html", message = message)
 
 
-    alert = "error verifying user"
+    alert = "Error verifying user"
     return render_template("index.html", alert = alert)
 
 
