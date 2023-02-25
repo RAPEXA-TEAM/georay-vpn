@@ -349,7 +349,7 @@ def handle_Authentication_new_user():
     Token = request.args.get('Token')
     exec(open('/var/www/vpn/site/Expiration.py').read())
     
-    if Mysql.update_user_registration(Token) and Check_User(Token):
+    if Mysql.update_user_registration(Token) and Check_User_Reverse(Token):
     
         message = "User verified successfully and you can use mobile app now with out any problem"
         return render_template("index.html", message = message)
@@ -475,6 +475,21 @@ def Check_User(token):
                 
     else:
         return True
+
+def Check_User_Reverse(token):
+    '''this function is used to check if the new token is valid or not'''
+
+    List_Of_Users = Mysql.read_users_from_database()
+    List_of_tokens = []
+    for user in List_Of_Users:
+        user_db, password_db, phone_number, email, days, token_db, verified = user 
+        List_of_tokens.append(token_db)
+
+    if token in List_of_tokens:
+        return True
+                
+    else:
+        return False
 
 def Check_Seller(username,password):
     Sellers = Read_Sellers()
