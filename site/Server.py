@@ -349,7 +349,7 @@ def handle_Authentication_new_user():
     Token = request.args.get('Token')
     exec(open('/var/www/vpn/site/Expiration.py').read())
     
-    if Mysql.update_user_registration(Token):
+    if Mysql.update_user_registration(Token) and Check_User(Token):
     
         message = "User verified successfully and you can use mobile app now with out any problem"
         return render_template("index.html", message = message)
