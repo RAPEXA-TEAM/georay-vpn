@@ -36,7 +36,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"amir@gmail.com\",\n    \"pass\": \"vldmdtjlrsvl\"\n}",
+							"raw": "{\n    \"email\": \"lucy\",\n    \"pass\": \"tsfurzvrxjzx\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,7 +44,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/login",
+							"raw": "http://thefarameta.com/login?Device=a&OS=a",
 							"protocol": "http",
 							"host": [
 								"thefarameta",
@@ -52,6 +52,16 @@
 							],
 							"path": [
 								"login"
+							],
+							"query": [
+								{
+									"key": "Device",
+									"value": "a"
+								},
+								{
+									"key": "OS",
+									"value": "a"
+								}
 							]
 						}
 					},

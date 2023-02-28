@@ -1,4 +1,4 @@
-Url : thefarameta.com/login
+Url : thefarameta.com/login?Device=s23&OS=android
 
 Method : POST
 
@@ -14,23 +14,34 @@ Headers:
 Responses :
 
 {
-    "v2ray": [
-        "vmess://eyJhZGQiOiJjMS5oYWZwYS5pciIsImFpZCI6IjAiLCJhbHBuIjoiIiwiaG9zdCI6IiIsImlkIjoiYTVhNzk1NjEtOTdlMS00NTU2LTkzNDMtYmZiZjc2MTUwYzgzIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIyMTE2MiIsInBzIjoiYnJvb3o1Iiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6Im5vbmUiLCJ0eXBlIjoiIiwidiI6IjIifQ==",
-        "vmess://eyJhZGQiOiJicm9vei5oYWZwYS5pciIsImFpZCI6IjAiLCJhbHBuIjoiIiwiaG9zdCI6IiIsImlkIjoiYmY5NjYxZGYtZDBlMy00Y2JiLWM2M2UtZWYwZGVmMWI2Nzg4IiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIyNDA2MCIsInBzIjoiYnJvb3o0Iiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6Im5vbmUiLCJ0eXBlIjoiIiwidiI6IjIifQ=="
-    ],
-    "openconnect": [],
     "code": 200,
     "data": {
-        "days": "6",
-        "username": "rapexamrs@gmail.com",
-        "password": "Mmgstudio884!",
-        "token": "fdc663715e8961cc32afd0f063b894cfa627a41136be9b817b9a5026e89b66cb"
+        "Device": "a",
+        "OS": "a",
+        "days": "28",
+        "password": "tsfurzvrxjzx",
+        "token": "d489a7e9455ddbbb538ebc7c3e1c840c944bb789f12b1b76e9eb0757131336ac",
+        "username": "6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2"
     },
+    "openconnect": [],
     "prices": {
         "1month": 50000,
         "2month": 100000,
         "3month": 150000
-    }
+    },
+    "update_info": {
+        "force": "0",
+        "links": "",
+        "version": "0.1.0"
+    },
+    "v2ray": [
+        "vless://3365caca-abaa-47ba-ed1d-7e81c753fabe@45.85.118.88:2083?path=%2F&security=tls&encryption=none&host=a1.iraniancp.autos&type=ws&sni=iraniancp.autos#Georay+2083",
+        "vmess://eyJhZGQiOiI0NS44NS4xMTguNDgiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImhvc3QiOiJhMi5pcmFuaWFuY3AuYXV0b3MiLCJpZCI6IjcyZjc2YzM2LTNlM2MtNDViMy1hNjFmLWQ4ZjAxNzM0NTk1OCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJwb3J0IjoiMjA1MyIsInBzIjoiR2VvcmF5IDIwNTMiLCJzY3kiOiJhdXRvIiwic25pIjoiaXJhbmlhbmNwLmF1dG9zIiwidGxzIjoidGxzIiwidHlwZSI6IiIsInYiOiIyIn0=",
+        "vmess://eyJhZGQiOiIxMDQuMTYuMjA5LjEyIiwiYWlkIjoiMCIsImFscG4iOiIiLCJob3N0IjoiYTMuaXJhbmlhbmNwLmF1dG9zIiwiaWQiOiI0NGM0NjdhOS04ZjBkLTQxYTUtZjAwYi04NjU2OTc1M2U1YjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjgwIiwicHMiOiJHZW9yYXkgODAiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6IiIsInYiOiIyIn0=",
+        "vless://8230fa43-a36c-4b8f-f3c5-3cc8e8fc1999@104.24.150.199:8080?path=%2F&security=none&encryption=none&host=a4.iraniancp.autos&type=ws#Georay+8080",
+        "vless://fc03933c-9b0b-4eab-9c5f-626ea67c5bff@104.24.150.199:8443?path=%2F&security=tls&encryption=none&host=a5.iraniancp.autos&type=ws&sni=iraniancp.autos#Georay+8443",
+        "vmess://eyJhZGQiOiIxMDQuMTYuMjA5LjEyIiwiYWlkIjoiMCIsImFscG4iOiIiLCJob3N0IjoiYTYuaXJhbmlhbmNwLmF1dG9zIiwiaWQiOiIwYzY2NGY0NC05ZjY5LTQ1NGYtODQxYS00NjE2NzE1ZGYyNmYiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6Ijg4ODAiLCJwcyI6Ikdlb3JheSA4ODgwIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiIiLCJ2IjoiMiJ9"
+    ]
 }
 
 {"code" : 500, "data" : "Request not valid"}
