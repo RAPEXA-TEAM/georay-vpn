@@ -3,6 +3,7 @@
 # Flask Secret key
 
 SECRET_KEY = "secret!"
+HOST = "0.0.0.0"
 
 # MySQL Configs
 
@@ -33,3 +34,19 @@ PRICE_TRE_MONTH = 150000
 VERSION = "0.1.0"
 VERSION_TYPE = "0" # 0 : False, 1 : True
 DOWNLOAD_LINK = ""
+
+# Config Production
+
+PATH_EXPIRATION = '/var/www/vpn/site/Expiration.py'
+PATH_SELLERS = '/var/www/vpn/site/Sellers.csv'
+PATH_SERVERS = '/var/www/vpn/site/Servers.csv'
+RUNNING_PORT = 80
+PRODUCTION_MODE = False
+
+# Config Development
+
+PATH_EXPIRATION_DEV = 'Expiration.py'
+PATH_SELLERS_DEV = 'Sellers.csv'
+PATH_SERVERS_DEV = 'Servers.csv'
+RUNNING_PORT_DEV = 5550
+DEBUG_MODE = True

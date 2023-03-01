@@ -42,6 +42,12 @@ def logout():
 
     return redirect(url_for('handle_main_page'))
 
+@app.route("/logout_apk")
+def logout():
+    '''this function is used to logout the user and clean device and os from database'''
+
+    return redirect(url_for('handle_main_page'))
+
 @app.route("/update") 
 def handle_update():
     '''this function is used to update apps'''
@@ -112,7 +118,7 @@ def handle_add_sell():
 def Handle_Sellers_json():
     '''this function is used to handle the sells from one seller in json format'''
 
-    exec(open('/var/www/vpn/site/Expiration.py').read())      
+    exec(open(CONFIG.PATH_EXPIRATION).read())      
 
     Token = request.args.get('Token')
     Sellers = Read_Sellers()
@@ -153,8 +159,8 @@ def Handle_Sellers_json():
                 continue
 
         for user in all_users:
-            user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified = user
-            users.append({'username' : user_db, 'password' : password_db, 'days' : days, 'token' : token_db})
+            user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified, Device, Device_OS  = user
+            users.append({'username' : user_db, 'password' : password_db, 'days' : days, 'token' : token_db, 'Device' : Device, 'OS' : Device_OS})
             user_counter += 1
             total_sell = user_counter * CONFIG.PRICE_ONE_MONTH
 
@@ -170,7 +176,7 @@ def Handle_Sellers_json():
 def Handle_Sellers():
     '''this function is used to handle the sells from one seller'''
 
-    exec(open('/var/www/vpn/site/Expiration.py').read())      
+    exec(open(CONFIG.PATH_EXPIRATION).read())      
 
     Token = request.args.get('Token')
     Sellers = Read_Sellers()
@@ -214,8 +220,8 @@ def Handle_Sellers():
         seller_payed = Read_Sellers_payed(username_new)
 
         for user in all_users:
-            user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified = user
-            users.append({'username' : user_db, 'password' : password_db, 'days' : days, 'token' : token_db})
+            user_db, password_db, Token_seller, Token_sellerr, days, token_db, verified, Device, Device_OS  = user
+            users.append({'username' : user_db, 'password' : password_db, 'days' : days, 'token' : token_db, 'Device' : Device, 'OS' : Device_OS})
             user_counter += 1
             total_sell = user_counter * CONFIG.PRICE_ONE_MONTH
 
@@ -234,7 +240,7 @@ def handle_make_payment_hash():
         List_Of_Users = Mysql.read_users_from_database()
         List_of_tokens = []
         for user in List_Of_Users:
-            user_db, password_db, phone_number, email, days, token_db, verified = user 
+            user_db, password_db, phone_number, email, days, token_db, verified, Device, Device_OS = user 
             List_of_tokens.append(token_db)
 
         value = request.json['value']
@@ -300,10 +306,10 @@ def handle_admin_page():
     all_users = Mysql.read_users_from_database()
     users = []
     for user in all_users:
-        user_db, password_db, phone_number, email, days, token, verified = user
+        user_db, password_db, phone_number, email, days, token, verified, Device, Device_OS = user
     
         if verified != "0":
-            users.append({'username' : user_db, 'password' : password_db,'phone' : Read_Sellers_from_token(phone_number), 'email' : email, 'days' : days, 'token' : token})
+            users.append({'username' : user_db, 'password' : password_db,'phone' : Read_Sellers_from_token(phone_number), 'days' : days, 'token' : token, 'Device' : Device, 'OS' : Device_OS})
         
         else:
             continue
@@ -347,7 +353,7 @@ def handle_Authentication_new_user():
     '''this function is used to handle the authentication of new user that rigistered a account but did not verify by the email'''
 
     Token = request.args.get('Token')
-    exec(open('/var/www/vpn/site/Expiration.py').read())
+    exec(open(CONFIG.PATH_EXPIRATION).read())
     
     if Mysql.update_user_registration(Token) and Check_User_Reverse(Token):
     
@@ -364,7 +370,7 @@ def handle_main_page():
     '''this function is used to handle the main page'''
 
     # run Expiration.py
-    exec(open('/var/www/vpn/site/Expiration.py').read())
+    exec(open(CONFIG.PATH_EXPIRATION).read())
 
     return render_template("index.html")
 
@@ -373,49 +379,59 @@ def handle_login_user():
     '''this function is used to handle the login users from aplication'''
 
     # run Expiration.py
-    exec(open('/var/www/vpn/site/Expiration.py').read())
+    exec(open(CONFIG.PATH_EXPIRATION).read())
 
     if request.method == 'POST':
         username = request.json["email"]
         passw = request.json["pass"]
+        Device_GET = request.json['Device']
+        Device_OS_GET = request.json['OS']
 
         list_of_users_dic = {}
         List_Of_Users = Mysql.read_users_from_database()
 
         for user in List_Of_Users:
 
-            user_db, password_db, phone_number, email, days, token, verified = user
+            user_db, password_db, phone_number, email, days, token, verified, Device, Device_OS = user
     
             if verified != "0" and days != "0":
-                list_of_users_dic[user_db] = {'password' : password_db, 'username' : email, 'days' : days, 'token' : token} 
+                list_of_users_dic[user_db] = {'password' : password_db, 'username' : email, 'days' : days, 'token' : token, 'Device' : Device, 'OS' : Device_OS} 
 
             else:
                 continue
 
-        Servers_v = Read_servers()
-        servers_o = [] #TODO: add it for next update
+        if list_of_users_dic[username]['Device'] is not None and list_of_users_dic[username]['OS'] is not None:
 
-        update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
+            Servers_v = Read_servers()
+            servers_o = [] #TODO: add it for next update
 
-        if (username in list_of_users_dic and passw == list_of_users_dic[username]["password"] and int(list_of_users_dic[username]["days"]) > 0):
+            update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
 
-            prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-            ret = {"code" : 200, "data" : list_of_users_dic[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
-            return jsonify(ret)
+            if (username in list_of_users_dic and passw == list_of_users_dic[username]["password"] and list_of_users_dic[username]['Device'] == Device_GET and list_of_users_dic[username]['OS'] == Device_OS_GET and int(list_of_users_dic[username]["days"]) > 0):
+
+                prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
+                ret = {"code" : 200, "data" : list_of_users_dic[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+                return jsonify(ret)
+            
+            else:
+                ret = {"code" : 401, "data" : "Error"}
+                return jsonify(ret)    
         
-        else:
-            ret = {"code" : 401, "data" : "Error"}
-            return jsonify(ret)    
-    
-    ret = {"code" : 500, "data" : "Request not valid"}
-    return jsonify(ret)
+        elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
+
+            ret = {"code" : 201, "data" : "Device and OS set correctly for this user"}
+            return jsonify(ret)
+
+        ret = {"code" : 401, "data" : "Error"}
+        return jsonify(ret)
+
 
 def Read_servers():
     '''this function is used to read the servers from the csv file'''
 
     Servers = []
 
-    with open('/var/www/vpn/site/Servers.csv', newline='') as csvfile:
+    with open(CONFIG.PATH_SERVERS, newline='') as csvfile:
         spamreader = csv.reader(csvfile)
         for row in spamreader:
             Servers.append(row[1])
@@ -425,7 +441,7 @@ def Read_servers():
 def Read_Sellers_from_token(Token):
     '''this function is used to read the sellers from the csv file'''
 
-    with open('/var/www/vpn/site/Sellers.csv', newline='') as csvfile:
+    with open(CONFIG.PATH_SELLERS, newline='') as csvfile:
         spamreader = csv.reader(csvfile)
         for row in spamreader:
                 
@@ -440,7 +456,7 @@ def Read_Sellers():
 
     Sellers = {}
 
-    with open('/var/www/vpn/site/Sellers.csv', newline='') as csvfile:
+    with open(CONFIG.PATH_SELLERS, newline='') as csvfile:
         spamreader = csv.reader(csvfile)
         for row in spamreader:
             Sellers[row[0]] = row[1]
@@ -450,7 +466,7 @@ def Read_Sellers():
 def Read_Sellers_payed(Seller):
     '''this function is used to read the seller payed from the csv file'''
 
-    with open('/var/www/vpn/site/Sellers.csv', newline='') as csvfile:
+    with open(CONFIG.PATH_SELLERS, newline='') as csvfile:
         spamreader = csv.reader(csvfile)
         
         for row in spamreader:
@@ -467,7 +483,7 @@ def Check_User(token):
     List_Of_Users = Mysql.read_users_from_database()
     List_of_tokens = []
     for user in List_Of_Users:
-        user_db, password_db, phone_number, email, days, token_db, verified = user 
+        user_db, password_db, phone_number, email, days, token_db, verified, Device, Device_OS = user 
         List_of_tokens.append(token_db)
 
     if token in List_of_tokens:
@@ -482,7 +498,7 @@ def Check_User_Reverse(token):
     List_Of_Users = Mysql.read_users_from_database()
     List_of_tokens = []
     for user in List_Of_Users:
-        user_db, password_db, phone_number, email, days, token_db, verified = user 
+        user_db, password_db, phone_number, email, days, token_db, verified, Device, Device_OS = user 
         List_of_tokens.append(token_db)
 
     if token in List_of_tokens:
@@ -596,4 +612,4 @@ def generate_random_password():
     return result_str
 
 if __name__ == "__main__":
-    app.run("0.0.0.0",80,debug=False)
+    app.run(CONFIG.HOST,CONFIG.RUNNING_PORT,debug=CONFIG.PRODUCTION_MODE)

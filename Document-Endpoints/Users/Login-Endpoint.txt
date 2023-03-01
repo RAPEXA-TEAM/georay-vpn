@@ -1,8 +1,8 @@
-Url : thefarameta.com/login?Device=s23&OS=android
+Url : thefarameta.com/login
 
 Method : POST
 
-Body : {"email" : "<user-username>" , "pass" : "<user-password>"}
+Body : {"email" : "<user-username>" , "pass" : "<user-password>", "Device" : "<s23>" , "OS" : "<android>"}
 
 Headers:
 
@@ -12,6 +12,8 @@ Headers:
     cache:no-cache
 
 Responses :
+
+{"code" : 201, "data" : "Device and OS set correctly for this user"}
 
 {
     "code": 200,
