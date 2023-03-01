@@ -1,4 +1,4 @@
-Url : thefarameta.com/add_sell
+Url : georay.site/add_sell
 
 Method : POST
 

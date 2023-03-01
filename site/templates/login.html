@@ -65,7 +65,7 @@
 						}),
 					};
 
-					fetch("http://thefarameta.com/seller", fetchOptions)
+					fetch("http://georay.site/seller", fetchOptions)
 						.then((response) => {
 							if (response.ok) {
 								return response.json();
@@ -73,10 +73,10 @@
 						})
 						.then((res) => {
 							if (res.code === 200) {
-								window.location.href = "http://thefarameta.com/sells?Token="+res.Token;
+								window.location.href = "http://georay.site/sells?Token="+res.Token;
 					
 							} else {
-								window.location.href = "http://thefarameta.com/seller";
+								window.location.href = "http://georay.site/seller";
 							}
 						})
 					});

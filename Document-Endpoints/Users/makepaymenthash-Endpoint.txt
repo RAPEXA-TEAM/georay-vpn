@@ -1,4 +1,4 @@
-Url : thefarameta.com/makepaymenthash
+Url : georay.site/makepaymenthash
 
 Method : POST
 

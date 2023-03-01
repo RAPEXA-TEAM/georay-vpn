@@ -1,4 +1,4 @@
-Url : thefarameta.com/payment
+Url : georay.site/payment
 
 Method : POST
 

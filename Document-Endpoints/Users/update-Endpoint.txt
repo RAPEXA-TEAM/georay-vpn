@@ -1,4 +1,4 @@
-Url : thefarameta.com/update
+Url : georay.site/update
 
 Method : GET
 

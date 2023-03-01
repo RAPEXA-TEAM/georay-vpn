@@ -1,4 +1,4 @@
-Url : thefarameta.com/sells_json?Token=<token-seller>
+Url : georay.site/sells_json?Token=<token-seller>
 
 Method : GET
 
@@ -50,7 +50,7 @@ Responses :
 
 ----------------------------------------------------------------
 
-Url : thefarameta.com/sells_json
+Url : georay.site/sells_json
 
 Method : POST
 

@@ -43,10 +43,42 @@ def logout():
     return redirect(url_for('handle_main_page'))
 
 @app.route("/logout_apk")
-def logout():
+def logout_apk():
     '''this function is used to logout the user and clean device and os from database'''
 
-    return redirect(url_for('handle_main_page'))
+    if request.method == 'POST':
+        username = request.json["email"]
+        passw = request.json["pass"]
+        Device_GET = request.json['Device']
+        Device_OS_GET = request.json['OS']
+
+        list_of_users_dic = {}
+        List_Of_Users = Mysql.read_users_from_database()
+
+        for user in List_Of_Users:
+
+            user_db, password_db, phone_number, email, days, token, verified, Device, Device_OS = user
+    
+            if verified != "0" and days != "0":
+                list_of_users_dic[user_db] = {'password' : password_db, 'username' : email, 'days' : days, 'token' : token, 'Device' : Device, 'OS' : Device_OS} 
+
+            else:
+                continue
+
+        if (username in list_of_users_dic and passw == list_of_users_dic[username]["password"] and list_of_users_dic[username]['Device'] == Device_GET and list_of_users_dic[username]['OS'] == Device_OS_GET and int(list_of_users_dic[username]["days"]) > 0):
+
+            if Mysql.delete_user_device_from_database(username):
+
+                ret = {"code" : 200, "data" : "Device logout correctly!"}
+                return jsonify(ret)
+
+            else:
+
+                ret = {"code" : 401, "data" : "Error"}
+                return jsonify(ret)
+
+        ret = {"code" : 401, "data" : "Forbidden"}
+        return jsonify(ret)
 
 @app.route("/update") 
 def handle_update():
@@ -564,7 +596,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     text = f"""\
     Hi,
     Check out the link below To register your Georay VPN account:
-    http://thefarameta.com/Authentication?Token={token}
+    http://georay.site/Authentication?Token={token}
     \n
     username: {username}
     password: {password}
@@ -575,7 +607,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     <body>
         <p>Hi,<br>
         Check out the link below To register your Georay VPN account:</p>
-        <p><a href="http://thefarameta.com/Authentication?Token={token}">Register Now!</a></p>
+        <p><a href="http://georay.site/Authentication?Token={token}">Register Now!</a></p>
         <br>
         <p>Username: {username}</p>
         <p>Password: {password}</p>

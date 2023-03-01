@@ -44,14 +44,63 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/login",
+							"raw": "http://georay.site/login",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "method",
+								"value": "POST",
+								"type": "default"
+							},
+							{
+								"key": "mode",
+								"value": "cors",
+								"type": "default"
+							},
+							{
+								"key": "cache",
+								"value": "no-cache",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"lucy\",\n    \"pass\": \"tsfurzvrxjzx\",\n    \"Device\":\"a\",\n    \"OS\": \"a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://georay.site/logout_apk",
+							"protocol": "http",
+							"host": [
+								"georay",
+								"site"
+							],
+							"path": [
+								"logout_apk"
 							]
 						}
 					},
@@ -93,11 +142,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/register",
+							"raw": "http://georay.site/register",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"register"
@@ -142,11 +191,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/makepaymenthash",
+							"raw": "http://georay.site/makepaymenthash",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"makepaymenthash"
@@ -191,11 +240,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/payment",
+							"raw": "http://georay.site/payment",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"payment"
@@ -243,11 +292,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/update",
+							"raw": "http://georay.site/update",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"update"
@@ -297,11 +346,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/seller",
+							"raw": "http://georay.site/seller",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"seller"
@@ -346,11 +395,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/add_sell",
+							"raw": "http://georay.site/add_sell",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"add_sell"
@@ -395,11 +444,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"raw": "http://georay.site/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"sells_json"
@@ -453,11 +502,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://thefarameta.com/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"raw": "http://georay.site/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "http",
 							"host": [
-								"thefarameta",
-								"com"
+								"georay",
+								"site"
 							],
 							"path": [
 								"sells_json"

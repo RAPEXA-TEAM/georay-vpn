@@ -84,7 +84,7 @@
               email,
           }),
         };
-        fetch("http://thefarameta.com/register", fetchOptions)
+        fetch("http://georay.site/register", fetchOptions)
           .then((response) => {
             if (response.ok) {
               return response.json();
@@ -94,7 +94,7 @@
             if (res.code === 200) {
               showAlert(res.data, "alert-warning");
               setTimeout(() => {
-                window.location.href = "http://thefarameta.com";
+                window.location.href = "http://georay.site";
               }, 3000);
             } else {
               showAlert(res.data);

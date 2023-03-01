@@ -1,4 +1,4 @@
-Url : thefarameta.com/register
+Url : georay.site/register
 
 Method : POST
 

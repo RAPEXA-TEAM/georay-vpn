@@ -37,6 +37,17 @@ def add_user_device_to_database(email, Device, OS):
     db.close()    
     return True
 
+def delete_user_device_from_database(email):
+    '''this function update user expired time on database'''
+    
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'UPDATE users SET Device = NULL, OS = NULL where user = "{email}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
 def update_user_registration(Token):
     '''this function update user registration status on database'''
     
