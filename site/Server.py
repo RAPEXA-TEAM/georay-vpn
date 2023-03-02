@@ -42,7 +42,7 @@ def logout():
 
     return redirect(url_for('handle_main_page'))
 
-@app.route("/logout_apk")
+@app.route("/logout_apk", methods=['POST','GET'])
 def logout_apk():
     '''this function is used to logout the user and clean device and os from database'''
 
