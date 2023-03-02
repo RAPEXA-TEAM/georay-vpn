@@ -1,4 +1,4 @@
-Url : georay.site/update
+Url : georay.store/update
 
 Method : GET
 

@@ -1,4 +1,4 @@
-Url : georay.site/sells_json?Token=<token-seller>
+Url : georay.store/sells_json?Token=<token-seller>
 
 Method : GET
 
@@ -50,7 +50,7 @@ Responses :
 
 ----------------------------------------------------------------
 
-Url : georay.site/sells_json
+Url : georay.store/sells_json
 
 Method : POST
 

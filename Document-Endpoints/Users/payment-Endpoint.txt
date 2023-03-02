@@ -1,4 +1,4 @@
-Url : georay.site/payment
+Url : georay.store/payment
 
 Method : POST
 

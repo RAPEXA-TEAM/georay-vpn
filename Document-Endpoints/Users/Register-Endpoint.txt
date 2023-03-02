@@ -1,4 +1,4 @@
-Url : georay.site/register
+Url : georay.store/register
 
 Method : POST
 

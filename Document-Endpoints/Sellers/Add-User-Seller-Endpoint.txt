@@ -1,4 +1,4 @@
-Url : georay.site/add_sell
+Url : georay.store/add_sell
 
 Method : POST
 
