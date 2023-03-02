@@ -596,7 +596,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     text = f"""\
     Hi,
     Check out the link below To register your Georay VPN account:
-    http://georay.store/Authentication?Token={token}
+    https://georay.store/Authentication?Token={token}
     \n
     username: {username}
     password: {password}
@@ -607,7 +607,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     <body>
         <p>Hi,<br>
         Check out the link below To register your Georay VPN account:</p>
-        <p><a href="http://georay.store/Authentication?Token={token}">Register Now!</a></p>
+        <p><a href="https://georay.store/Authentication?Token={token}">Register Now!</a></p>
         <br>
         <p>Username: {username}</p>
         <p>Password: {password}</p>

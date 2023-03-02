@@ -44,7 +44,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/login",
+							"raw": "https://georay.store/login",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -93,7 +93,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/logout_apk",
+							"raw": "https://georay.store/logout_apk",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -142,7 +142,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/register",
+							"raw": "https://georay.store/register",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -191,7 +191,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/makepaymenthash",
+							"raw": "https://georay.store/makepaymenthash",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -240,7 +240,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/payment",
+							"raw": "https://georay.store/payment",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -292,7 +292,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/update",
+							"raw": "https://georay.store/update",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -346,7 +346,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/seller",
+							"raw": "https://georay.store/seller",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -395,7 +395,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/add_sell",
+							"raw": "https://georay.store/add_sell",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -444,7 +444,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"raw": "https://georay.store/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "http",
 							"host": [
 								"georay",
@@ -502,7 +502,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://georay.store/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"raw": "https://georay.store/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "http",
 							"host": [
 								"georay",
