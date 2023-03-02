@@ -44,8 +44,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/login",
-							"protocol": "http",
+							"raw": "https://georay.site/login",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -93,8 +93,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/logout_apk",
-							"protocol": "http",
+							"raw": "https://georay.site/logout_apk",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -142,8 +142,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/register",
-							"protocol": "http",
+							"raw": "https://georay.site/register",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -191,8 +191,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/makepaymenthash",
-							"protocol": "http",
+							"raw": "https://georay.site/makepaymenthash",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -240,8 +240,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/payment",
-							"protocol": "http",
+							"raw": "https://georay.site/payment",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -292,8 +292,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/update",
-							"protocol": "http",
+							"raw": "https://georay.site/update",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -338,7 +338,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"aa\",\n    \"password\": \"aa\"\n}",
+							"raw": "{\n    \"username\": \"erfan1381\",\n    \"password\": \"1296354870\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -346,8 +346,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/seller",
-							"protocol": "http",
+							"raw": "https://georay.site/seller",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -395,8 +395,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/add_sell",
-							"protocol": "http",
+							"raw": "https://georay.site/add_sell",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -444,8 +444,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
-							"protocol": "http",
+							"raw": "https://georay.site/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
@@ -502,8 +502,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://georay.store/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
-							"protocol": "http",
+							"raw": "https://georay.site/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"protocol": "https",
 							"host": [
 								"georay",
 								"site"
