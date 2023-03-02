@@ -446,7 +446,7 @@ def handle_login_user():
                 return jsonify(ret)
             
             else:
-                ret = {"code" : 401, "data" : "Error"}
+                ret = {"code" : 402, "data" : "Contact to Seller or provider"}
                 return jsonify(ret)    
         
         elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
@@ -454,8 +454,11 @@ def handle_login_user():
             ret = {"code" : 201, "data" : "Device and OS set correctly for this user"}
             return jsonify(ret)
 
-        ret = {"code" : 401, "data" : "Error"}
+        ret = {"code" : 403, "data" : "Error writing to database"}
         return jsonify(ret)
+    
+    ret = {"code" : 401, "data" : "request not valid"}
+    return jsonify(ret)
 
 
 def Read_servers():

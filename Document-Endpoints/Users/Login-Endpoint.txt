@@ -13,7 +13,10 @@ Headers:
 
 Responses :
 
+{"code" : 402, "data" : "Contact to Seller or provider"}
 {"code" : 201, "data" : "Device and OS set correctly for this user"}
+{"code" : 500, "data" : "Request not valid"}
+{"code" : 401, "data" : "Error writing to database"}
 
 {
     "code": 200,
@@ -45,6 +48,3 @@ Responses :
         "vmess://eyJhZGQiOiIxMDQuMTYuMjA5LjEyIiwiYWlkIjoiMCIsImFscG4iOiIiLCJob3N0IjoiYTYuaXJhbmlhbmNwLmF1dG9zIiwiaWQiOiIwYzY2NGY0NC05ZjY5LTQ1NGYtODQxYS00NjE2NzE1ZGYyNmYiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6Ijg4ODAiLCJwcyI6Ikdlb3JheSA4ODgwIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiIiLCJ2IjoiMiJ9"
     ]
 }
-
-{"code" : 500, "data" : "Request not valid"}
-{"code" : 401, "data" : "Error"}
