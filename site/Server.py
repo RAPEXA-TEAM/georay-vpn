@@ -396,6 +396,11 @@ def handle_Authentication_new_user():
     alert = "Error verifying user"
     return render_template("index.html", alert = alert)
 
+@app.route('/privacy',methods=["GET", "POST"])
+def handle_main_page():
+    '''this function is used to handle the privacy page'''
+
+    return render_template("privacy.html")
 
 @app.route('/',methods=["GET", "POST"])
 def handle_main_page():
