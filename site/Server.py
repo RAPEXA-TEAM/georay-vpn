@@ -403,7 +403,7 @@ def handle_main_page():
     return render_template("privacy.html")
 
 @app.route('/',methods=["GET", "POST"])
-def handle_main_page():
+def handle_privacy_page():
     '''this function is used to handle the main page'''
 
     # run Expiration.py
