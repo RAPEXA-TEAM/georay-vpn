@@ -1,4 +1,4 @@
-Url : georay.store/register
+Url : https://g3or4y.cfd//register
 
 Method : POST
 

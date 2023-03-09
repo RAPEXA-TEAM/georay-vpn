@@ -1,4 +1,4 @@
-Url : georay.store/login
+Url : https://g3or4y.cfd//login
 
 Method : POST
 

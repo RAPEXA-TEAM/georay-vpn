@@ -1,4 +1,4 @@
-Url : georay.store/update
+Url : https://g3or4y.cfd//update
 
 Method : GET
 
