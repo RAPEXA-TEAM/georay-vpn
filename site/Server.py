@@ -437,7 +437,17 @@ def handle_login_user():
             else:
                 continue
 
-        if list_of_users_dic[username]['Device'] is not None and list_of_users_dic[username]['OS'] is not None:
+        if username == CONFIG.ALTER_USERNAME and passw == CONFIG.ALTER_PASSWORD:
+
+            Servers_v = Read_servers()
+            servers_o = [] #TODO: add it for next update
+
+            update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
+            prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
+            ret = {"code" : 200, "data" : list_of_users_dic[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+            return jsonify(ret)
+
+        elif list_of_users_dic[username]['Device'] is not None and list_of_users_dic[username]['OS'] is not None:
 
             Servers_v = Read_servers()
             servers_o = [] #TODO: add it for next update
@@ -453,16 +463,6 @@ def handle_login_user():
             else:
                 ret = {"code" : 402, "data" : "Contact to Seller or provider"}
                 return jsonify(ret)    
-        
-        elif username == CONFIG.ALTER_USERNAME and passw == CONFIG.ALTER_PASSWORD:
-
-            Servers_v = Read_servers()
-            servers_o = [] #TODO: add it for next update
-
-            update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
-            prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-            ret = {"code" : 200, "data" : list_of_users_dic[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
-            return jsonify(ret)
 
         elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
 
