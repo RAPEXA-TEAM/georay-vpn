@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd//payment
+Url : https://g3or4y.cfd/payment
 
 Method : POST
 

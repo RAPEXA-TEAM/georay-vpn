@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd//update
+Url : https://g3or4y.cfd/update
 
 Method : GET
 

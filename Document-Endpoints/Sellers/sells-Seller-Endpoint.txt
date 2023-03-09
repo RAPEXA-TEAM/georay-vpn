@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd//sells_json?Token=<token-seller>
+Url : https://g3or4y.cfd/sells_json?Token=<token-seller>
 
 Method : GET
 

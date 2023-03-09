@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd//seller
+Url : https://g3or4y.cfd/seller
 
 Method : POST
 

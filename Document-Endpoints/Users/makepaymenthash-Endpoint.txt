@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd//makepaymenthash
+Url : https://g3or4y.cfd/makepaymenthash
 
 Method : POST
 

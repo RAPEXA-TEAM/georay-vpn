@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd//login
+Url : https://g3or4y.cfd/login
 
 Method : POST
 
