@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "761638484253",
+    "project_id": "georay-69977",
+    "storage_bucket": "georay-69977.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761638484253:android:36ef9902e6e4404fbb89f4",
+        "android_client_info": {
+          "package_name": "com.example.cross_vpn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761638484253-2s74jsgaq00tdjtq692n4d7qbq0ludd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cross_vpn",
+            "certificate_hash": "8ce59da2c90d9221ad12a7b871f263254810d209"
+          }
+        },
+        {
+          "client_id": "761638484253-dgb417fka2v3m0pf9ou72q5t04ifm3l3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCII1jRd7DvCaxfNKRZfTI-04RUJNdJsTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761638484253-dgb417fka2v3m0pf9ou72q5t04ifm3l3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
