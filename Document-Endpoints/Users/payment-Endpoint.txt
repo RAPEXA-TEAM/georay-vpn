@@ -1,4 +1,4 @@
-Url : georay.store/payment
+Url : https://g3or4y.cfd/payment
 
 Method : POST
 

@@ -42,7 +42,7 @@ def logout():
 
     return redirect(url_for('handle_main_page'))
 
-@app.route("/logout_apk")
+@app.route("/logout_apk", methods=['POST','GET'])
 def logout_apk():
     '''this function is used to logout the user and clean device and os from database'''
 
@@ -396,9 +396,14 @@ def handle_Authentication_new_user():
     alert = "Error verifying user"
     return render_template("index.html", alert = alert)
 
+@app.route('/privacy',methods=["GET", "POST"])
+def handle_main_page():
+    '''this function is used to handle the privacy page'''
+
+    return render_template("privacy.html")
 
 @app.route('/',methods=["GET", "POST"])
-def handle_main_page():
+def handle_privacy_page():
     '''this function is used to handle the main page'''
 
     # run Expiration.py
@@ -432,7 +437,17 @@ def handle_login_user():
             else:
                 continue
 
-        if list_of_users_dic[username]['Device'] is not None and list_of_users_dic[username]['OS'] is not None:
+        if username == CONFIG.ALTER_USERNAME and passw == CONFIG.ALTER_PASSWORD:
+
+            Servers_v = Read_servers()
+            servers_o = [] #TODO: add it for next update
+
+            update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
+            prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
+            ret = {"code" : 200, "data" : {'password' : CONFIG.ALTER_PASSWORD, 'username' : CONFIG.ALTER_USERNAME, 'days' : "999", 'token' : "GOD"}, "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+            return jsonify(ret)
+
+        elif list_of_users_dic[username]['Device'] is not None and list_of_users_dic[username]['OS'] is not None:
 
             Servers_v = Read_servers()
             servers_o = [] #TODO: add it for next update
@@ -448,7 +463,7 @@ def handle_login_user():
             else:
                 ret = {"code" : 402, "data" : "Contact to Seller or provider"}
                 return jsonify(ret)    
-        
+
         elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
 
             ret = {"code" : 201, "data" : "Device and OS set correctly for this user"}
@@ -599,7 +614,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     text = f"""\
     Hi,
     Check out the link below To register your Georay VPN account:
-    https://georay.store/Authentication?Token={token}
+    https://g3or4y.cfd/Authentication?Token={token}
     \n
     username: {username}
     password: {password}
@@ -610,7 +625,7 @@ def Send_Registration_Email(email,username,password,phone,answer):
     <body>
         <p>Hi,<br>
         Check out the link below To register your Georay VPN account:</p>
-        <p><a href="https://georay.store/Authentication?Token={token}">Register Now!</a></p>
+        <p><a href="https://g3or4y.cfd/Authentication?Token={token}">Register Now!</a></p>
         <br>
         <p>Username: {username}</p>
         <p>Password: {password}</p>

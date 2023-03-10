@@ -1,4 +1,4 @@
-Url : georay.store/logout_apk
+Url : https://g3or4y.cfd/logout_apk
 
 Method : POST
 

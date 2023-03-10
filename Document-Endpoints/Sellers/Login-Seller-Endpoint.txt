@@ -1,4 +1,4 @@
-Url : georay.store/seller
+Url : https://g3or4y.cfd/seller
 
 Method : POST
 

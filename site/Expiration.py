@@ -31,7 +31,7 @@ try:
         Mysql.write_date_to_database(date)
         for user in List_Of_Users:
 
-            user_db, password_db, phone_number, email, days, token, verify = user
+            user_db, password_db, phone_number, email, days, token, verify, Device, Device_OS = user
             Mysql.update_user(token,int(days)-1)
         
         # log it on flask

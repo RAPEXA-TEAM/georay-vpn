@@ -4,6 +4,8 @@
 
 SECRET_KEY = "secret!"
 HOST = "0.0.0.0"
+ALTER_USERNAME = "georayadmin@gmail.com"
+ALTER_PASSWORD = "georayadminpassword"
 
 # MySQL Configs
 
@@ -31,7 +33,7 @@ PRICE_TRE_MONTH = 150000
 
 # Update version
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 VERSION_TYPE = "0" # 0 : False, 1 : True
 DOWNLOAD_LINK = ""
 
