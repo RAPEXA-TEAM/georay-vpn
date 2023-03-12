@@ -48,5 +48,5 @@ DOWNLOAD_LINK = ""
 
 PATH_SELLERS    = '/var/www/vpn/site/Sellers.csv'
 PATH_SERVERS    = '/var/www/vpn/site/Servers.csv'
-RUNNING_PORT    = 5550
-DEBUG_MODE      = True
+RUNNING_PORT    = 80
+DEBUG_MODE      = False
