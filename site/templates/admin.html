@@ -82,7 +82,7 @@
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                         >
-                          Phone
+                          Expiration Date
                         </th>
                         <th class="text-secondary opacity-7"></th>
                       </tr>
@@ -218,6 +218,7 @@
               daysParent.appendChild(span);
 
               // post data to backend
+              // TODO: edit dates instead of days 
               const fetchOptions = {
                 method: "POST",
                 mode: "cors",

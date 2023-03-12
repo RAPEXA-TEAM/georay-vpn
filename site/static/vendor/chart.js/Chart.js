@@ -2989,7 +2989,7 @@ var defaults = {
 	}
 };
 
-// TODO(v3): remove 'global' from namespace.  all default are global and
+// (v3): remove 'global' from namespace.  all default are global and
 // there's inconsistency around which options are under 'global'
 defaults._set('global', {
 	defaultColor: 'rgba(0,0,0,0.1)',
@@ -9540,7 +9540,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 
 			scale.mergeTicksOptions();
 
-			// TODO(SB): I think we should be able to remove this custom case (options.scale)
+			// (SB): I think we should be able to remove this custom case (options.scale)
 			// and consider it as a regular scale part of the "scales"" map only! This would
 			// make the logic easier and remove some useless? custom code.
 			if (item.isDefault) {
@@ -11586,7 +11586,7 @@ var Scale = core_element.extend({
 
 		me.afterUpdate();
 
-		// TODO(v3): remove minSize as a public property and return value from all layout boxes. It is unused
+		// (v3): remove minSize as a public property and return value from all layout boxes. It is unused
 		// make maxWidth and maxHeight private
 		return me.minSize;
 	},
@@ -13141,7 +13141,7 @@ var defaultConfig$2 = {
 	}
 };
 
-// TODO(v3): change this to positiveOrDefault
+// (v3): change this to positiveOrDefault
 function nonNegativeOrDefault(value, defaultValue) {
 	return helpers$1.isFinite(value) && value >= 0 ? value : defaultValue;
 }

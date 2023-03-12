@@ -2,7 +2,6 @@
 
 #import libraries that are needed
 
-import sys
 import pymysql
 import CONFIG     #SERVER CONGIG
 
@@ -15,12 +14,12 @@ def connect_to_database():
                        db=CONFIG.MYSQL_DATABAS)
     return(db)
 
-def update_user(token, days):
+def update_user(token, new_expiration_date):
     '''this function update user expired time on database'''
     
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'UPDATE users SET days = "{days}" where token = "{token}";'
+    qury = f'UPDATE users SET ExpiredDate = "{new_expiration_date}" where token = "{token}";'
     cur.execute(qury)
     db.commit()
     db.close()    
@@ -59,59 +58,38 @@ def update_user_registration(Token):
     db.close()    
     return True
 
-def write_user_to_database(username, password, phone, email, days, token, verified):
+def write_user_to_database(username, password, phone, email, token, verified, CreatedDate, ExpiredDate):
     '''this function create user on database'''
     
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'INSERT INTO users (user, password, phone, email, days, token, verified, Device, OS) VALUES ("{username}", "{password}", "{phone}", "{email}", "{days}", "{token}", "{verified}", NULL, NULL);'
+    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate) VALUES ("{username}", "{password}", "{phone}", "{email}", "{token}", "{verified}", NULL, NULL, "{CreatedDate}", "{ExpiredDate}");'
     cur.execute(qury)
     db.commit()
     db.close()    
     return True
 
-def write_user_from_seller_to_database(username, password, Token_seller, token):
+def write_user_from_seller_to_database(username, password, Token_seller, token, CreatedDate, ExpiredDate):
     '''this function create user that seller sells on database'''
     
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'INSERT INTO users (user, password, phone, email, days, token, verified, Device, OS) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "30", "{token}", "1", NULL, NULL);'
+    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "{token}", "1", NULL, NULL, "{CreatedDate}", "{ExpiredDate}");'
     cur.execute(qury)
     db.commit()
     db.close()    
     return True
 
-def write_txid_to_database(txid, days):
+def write_txid_to_database(txid, new_expiration_date):
     '''this function write verified tx-ids on database'''
 
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'INSERT INTO txids (txid, days, time) VALUES ("{txid}", "{days}", now());'
+    qury = f'INSERT INTO txids (txid, days, time) VALUES ("{txid}", "{new_expiration_date}", now());'
     cur.execute(qury)
     db.commit()
     db.close()    
     return True
-
-def write_date_to_database(date):
-    '''this function write dates that expiration.py run on database'''
-    
-    db = connect_to_database()
-    cur = db.cursor()                       
-    qury = f'INSERT INTO dates (date) VALUES ("{date}");'
-    cur.execute(qury)
-    db.commit()
-    db.close()    
-    return True
-
-def read_dates_from_database():
-    '''this function return all working dates that expiration.py run on database'''
-
-    db = connect_to_database()
-    cur = db.cursor()
-    qury = f'SELECT * FROM dates;'
-    cur.execute(qury)
-    db.close()
-    return cur.fetchall()
 
 def read_txids_from_database():
     '''this function return all verified tx-ids that used before'''
@@ -132,6 +110,26 @@ def read_users_from_database():
     cur.execute(qury)
     db.close()
     return cur.fetchall()
+
+def read_one_users_or_404_from_database(email):
+    '''this function return all users information from database'''
+
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'select * from users where email = "{email}";'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchone()
+
+def read_one_users_with_token_or_404_from_database(token):
+    '''this function return all users information from database'''
+
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'select * from users where token = "{token}";'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchone()
 
 def read_users_for_seller_from_database(Token_seller):
     '''this function return all users information that one seller sells'''
