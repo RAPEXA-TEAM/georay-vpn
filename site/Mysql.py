@@ -116,7 +116,7 @@ def read_one_users_or_404_from_database(email):
 
     db = connect_to_database()
     cur = db.cursor()
-    qury = f'select * from users where email = "{email}";'
+    qury = f'select * from users where user = "{email}";'
     cur.execute(qury)
     db.close()
     return cur.fetchone()
