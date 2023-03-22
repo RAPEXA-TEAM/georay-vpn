@@ -32,6 +32,7 @@ NODE_URL = "https://ethereum.publicnode.com"
 
 # VPN Prices
 
+FREE_PLAN_HOURS = 1
 PRICE_ONE_MONTH = 50000
 PRICE_TWO_MONTH = 100000
 PRICE_TRE_MONTH = 150000
@@ -46,7 +47,9 @@ DOWNLOAD_LINK = ""
 # /var/www/vpn/site/
 # PATH_EXPIRATION = '/var/www/vpn/site/Expiration.py'
 
-PATH_SELLERS    = '/var/www/vpn/site/Sellers.csv'
-PATH_SERVERS    = '/var/www/vpn/site/Servers.csv'
-RUNNING_PORT    = 80
-DEBUG_MODE      = False
+PATH_SELLERS        = '/var/www/vpn/site/Sellers.csv'
+PATH_SERVERS        = '/var/www/vpn/site/Servers.csv'
+PATH_SERVERS_MTN    = "/var/www/vpn/site/ServersMTN.csv"
+PATH_SERVERS_MCI    = "/var/www/vpn/site/ServersMCI.csv"
+RUNNING_PORT        = 80
+DEBUG_MODE          = False
