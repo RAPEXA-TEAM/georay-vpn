@@ -532,7 +532,7 @@ def handle_login_user():
 
                     elif (Device != Device_GET or Device_OS != Device_OS_GET):
 
-                        ret = {"code" : 202, "data" : "You have an other device logged in this account", "Device" : Device_GET, "OS" : Device_OS_GET}
+                        ret = {"code" : 202, "data" : "You have an other device logged in this account", "Devices" : [{'os': Device_OS, 'Device': Device}]}
                         return jsonify(ret)
 
                     else:
