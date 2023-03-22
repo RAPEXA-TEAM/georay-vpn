@@ -25,6 +25,28 @@ def update_user(token, new_expiration_date):
     db.close()    
     return True
 
+def update_user_free_plan_time(user, new_expiration_date):
+    '''this function update user expired time on database'''
+    
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'UPDATE users SET FreeTimeExpired = "{new_expiration_date}" where user = "{user}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
+def update_user_password(username, password):
+    '''this function update user password on database'''
+    
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'UPDATE users SET password = "{password}" where user = "{username}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
 def add_user_device_to_database(email, Device, OS):
     '''this function update user expired time on database'''
     
@@ -63,7 +85,7 @@ def write_user_to_database(username, password, phone, email, token, verified, Cr
     
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate) VALUES ("{username}", "{password}", "{phone}", "{email}", "{token}", "{verified}", NULL, NULL, "{CreatedDate}", "{ExpiredDate}");'
+    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired) VALUES ("{username}", "{password}", "{phone}", "{email}", "{token}", "{verified}", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL);'
     cur.execute(qury)
     db.commit()
     db.close()    
@@ -74,7 +96,7 @@ def write_user_from_seller_to_database(username, password, Token_seller, token, 
     
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "{token}", "1", NULL, NULL, "{CreatedDate}", "{ExpiredDate}");'
+    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "{token}", "1", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL);'
     cur.execute(qury)
     db.commit()
     db.close()    
