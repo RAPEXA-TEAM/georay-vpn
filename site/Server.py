@@ -180,7 +180,7 @@ def Handle_Sellers_json():
 
         for user in all_users:
 
-            user_db, password_db, Token_seller, Token_seller, token_db, verified, Device, Device_OS , created_date, expierd_date= user
+            user_db, password_db, Token_seller, Token_seller, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired= user
 
             exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
@@ -236,7 +236,7 @@ def Handle_Sellers():
 
         for user in all_users:
             
-            user_db, password_db, Token_seller, Token_seller, token_db, verified, Device, Device_OS , created_date, expierd_date= user
+            user_db, password_db, Token_seller, Token_seller, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired= user
             
             exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
