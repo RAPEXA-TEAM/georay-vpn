@@ -1,0 +1,20 @@
+Url : https://g3or4y.cfd/ads
+
+Method : POST
+
+Body : {"email" : "<user-username>" , "pass" : "<user-password>", "Device" : "<s23>" , "OS" : "<android>"}
+
+Headers:
+
+    Content-Type:application/json
+    method:POST
+    mode:cors
+    cache:no-cache
+
+Responses :
+
+{"code" : 200, "data" : "successfully updated free plan"}
+{"code" : 404, "data" : "Error"}
+{"code" : 500, "data" : "Request not valid"}
+{"code" : 401, "data" : "Error writing to database"}
+{"code" : 401, "data" : "Error Forbidden"}

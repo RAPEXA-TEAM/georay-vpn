@@ -13,10 +13,11 @@ Headers:
 
 Responses :
 
-{"code" : 402, "data" : "Contact to Seller or provider"}
 {"code" : 201, "data" : "Device and OS set correctly for this user"}
-{"code" : 500, "data" : "Request not valid"}
+{"code" : 202, "data" : "You have an other device logged in this account", "Device" : "<device>", "OS" : "<OS>"}
 {"code" : 401, "data" : "Error writing to database"}
+{"code" : 402, "data" : "Contact to Seller or provider"}
+{"code" : 500, "data" : "Request not valid"}
 
 {
     "code": 200,
