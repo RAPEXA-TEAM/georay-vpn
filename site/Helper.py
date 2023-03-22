@@ -119,6 +119,69 @@ def Read_servers():
     
     return Servers
 
+def One_Hour_from_Now():
+
+    return str(datetime.datetime.now() + datetime.timedelta(hours=CONFIG.FREE_PLAN_HOURS))
+
+def Check_Free_Plan_Time(username):
+    """this function checks the free plan time for one user"""
+
+    user = Mysql.read_one_users_or_404_from_database(username)
+
+    if user != None:
+
+        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+
+        if FreeTimeExpired != None:
+
+            # convert string to datetime
+            dt1 = datetime.datetime.strptime(str(datetime.datetime.now()), "%Y-%m-%d %H:%M:%S.%f")
+            dt2 = datetime.datetime.strptime(FreeTimeExpired, "%Y-%m-%d %H:%M:%S.%f")
+
+            if dt2 > dt1:
+
+                return True
+        
+            else:
+
+                return False
+            
+        else:
+
+            date = str(datetime.datetime.now())
+
+            if Mysql.update_user_free_plan_time(username, date):
+
+                return False
+
+    else:
+
+        return False
+
+def Read_servers_irancell():
+    '''this function is used to read the irancell servers from the csv file'''
+
+    Servers = []
+
+    with open(CONFIG.PATH_SERVERS_MTN, newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            Servers.append(row[1])
+    
+    return Servers
+
+def Read_servers_hamrah():
+    '''this function is used to read the hamrah aval servers from the csv file'''
+
+    Servers = []
+
+    with open(CONFIG.PATH_SERVERS_MCI, newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            Servers.append(row[1])
+    
+    return Servers
+
 def Read_Sellers():
     '''this function is used to read the sellers from the csv file'''
 
@@ -145,7 +208,7 @@ def Check_User_Reverse(token):
 
     if user != None:
 
-        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date = user
+        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
 
         if token == token_db:
 
@@ -161,7 +224,7 @@ def Check_User(email,token):
 
     if user != None:
 
-        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date = user
+        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
         
         if token == token_db:
                
