@@ -55,11 +55,9 @@ def logout_apk():
 
         if user != None:
 
-            user_db, password_db, phone_number, email, token, verify, Device, Device_OS , created_date, expierd_date= user
+            user_db, password_db, phone_number, email, token, verify, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
             
-            exdays = Helper.Calculate_expired_days_from_date(expierd_date)
-            
-            if (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and int(exdays) > 0):
+            if (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET):
 
                 if Mysql.delete_user_device_from_database(username):
 
@@ -148,7 +146,7 @@ def handle_add_sell():
 def Handle_Sellers_json():
     '''this function is used to handle the sells from one seller in json format'''
 
-    # exec(open(CONFIG.PATH_EXPIRATION).read())      
+          
 
     Token = request.args.get('Token')
 
@@ -200,7 +198,7 @@ def Handle_Sellers_json():
 def Handle_Sellers():
     '''this function is used to handle the sells from one seller'''
 
-    # exec(open(CONFIG.PATH_EXPIRATION).read())      
+          
 
     Token = request.args.get('Token')
 
@@ -264,7 +262,7 @@ def handle_make_payment_hash():
 
         if user != None:
 
-            user_db, password_db, phone_number, email, token_db, verified, Device, Device_OS , created_date, expierd_date = user
+            user_db, password_db, phone_number, email, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
 
             if token == token_db:
 
@@ -323,7 +321,7 @@ def handle_admin_page():
     users = []
     for user in all_users:
         
-        user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date = user
+        user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
     
         #exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
@@ -378,7 +376,7 @@ def handle_Authentication_new_user():
     '''this function is used to handle the authentication of new user that rigistered a account but did not verify by the email'''
 
     Token = request.args.get('Token')
-    # exec(open(CONFIG.PATH_EXPIRATION).read())
+    
     
     if Mysql.update_user_registration(Token) and Helper.Check_User_Reverse(Token):
     
@@ -400,16 +398,84 @@ def handle_main_page():
     '''this function is used to handle the main page'''
 
     # run Expiration.py
-    # exec(open(CONFIG.PATH_EXPIRATION).read())
+    
 
     return render_template("index.html")
+
+@app.route(Routes.ROUTE_CHANGE_PASS, methods=["GET", "POST"])
+def handle_change_password():
+    """this function is used to handle the change password by user """
+    
+    if request.method == 'POST':
+
+        username = request.json["email"]
+        password = request.json["pass"]
+        new_password = request.json["newpass"]
+
+        user = Mysql.read_one_users_or_404_from_database(username)
+
+        if user != None:
+
+            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+            
+            if username == user_db and password == password_db:
+
+                if Mysql.update_user_password(username, new_password):
+
+                    return jsonify(Response.CHANGE_PASSWORD_CORRECTLY)
+                
+                else:
+
+                    return jsonify(Response.ERROR_DATABASE)
+            
+            return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+        
+        return jsonify(Response.ERROR_USER_NOT_EXIST)
+    
+    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+
+@app.route(Routes.ROUTE_ADDS, methods=["GET", "POST"])
+def handle_Free_Plan_By_Adds():
+    """this function is used to handle the get free plan by watching adds"""
+    
+    if request.method == 'POST':
+
+        username = request.json["email"]
+        password = request.json["pass"]
+        Device_GET = request.json['Device']
+        Device_OS_GET = request.json['OS']
+
+        user = Mysql.read_one_users_or_404_from_database(username)
+
+        if user != None:
+
+            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+            
+            if username == user_db and password == password_db and Device == Device_GET and Device_OS == Device_OS_GET:
+                
+                new_expiration_date = Helper.One_Hour_from_Now()
+
+                if Mysql.update_user_free_plan_time(username, new_expiration_date):
+
+                    return jsonify(Response.UPDATE_FREE_PLAN_CORRECTLY)
+                
+                else:
+
+                    return jsonify(Response.ERROR_DATABASE)
+            
+            return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+        
+        return jsonify(Response.ERROR_USER_NOT_EXIST)
+    
+    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+
 
 @app.route(Routes.ROUTE_LOGIN,methods=["GET", "POST"])
 def handle_login_user():
     '''this function is used to handle the login users from aplication'''
 
     # run Expiration.py
-    # exec(open(CONFIG.PATH_EXPIRATION).read())
+    
 
     if request.method == 'POST':
 
@@ -418,12 +484,24 @@ def handle_login_user():
         Device_GET = request.json['Device']
         Device_OS_GET = request.json['OS']
 
+        if username == CONFIG.ALTER_USERNAME and passw == CONFIG.ALTER_PASSWORD:
+
+            Servers_v = Helper.Read_servers()
+            Servers_v_MTN = Helper.Read_servers_irancell()
+            Servers_v_MCI = Helper.Read_servers_hamrah()
+            servers_o = [] #TODO: add it for next update
+
+            update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
+            prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
+            ret = {"code" : 200, "data" : {'password' : CONFIG.ALTER_PASSWORD, 'username' : CONFIG.ALTER_USERNAME, 'days' : "999", 'token' : "GOD"}, "v2ray" : Servers_v, "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI, "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+            return jsonify(ret)
+
         user = Mysql.read_one_users_or_404_from_database(username)
         user_data = {}
 
         if user != None:
 
-            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date = user
+            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
 
             exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
@@ -431,19 +509,11 @@ def handle_login_user():
 
                 user_data[username] = {'password' : password_db, 'username' : email, 'days' : exdays, 'token' : token, 'Device' : Device, 'OS' : Device_OS} 
 
-                if username == CONFIG.ALTER_USERNAME and passw == CONFIG.ALTER_PASSWORD:
+                if Device is not None and Device_OS is not None:
 
                     Servers_v = Helper.Read_servers()
-                    servers_o = [] #TODO: add it for next update
-
-                    update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
-                    prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-                    ret = {"code" : 200, "data" : {'password' : CONFIG.ALTER_PASSWORD, 'username' : CONFIG.ALTER_USERNAME, 'days' : "999", 'token' : "GOD"}, "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
-                    return jsonify(ret)
-
-                elif Device is not None and Device_OS is not None:
-
-                    Servers_v = Helper.Read_servers()
+                    Servers_v_MTN = Helper.Read_servers_irancell()
+                    Servers_v_MCI = Helper.Read_servers_hamrah()
                     servers_o = [] #TODO: add it for next update
 
                     update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
@@ -451,11 +521,22 @@ def handle_login_user():
                     if (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and int(exdays) > 0):
 
                         prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
                         return jsonify(ret)
                     
-                    else:
+                    elif (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and Helper.Check_Free_Plan_Time(username)):
 
+                        prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
+                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+                        return jsonify(ret)
+
+                    elif (Device != Device_GET or Device_OS != Device_OS_GET):
+
+                        ret = {"code" : 202, "data" : "You have an other device logged in this account", "Device" : Device_GET, "OS" : Device_OS_GET}
+                        return jsonify(ret)
+
+                    else:
+                        
                         return jsonify(Response.ERROR_DONE_EXPIRE_TIME)    
 
                 elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
