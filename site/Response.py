@@ -3,7 +3,6 @@
 # Response Trues
 
 LOGOUT_CORRECTLY                      = {"code" : 200, "data" : "Device logout correctly!"}
-CHANGE_PASSWORD_CORRECTLY             = {"code" : 200, "data" : "Change password correctly!"}
 UPDATE_FREE_PLAN_CORRECTLY            = {"code" : 200, "data" : "successfully updated free plan"}
 CREATE_USER_CORRECTLY                 = {"code" : 200, "data" : "user created successfully"}
 CREATE_USER_CORRECTLY_NOT_VERIFIED    = {"code" : 200, "data" : "user created successfully but not verified"}

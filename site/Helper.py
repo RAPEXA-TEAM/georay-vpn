@@ -182,6 +182,18 @@ def Read_servers_hamrah():
     
     return Servers
 
+def Read_free_servers():
+    '''this function is used to read the Free Saw Adds servers from the csv file'''
+
+    Servers = []
+
+    with open(CONFIG.PATH_FREE_SERVER, newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            Servers.append(row[1])
+    
+    return Servers
+
 def Read_Sellers():
     '''this function is used to read the sellers from the csv file'''
 

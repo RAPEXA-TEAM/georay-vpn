@@ -457,7 +457,7 @@ def handle_Free_Plan_By_Adds():
 
                 if Mysql.update_user_free_plan_time(username, new_expiration_date):
 
-                    return jsonify(Response.UPDATE_FREE_PLAN_CORRECTLY)
+                    return jsonify({"code" : 200, "data" : "Change password correctly!", "ExpiredTime" : new_expiration_date})
                 
                 else:
 
@@ -467,7 +467,9 @@ def handle_Free_Plan_By_Adds():
         
         return jsonify(Response.ERROR_USER_NOT_EXIST)
     
-    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+    Servers_v = Helper.Read_free_servers()
+    ret = {"code" : 200, "AddsServer" : Servers_v}
+    return jsonify(ret)
 
 
 @app.route(Routes.ROUTE_LOGIN,methods=["GET", "POST"])
