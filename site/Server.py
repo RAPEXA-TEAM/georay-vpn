@@ -514,6 +514,7 @@ def handle_login_user():
                     Servers_v = Helper.Read_servers()
                     Servers_v_MTN = Helper.Read_servers_irancell()
                     Servers_v_MCI = Helper.Read_servers_hamrah()
+                    Servers_free_v = Helper.Read_free_servers()
                     servers_o = [] #TODO: add it for next update
 
                     update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
@@ -536,8 +537,8 @@ def handle_login_user():
                         return jsonify(ret)
 
                     else:
-                        Servers_v = Helper.Read_free_servers()
-                        ret = {"code" : 407, "data" : "Error Contact to Seller or provider", "AddsServer" : Servers_v}                   
+
+                        ret = {"code" : 407, "data" : "Error Contact to Seller or provider", "AddsServer" : Servers_free_v, "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI}                   
                         return jsonify(ret)    
 
                 elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
