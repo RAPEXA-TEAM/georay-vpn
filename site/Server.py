@@ -467,9 +467,7 @@ def handle_Free_Plan_By_Adds():
         
         return jsonify(Response.ERROR_USER_NOT_EXIST)
     
-    Servers_v = Helper.Read_free_servers()
-    ret = {"code" : 200, "AddsServer" : Servers_v}
-    return jsonify(ret)
+    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
 
 
 @app.route(Routes.ROUTE_LOGIN,methods=["GET", "POST"])
@@ -538,8 +536,9 @@ def handle_login_user():
                         return jsonify(ret)
 
                     else:
-                        
-                        return jsonify(Response.ERROR_DONE_EXPIRE_TIME)    
+                        Servers_v = Helper.Read_free_servers()
+                        ret = {"code" : 407, "data" : "Error Contact to Seller or provider", "AddsServer" : Servers_v}                   
+                        return jsonify(ret)    
 
                 elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
 
