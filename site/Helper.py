@@ -123,6 +123,10 @@ def One_Hour_from_Now():
 
     return str(datetime.datetime.now() + datetime.timedelta(hours=CONFIG.FREE_PLAN_HOURS))
 
+def Server_time():
+
+    return str(datetime.datetime.now())
+
 def Check_Free_Plan_Time(username):
     """this function checks the free plan time for one user"""
 

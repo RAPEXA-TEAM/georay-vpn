@@ -76,8 +76,8 @@ def logout_apk():
 @app.route(Routes.ROUTE_UPDATE) 
 def handle_update():
     '''this function is used to update apps'''
-
-    ret = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
+    time = Helper.Server_time()
+    ret = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK, "ServerTime" : time}
     return jsonify(ret)
 
 @app.route(Routes.ROUTE_SELLER, methods=['POST','GET'])
