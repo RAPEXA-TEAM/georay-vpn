@@ -507,7 +507,7 @@ def handle_login_user():
 
             if verified != "0":
 
-                user_data[username] = {'password' : password_db, 'username' : email, 'days' : exdays, 'token' : token, 'Device' : Device, 'OS' : Device_OS} 
+                user_data[username] = {'password' : password_db, 'username' : user_db, 'days' : exdays, 'token' : token, 'Device' : Device, 'OS' : Device_OS} 
 
                 if Device is not None and Device_OS is not None:
 
