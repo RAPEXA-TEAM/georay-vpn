@@ -11,7 +11,7 @@ import Mysql      #SERVER MYSQL
 import CONFIG     #SERVER CONGIG
 import Routes     #SERVER ROUTES
 import Helper     #SERVER HELPER
-import Response   #SERVER RESPONSE
+import TEXT       #SERVER RESPONSE
 
 # Flask app configuration
 
@@ -50,7 +50,7 @@ def logout_apk():
         passw = request.json["pass"]
         Device_GET = request.json['Device']
         Device_OS_GET = request.json['OS']
-
+        
         user = Mysql.read_one_users_or_404_from_database(username)
 
         if user != None:
@@ -61,23 +61,43 @@ def logout_apk():
 
                 if Mysql.delete_user_device_from_database(username):
 
-                    return jsonify(Response.LOGOUT_CORRECTLY)
+                    return jsonify({"code" : 200, "data" : TEXT.LOGOUT_CORRECTLY})
                 
                 else:
 
-                    return jsonify(Response.ERROR_DATABASE)
+                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
             
-            return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
         
-        return jsonify(Response.ERROR_USER_NOT_EXIST)
+        return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
     
-    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
-@app.route(Routes.ROUTE_UPDATE) 
-def handle_update():
+@app.route(Routes.ROUTE_UPDATE, defaults={'lng': None})
+@app.route(Routes.ROUTE_UPDATE+"/<lng>") 
+def handle_update(lng):
     '''this function is used to update apps'''
+
+    if lng == None:
+        
+        time = Helper.Server_time()
+        ret = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK, "ServerTime" : time, "data" : Helper.app_data_in_lang(CONFIG.ENGLISH)}
+        return jsonify(ret)
+
+    elif lng == "en":
+
+        time = Helper.Server_time()
+        ret = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK, "ServerTime" : time, "data" : Helper.app_data_in_lang(CONFIG.ENGLISH)}
+        return jsonify(ret)
+    
+    elif lng == "fa":
+
+        time = Helper.Server_time()
+        ret = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK, "ServerTime" : time, "data" : Helper.app_data_in_lang(CONFIG.FARSI)}
+        return jsonify(ret)
+
     time = Helper.Server_time()
-    ret = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK, "ServerTime" : time}
+    ret = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK, "ServerTime" : time, "data" : Helper.app_data_in_lang(lng)}
     return jsonify(ret)
 
 @app.route(Routes.ROUTE_SELLER, methods=['POST','GET'])
@@ -97,7 +117,7 @@ def Handle_Seller():
             return jsonify(ret)
 
         else:
-            return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
     return render_template('login.html')
 
@@ -128,18 +148,18 @@ def handle_add_sell():
 
                 if Mysql.write_user_from_seller_to_database(email, password, Token_seller, token, CreatedDate, ExpiredDate):
             
-                    return jsonify(Response.CREATE_USER_CORRECTLY)
+                    return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY})
                 
                 else :
-                    return jsonify(Response.ERROR_DATABASE)
+                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
             
             else:
-                return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+                return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
         except:
-            return jsonify(Response.ERROR_USER_NOT_EXIST)
+            return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
 
-    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
 @app.route(Routes.ROUTE_SELLS_APK, methods=['POST','GET'])
 @limiter.limit("100 per day")
@@ -161,7 +181,7 @@ def Handle_Sellers_json():
                 return jsonify(ret)
 
             else:
-                return jsonify(Response.ERROR_DATABASE)
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
 
         users = []
         all_users = Mysql.read_users_for_seller_from_database(Token)
@@ -191,7 +211,7 @@ def Handle_Sellers_json():
         return jsonify(json_data)
 
     else:
-        return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+        return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
 @app.route(Routes.ROUTE_SELLS_WEB, methods=['POST','GET'])
 @limiter.limit("100 per day")
@@ -213,7 +233,7 @@ def Handle_Sellers():
                 return jsonify(ret)
 
             else:
-                return jsonify(Response.ERROR_DATABASE)
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
 
         users = []
         all_users = Mysql.read_users_for_seller_from_database(Token)
@@ -270,11 +290,11 @@ def handle_make_payment_hash():
                 ret = {"code" : 200, "payment_hash" : payment_hash}
                 return jsonify(ret)
             
-            return jsonify(Response.ERROR_USER_OR_PASS_WRONG)    
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})    
 
-        return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+        return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
-    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
 @app.route(Routes.ROUTE_CHECK_PAY,methods=["GET","POST"])
 def handle_check_payment():
@@ -293,15 +313,15 @@ def handle_check_payment():
         if Helper.Check_Payment(txid,payment_hash):
             if Mysql.update_user(token, new_expiration_date) and Mysql.write_txid_to_database(txid, new_expiration_date):
 
-                return jsonify(Response.PAYMENT_SUCCESSFULLY)
+                return jsonify({"code" : 200, "data" : TEXT.PAYMENT_SUCCESSFULLY})
 
             else:
-                return jsonify(Response.ERROR_DATABASE)
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
         
         else:
-            return jsonify(Response.ERROR_PAYMENT_NOT_VALID)
+            return jsonify({"code" : 405, "data" : TEXT.ERROR_PAYMENT_NOT_VALID})
 
-    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
 @app.route(Routes.ROUTE_ADMIN,methods=["GET", "POST"])
 def handle_admin_page():
@@ -315,7 +335,7 @@ def handle_admin_page():
             return jsonify(ret)
 
         else:
-            return jsonify(Response.ERROR_DATABASE)
+            return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
             
     all_users = Mysql.read_users_from_database()
     users = []
@@ -355,19 +375,19 @@ def handle_create_user():
 
                 if Mysql.write_user_to_database(username, password, phone, email, token, "0", current_date, Expired_date):
                     
-                    return jsonify(Response.CREATE_USER_CORRECTLY_NOT_VERIFIED)
+                    return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY_NOT_VERIFIED})
                 
                 else :
                 
-                    return jsonify(Response.ERROR_DATABASE)
+                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
             
             else:
             
-                return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+                return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
         except:
 
-            return jsonify(Response.ERROR_USER_NOT_EXIST)
+            return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
 
     return render_template("register.html")
 
@@ -422,17 +442,17 @@ def handle_change_password():
 
                 if Mysql.update_user_password(username, new_password):
 
-                    return jsonify(Response.CHANGE_PASSWORD_CORRECTLY)
+                    return jsonify({"code" : 200, "data" : TEXT.CHANGE_PASSWORD_CORRECTLY})
                 
                 else:
 
-                    return jsonify(Response.ERROR_DATABASE)
+                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
             
-            return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
         
-        return jsonify(Response.ERROR_USER_NOT_EXIST)
+        return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
     
-    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
 @app.route(Routes.ROUTE_ADDS, methods=["GET", "POST"])
 def handle_Free_Plan_By_Adds():
@@ -457,17 +477,17 @@ def handle_Free_Plan_By_Adds():
 
                 if Mysql.update_user_free_plan_time(username, new_expiration_date):
 
-                    return jsonify({"code" : 200, "data" : "Change password correctly!", "ExpiredTime" : new_expiration_date})
+                    return jsonify({"code" : 200, "data" : TEXT.UPDATE_FREE_PLAN_CORRECTLY, "ExpiredTime" : new_expiration_date})
                 
                 else:
 
-                    return jsonify(Response.ERROR_DATABASE)
+                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
             
-            return jsonify(Response.ERROR_USER_OR_PASS_WRONG)
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
         
-        return jsonify(Response.ERROR_USER_NOT_EXIST)
+        return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
     
-    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
 
 @app.route(Routes.ROUTE_LOGIN,methods=["GET", "POST"])
@@ -533,25 +553,25 @@ def handle_login_user():
 
                     elif (Device != Device_GET or Device_OS != Device_OS_GET):
 
-                        ret = {"code" : 202, "data" : "You have an other device logged in this account", "Devices" : [{'os': Device_OS, 'Device': Device}]}
+                        ret = {"code" : 202, "data" : TEXT.ERROR_YOU_HAVE_AN_OTHER_DEVICE_LOGIN, "Devices" : [{'os': Device_OS, 'Device': Device}]}
                         return jsonify(ret)
 
                     else:
 
-                        ret = {"code" : 407, "data" : "Error Contact to Seller or provider", "AddsServer" : Servers_free_v, "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI}                   
+                        ret = {"code" : 407, "data" : TEXT.ERROR_DONE_EXPIRE_TIME, "AddsServer" : Servers_free_v, "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI}                   
                         return jsonify(ret)    
 
                 elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
 
-                    return jsonify(Response.DEVICE_AND_OS_SET_CORRECTLY)
+                    return jsonify({"code" : 201, "data" : TEXT.DEVICE_AND_OS_SET_CORRECTLY})
 
-                return jsonify(Response.ERROR_DATABASE)
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
 
-            return jsonify(Response.ERROR_USER_NOT_VERIFIED)
+            return jsonify({"code" : 406, "data" : TEXT.ERROR_USER_NOT_VERIFIED})
 
-        return jsonify(Response.ERROR_USER_NOT_EXIST)
+        return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
 
-    return jsonify(Response.ERROR_REQUEST_NOT_VALID)
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
 if __name__ == "__main__":
     app.run(CONFIG.HOST,CONFIG.RUNNING_PORT,debug=CONFIG.DEBUG_MODE)

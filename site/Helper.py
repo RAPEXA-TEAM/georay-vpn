@@ -3,6 +3,9 @@
 from web3 import Web3
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from googletrans import Translator
+
+import TEXT
 import smtplib
 import datetime
 import hashlib
@@ -338,3 +341,26 @@ def calculate_new_expiration_date(value):
     date = str(New_Expired_Day_Date).split(" ")[0]
 
     return date
+
+def app_data_in_lang(lang):
+    
+    ENGLISH_DATA = TEXT.APP_DATA_ENGLISH
+    PERSIAN_DATA = TEXT.APP_DATA_PERSIAN
+
+    if lang == 'en':
+
+        return ENGLISH_DATA
+    
+    if lang == 'fa':
+
+        return PERSIAN_DATA
+
+    else:
+        
+        trans = Translator()
+        
+        for key, value in ENGLISH_DATA.items():
+        
+            ENGLISH_DATA[key] = trans.translate(value,src="en",dest=lang).text
+        
+        return ENGLISH_DATA
