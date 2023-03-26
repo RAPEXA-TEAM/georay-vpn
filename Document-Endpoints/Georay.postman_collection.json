@@ -36,7 +36,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"zahrasaterabadi@gmail.com\",\n    \"pass\": \"acqitbpqfjkl\",\n    \"Device\":\"2201117TG,0.2.0\",\n    \"OS\": \"AndroidA\"\n}",
+							"raw": "{\n    \"email\": \"c@gmail.com\",\n    \"pass\": \"wrwdlzaeovqy\",\n    \"Device\":\"2201117TG,0.2.0\",\n    \"OS\": \"AndroidA\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +134,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"seyedi.hoseyn00@gmail.com\",\n    \"pass\": \"utbjakxsewik\",\n    \"newpass\" : \"mmdali1234\"\n}",
+							"raw": "{\n    \"email\": \"seyedi.hoseyn00@gmail.com\",\n    \"pass\": \"mmdali1234\",\n    \"newpass\" : \"aaaaaaaaa\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -390,14 +390,15 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/update",
+							"raw": "https://g3or4y.cfd/update/fa",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
 								"cfd"
 							],
 							"path": [
-								"update"
+								"update",
+								"fa"
 							]
 						}
 					},

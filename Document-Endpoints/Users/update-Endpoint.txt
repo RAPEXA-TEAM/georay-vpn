@@ -1,4 +1,6 @@
-Url : https://g3or4y.cfd/update
+Url : https://g3or4y.cfd/update/<lng>
+
+NOTICE: <lng> is optional if there is n lng data will be in english format persian and english is fast becuase they are in our server but other languages are will take 10 sec cuase it use google api translation
 
 Method : GET
 
@@ -11,6 +13,101 @@ Headers:
 
 Responses :
 
-{"code" : 200 , "version" : "v1.0" , "update_type" : "force"}
-{"code" : 200 , "version" : "v1.0" , "update_type" : "compatible"}
+{
+    "ServerTime": "2023-03-26 17:33:17.496641",
+    "data": {
+        "ARE_YOU_SURE_TO_LOGOUT_FROM_APP": "آیا مطمئن هستید که می خواهید از برنامه خارج شوید؟",
+        "BUY_PLAN": "خرید طرح",
+        "CHANGE_PASSWORD": "رمز عبور را تغییر دهید",
+        "CONNECTED": "متصل",
+        "DISCONNECTED": "قطع شده",
+        "EMAIL": "پست الکترونیک",
+        "LOGIN": "وارد شدن",
+        "LOGIN_WITH_THE_LAST_LOGGED_IN_ACCOUNT": "با آخرین حساب وارد شده وارد شوید",
+        "LOGOUT_CORRECTLY": "خروج",
+        "NO": "خیر",
+        "PASSWORD": "کلمه عبور",
+        "PRIVACY_AND_POLICY": "سیاست حفظ حریم خصوصی",
+        "PROTOCOLS": "سرور را انتخاب کنید",
+        "PROTOCOLS_AND_SERVICES": "پروتکل ها و خدمات",
+        "REMAINING_DAYS": "روزهای باقی مانده",
+        "REMEMBER_ME": "مرا به خاطر بسپار",
+        "SERVERSELECT_SERVER": "سرور",
+        "SIGN_UP": "ثبت نام",
+        "TELEGRAM": "تلگرام",
+        "VERSION": "نسخه",
+        "WATCH_ADD_AND_GET_PLAN": "برنامه افزودن و دریافت را تماشا کنید",
+        "WEBSITE": "سایت اینترنتی",
+        "YES": "بلی"
+    },
+    "force": "0",
+    "links": "",
+    "version": "0.2.0"
+}
+
+{
+    "ServerTime": "2023-03-26 17:31:23.466559",
+    "data": {
+        "ARE_YOU_SURE_TO_LOGOUT_FROM_APP": "Are you sure you want to log out from App?",
+        "BUY_PLAN": "Buy Plan",
+        "CHANGE_PASSWORD": "Change Password",
+        "CONNECTED": "Connected",
+        "DISCONNECTED": "Disconnected",
+        "EMAIL": "Email",
+        "LOGIN": "Login",
+        "LOGIN_WITH_THE_LAST_LOGGED_IN_ACCOUNT": "Log In With The Last Logged In Account",
+        "LOGOUT": "Logout",
+        "NO": "No",
+        "PASSWORD": "Password",
+        "PRIVACY_AND_POLICY": "Privacy & Policy",
+        "PROTOCOLS": "Protocols",
+        "PROTOCOLS_AND_SERVICES": "Protocols and Services",
+        "REMAINING_DAYS": "Remaining Days",
+        "REMEMBER_ME": "Remember Me",
+        "SELECT_SERVER": "Select Server",
+        "SERVER": "Server",
+        "SIGN_UP": "Sign Up",
+        "TELEGRAM": "Telegram",
+        "VERSION": "Version",
+        "WATCH_ADD_AND_GET_PLAN": "Watch Add and Get Plan",
+        "WEBSITE": "Website",
+        "YES": "Yes"
+    },
+    "force": "1",
+    "links": "",
+    "version": "1.0.0"
+}
+
+{
+    "ServerTime": "2023-03-26 17:28:00.787729",
+    "data": {
+        "ARE_YOU_SURE_TO_LOGOUT_FROM_APP": "Je, una uhakika unataka kuondoka kwenye Programu?",
+        "BUY_PLAN": "Nunua Mpango",
+        "CHANGE_PASSWORD": "Badilisha neno la siri",
+        "CONNECTED": "Imeunganishwa",
+        "DISCONNECTED": "Imetenganishwa",
+        "EMAIL": "Barua pepe",
+        "LOGIN": "Ingia",
+        "LOGIN_WITH_THE_LAST_LOGGED_IN_ACCOUNT": "Ingia na Akaunti ya Mwisho Iliyoingia",
+        "LOGOUT": "Ondoka",
+        "NO": "Hapana",
+        "PASSWORD": "Nenosiri",
+        "PRIVACY_AND_POLICY": "Faragha na Sera",
+        "PROTOCOLS": "Itifaki",
+        "PROTOCOLS_AND_SERVICES": "Itifaki na Huduma",
+        "REMAINING_DAYS": "Siku Zilizobaki",
+        "REMEMBER_ME": "Nikumbuke",
+        "SELECT_SERVER": "Chagua Seva",
+        "SERVER": "Seva",
+        "SIGN_UP": "Jisajili",
+        "TELEGRAM": "Telegramu",
+        "VERSION": "Toleo",
+        "WATCH_ADD_AND_GET_PLAN": "Tazama Ongeza na Upate Mpango",
+        "WEBSITE": "Tovuti",
+        "YES": "Ndiyo"
+    },
+    "force": "0",
+    "links": "",
+    "version": "0.2.0"
+}
 
