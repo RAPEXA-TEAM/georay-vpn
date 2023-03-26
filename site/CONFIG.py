@@ -54,3 +54,8 @@ PATH_SERVERS_MTN    = "/var/www/vpn/site/ServersMTN.csv"
 PATH_SERVERS_MCI    = "/var/www/vpn/site/ServersMCI.csv"
 RUNNING_PORT        = 80
 DEBUG_MODE          = False
+
+# LANGUAGES
+
+ENGLISH = "en"
+FARSI   = "fa"
