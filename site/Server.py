@@ -717,53 +717,6 @@ def handle_login_user():
 
     return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
-def Read_Sellers_from_csv():
-
-    import csv
-    
-    Sellers = {}
-
-    with open("Sellers.csv", newline='') as csvfile:
-        spamreader = csv.reader(csvfile)
-        for row in spamreader:
-            Sellers[row[0]] = row[1]
-
-    return Sellers
-
-def Read_Sellers_payed_from_csv(Seller):
-    
-    import csv
-    
-    with open("Sellers.csv", newline='') as csvfile:
-        spamreader = csv.reader(csvfile)
-            
-        for row in spamreader:
-
-            if Seller == str(row[0]):
-
-                return row[2]
-                
-        return None
-
-def read_sellers():
-
-    Sellers = Read_Sellers_from_csv()
-
-    for username, password in Sellers.items():  
-
-        if password == "20082008@#":
-            
-            current_date, Expired_date = Helper.free_plan_dates()
-            Mysql.write_seller_to_database(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), "mohsen")
-            print(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), "mohsen")
-
-        else:
-
-            current_date, Expired_date = Helper.free_plan_dates()
-            Mysql.write_seller_to_database(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), None)
-            print(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), None)
-
 if __name__ == "__main__":
-    #app.run(CONFIG.HOST,CONFIG.RUNNING_PORT,debug=CONFIG.DEBUG_MODE)
-
-    read_sellers()
+    
+    app.run(CONFIG.HOST,CONFIG.RUNNING_PORT,debug=CONFIG.DEBUG_MODE)
