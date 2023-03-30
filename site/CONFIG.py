@@ -47,9 +47,8 @@ DOWNLOAD_LINK = ""
 # /var/www/vpn/site/
 # PATH_EXPIRATION = '/var/www/vpn/site/Expiration.py'
 
-PATH_SELLERS        = '/var/www/vpn/site/Sellers.csv'
 PATH_SERVERS        = '/var/www/vpn/site/Servers.csv'
-PATH_FREE_SERVER    = '/var/www/vpn/site/FreeServer.csv'
+PATH_FREE_SERVER    = '/var/www/vpn/site/ServerFree.csv'
 PATH_SERVERS_MTN    = "/var/www/vpn/site/ServersMTN.csv"
 PATH_SERVERS_MCI    = "/var/www/vpn/site/ServersMCI.csv"
 RUNNING_PORT        = 80
