@@ -121,6 +121,63 @@ def Handle_Seller():
 
     return render_template('login.html')
 
+@app.route(Routes.ROUTE_ADD_RESELLER,methods=['GET', 'POST'])
+def handle_seller_add_reseller():
+
+    if request.method == "POST":
+        
+        reseller = str(request.json["reseller"])
+        seller = str(request.json["seller"]).strip()
+        Token_seller = str(request.json["tokenseller"])
+
+        password = Helper.generate_random_password()
+        Sellers = Helper.Read_Sellers()
+        Tokens = []
+        Token = Helper.reseller_hash_from_seller(reseller)
+        CreatedDate, ExpiredDate = Helper.monthly_plan_dates()
+
+        for username_db, password_db in Sellers.items():  
+            Tokens.append(Helper.seller_hash(username_db,password_db))
+
+        if Helper.Check_Seller(Token) and Token_seller in Tokens:
+
+            if Mysql.write_seller_to_database(reseller.strip(), password, Token, CreatedDate, "1", "0", seller):
+                ret = {"code" : 200, "data" : f"add reseller {reseller.strip()} successfully for seller {seller.strip()}!"}
+                return jsonify(ret)
+
+            return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+        
+        return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
+    
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
+
+@app.route(Routes.ROUTE_DEL_RESELLER,methods=["GET", "POST"])
+def handle_seller_delete_reseller():
+
+    if request.method == "POST":
+        
+        reseller = str(request.json["reseller"])
+        seller = str(request.json["seller"])
+        Token_seller = str(request.json["tokenseller"])
+
+        Sellers = Helper.Read_Sellers()
+        Tokens = []
+
+        for username_db, password_db in Sellers.items():  
+            Tokens.append(Helper.seller_hash(username_db,password_db))
+
+        if Token_seller in Tokens:
+
+            if (Mysql.delete_reseller_for_seller(seller.strip(),reseller.strip())):
+                ret = {"code" : 200, "data" : f"delete reseller {reseller.strip()} successfully for seller {seller.strip()}!"}
+                return jsonify(ret)
+
+            return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+        
+        return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
+    
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
+
 @app.route(Routes.ROUTE_ADD_SELL, methods=['POST', 'GET'])
 @limiter.limit("100 per day")
 def handle_add_sell():
@@ -236,6 +293,7 @@ def Handle_Sellers():
                 return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
 
         users = []
+        Sellerslist = []
         all_users = Mysql.read_users_for_seller_from_database(Token)
         user_counter = 0
 
@@ -247,12 +305,14 @@ def Handle_Sellers():
             if Helper.seller_hash(username_new,password_new) == Token:
                 
                 Seller[username_new] = password_new
+                allsellers = Mysql.read_resellers_for_Seller_from_database_or_404(username_new)
                 break
 
             else:
                 continue
 
-        seller_payed = Helper.Read_Sellers_payed(username_new)
+        seller_payed = int(Helper.Read_Sellers_payed(username_new))
+        reseller_sells = 0
 
         for user in all_users:
             
@@ -260,10 +320,18 @@ def Handle_Sellers():
             
             exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
-            users.append({'username' : user_db, 'password' : password_db, 'days' : exdays, 'token' : token_db, 'Device' : Device, 'OS' : Device_OS})
+            users.append({'username' : user_db, 'password' : password_db, 'days' : exdays, 'ExDate' : expierd_date, 'CrDate' : created_date, 'FrDate' : FreeTimeExpired, 'token' : token_db, 'Device' : Device, 'OS' : Device_OS})
             user_counter += 1
 
-        json_data = {"users" : users, "count" : user_counter, "seller" : Seller, "payed" : seller_payed}
+        for seller in allsellers:
+            
+            selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers, Reseller = seller
+
+            Sellerslist.append({'username' : selleruser, 'password' : sellerpassword,'CrDate' : sellerCreatedDate, 'token' : sellertoken, 'Paids' : Paidusers, 'Sells' : Sellusers , "Reseller" : Reseller})
+            reseller_sells += int(Sellusers)
+            seller_payed += int(Paidusers)
+
+        json_data = {"users" : users, "sellers" : Sellerslist, "count" : user_counter, "seller" : Seller, "payed" : str(seller_payed) ,"resellersSells" : str(reseller_sells)}
         return render_template('seller.html', data = json_data)
 
     else:
@@ -323,15 +391,82 @@ def handle_check_payment():
 
     return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
+@app.route(Routes.ROUTE_ADMIN_DEL_SELLER,methods=["GET", "POST"])
+def handle_admin_delete_seller():
+
+    if request.method == "POST":
+            
+        seller = str(request.json["seller"]).strip()
+
+        if (Mysql.delete_seller(seller)):
+            ret = {"code" : 200, "data" : f"delete seller {seller} successfully !"}
+            return jsonify(ret)
+
+        else:
+            return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
+
+@app.route(Routes.ROUTE_ADMIN_ADD_SELLER,methods=["GET", "POST"])
+def handle_admin_add_seller():
+
+    if request.method == "POST":
+
+        seller = str(request.json["seller"]).strip()
+        password = Helper.generate_random_password()
+        current_date, Expired_date = Helper.free_plan_dates()
+
+        if (Mysql.write_seller_to_database(seller, password, Helper.reseller_hash_from_seller(seller), current_date, "1", "0", None)):
+            ret = {"code" : 200, "data" : f"add seller {seller} successfully !"}
+            return jsonify(ret)
+
+        else:
+            return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
+
+@app.route(Routes.ROUTE_ADMIN_EDI_SELLER,methods=["GET", "POST"])
+def handle_admin_edit_seller():
+
+    if request.method == "POST":
+
+        seller = str(request.json["seller"]).strip()
+        payed = str(request.json["payed"]).strip()
+
+        if (Mysql.update_seller_paid_accounts(seller,payed)):
+            ret = {"code" : 200, "data" : f"update seller {seller} successfully to {payed} payed accounts!"}
+            return jsonify(ret)
+
+        else:
+            return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
+
+@app.route(Routes.ROUTE_ADMIN_DEL_USER,methods=["GET", "POST"])
+def handle_admin_delete_user():
+
+    if request.method == "POST":
+            
+        token = str(request.json["token"]).strip()
+
+        if (Mysql.delete_user_with_token(token)):
+            ret = {"code" : 200, "data" : f"delete user {token} successfully !"}
+            return jsonify(ret)
+
+        else:
+            return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
+
 @app.route(Routes.ROUTE_ADMIN,methods=["GET", "POST"])
 def handle_admin_page():
     '''this function is used to handle the admin private page to manage all users'''
 
     if request.method == "POST":
-        new_expiration_date = request.json["days"]
+        new_expiration_date = request.json["NewExDate"]
         token = str(request.json["data"])
         if (Mysql.update_user(token.strip(),new_expiration_date)):
-            ret = {"code" : 200, "data" : f"update {token.strip()} expired days to {new_expiration_date} days!"}
+            ret = {"code" : 200, "data" : f"update {token.strip()} expired days!"}
             return jsonify(ret)
 
         else:
@@ -343,15 +478,24 @@ def handle_admin_page():
         
         user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
     
-        #exdays = Helper.Calculate_expired_days_from_date(expierd_date)
+        exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
         if verified != "0":
-            users.append({'username' : user_db, 'password' : password_db,'phone' : Helper.Read_Sellers_from_token(phone_number), 'days' : expierd_date, 'token' : token, 'Device' : Device, 'OS' : Device_OS})
+            users.append({'username' : user_db, 'password' : password_db,'phone' : Helper.Read_Sellers_from_token(phone_number), 'days' : exdays, 'ExDate' : expierd_date, 'CrDate' : created_date, 'FrDate' : FreeTimeExpired , 'token' : token, 'Device' : Device, 'OS' : Device_OS})
         
         else:
             continue
 
-    return render_template("admin.html", data = {"users" : users})   
+    all_sellers = Mysql.read_all_sellers_from_database()
+    Sellers = []
+
+    for Seller in all_sellers:
+        
+        selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers, Reseller = Seller
+
+        Sellers.append({'username' : selleruser, 'password' : sellerpassword,'CrDate' : sellerCreatedDate, 'token' : sellertoken, 'Paids' : Paidusers, 'Sells' : Sellusers , "Reseller" : Reseller})
+
+    return render_template("admin.html", data = {"users" : users, "sellers" : Sellers})   
 
 @app.route(Routes.ROUTE_RIGISTER,methods=["GET", "POST"])
 def handle_create_user():
@@ -573,5 +717,51 @@ def handle_login_user():
 
     return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
+def Read_Sellers_from_csv():
+
+    import csv
+    
+    Sellers = {}
+
+    with open("Sellers.csv", newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            Sellers[row[0]] = row[1]
+
+    return Sellers
+
+def Read_Sellers_payed_from_csv(Seller):
+    
+    import csv
+    
+    with open("Sellers.csv", newline='') as csvfile:
+            spamreader = csv.reader(csvfile)
+            
+            for row in spamreader:
+
+                if Seller == row[0]:
+
+                    return row[2]
+
+                return None
+
+def read_sellers():
+
+    Sellers = Read_Sellers_from_csv()
+
+    for username, password in Sellers.items():  
+
+        if password == "20082008@#":
+            
+            current_date, Expired_date = Helper.free_plan_dates()
+            Mysql.write_seller_to_database(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), "mohsen")
+            
+        else:
+
+            current_date, Expired_date = Helper.free_plan_dates()
+            Mysql.write_seller_to_database(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), None)
+
 if __name__ == "__main__":
     app.run(CONFIG.HOST,CONFIG.RUNNING_PORT,debug=CONFIG.DEBUG_MODE)
+
+    #read_sellers()

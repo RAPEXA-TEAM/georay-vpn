@@ -201,18 +201,6 @@ def Read_free_servers():
     
     return Servers
 
-def Read_Sellers():
-    '''this function is used to read the sellers from the csv file'''
-
-    Sellers = {}
-
-    with open(CONFIG.PATH_SELLERS, newline='') as csvfile:
-        spamreader = csv.reader(csvfile)
-        for row in spamreader:
-            Sellers[row[0]] = row[1]
-
-    return Sellers
-
 def Check_Seller(username,password):
     Sellers = Read_Sellers()
     for username_for, password_for in Sellers.items():
@@ -252,6 +240,22 @@ def Check_User(email,token):
     else:
         return True
 
+def Check_Seller(token):
+    '''this function is used to check if the new token is valid or not'''
+    
+    seller = Mysql.read_one_seller_from_database_or_404(token)
+
+    if seller != None:
+
+        selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers, Reseller = seller
+        
+        if token == sellertoken:
+               
+            return False
+                
+    else:
+        return True
+
 def check_seller_from_token(Token):
     
     Sellers = Read_Sellers()
@@ -277,6 +281,10 @@ def Calculate_expired_days_from_date(expierd_date):
     delta = b - a
     exdays = str(delta).split(" ")[0]
     
+    if exdays == "0:00:00":
+
+        return "0"
+    
     return exdays
 
 def free_plan_dates():
@@ -297,31 +305,50 @@ def monthly_plan_dates():
 
     return current_date, Expired_date
 
+def Read_Sellers():
+    '''this function is used to read the sellers from the csv file'''
+
+    Sellers = {}
+    all_sellers = Mysql.read_all_sellers_from_database()
+    
+    for seller in all_sellers:
+        selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers, Reseller = seller
+        Sellers[selleruser] = sellerpassword
+    
+    return Sellers
+
 def Read_Sellers_from_token(Token):
     '''this function is used to read the sellers from the csv file'''
 
-    with open(CONFIG.PATH_SELLERS, newline='') as csvfile:
-        spamreader = csv.reader(csvfile)
-        for row in spamreader:
-                
-            if hashlib.sha256(("{"+str(row[0])+"}{"+str(row[1])+"}-georay").encode("utf-8")).hexdigest() == Token:
+    seller = Mysql.read_one_seller_from_database_with_token_or_404(Token)
+    
+    if seller != None:
 
-                return row[0]
+        selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers, Reseller = seller
+        
+        if Token == sellertoken:
 
-    return None
+            return selleruser
+        
+        return "WebSite"
+
+    return "WebSite"
 
 def Read_Sellers_payed(Seller):
     '''this function is used to read the seller payed from the csv file'''
 
-    with open(CONFIG.PATH_SELLERS, newline='') as csvfile:
-        spamreader = csv.reader(csvfile)
+    sellerinfo = Mysql.read_one_seller_from_database_or_404(Seller)
+
+    if sellerinfo != None:
+
+        selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers, Reseller = sellerinfo
         
-        for row in spamreader:
+        if Seller == selleruser:
 
-            if Seller == row[0]:
+            return Paidusers
 
-                return row[2]
-
+        return None
+    
     return None
 
 def generate_token(email):
@@ -329,6 +356,9 @@ def generate_token(email):
 
 def seller_hash(username,password):
     return hashlib.sha256(("{"+str(username)+"}{"+str(password)+"}-georay").encode("utf-8")).hexdigest()
+
+def reseller_hash_from_seller(username):
+    return hashlib.sha256(("{"+str(username)+"}-georay").encode("utf-8")).hexdigest()
 
 def make_payment_hash(value,token):
     return hashlib.sha256(f"{value}-{token}-georay".encode('utf-8')).hexdigest()

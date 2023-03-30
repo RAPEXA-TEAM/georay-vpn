@@ -80,16 +80,42 @@ def update_user_registration(Token):
     db.close()    
     return True
 
+def update_seller_paid_accounts(seller,payed):
+    
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'UPDATE sellers SET Paidusers = "{payed}" where selleruser = "{seller}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
 def write_user_to_database(username, password, phone, email, token, verified, CreatedDate, ExpiredDate):
     '''this function create user on database'''
     
     db = connect_to_database()
-    cur = db.cursor()                       
+    cur = db.cursor()                
     qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired) VALUES ("{username}", "{password}", "{phone}", "{email}", "{token}", "{verified}", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL);'
     cur.execute(qury)
     db.commit()
     db.close()    
     return True
+
+def write_seller_to_database(selleruser, sellerpassword, sellertoken, CreatedDate, Paidusers, Sellusers, Reseller=None):
+    '''this function create seller and reseller on database'''
+    try:
+
+        db = connect_to_database()
+        cur = db.cursor()
+        qury = f'INSERT INTO sellers (selleruser, sellerpassword, sellertoken, CreatedDate, Paidusers, Sellusers, Reseller) VALUES ("{selleruser}", "{sellerpassword}", "{sellertoken}", "{CreatedDate}", "{Paidusers}", "{Sellusers}", "{Reseller}");'
+        cur.execute(qury)
+        db.commit()
+        db.close()    
+        return True
+
+    except:
+
+        return False
 
 def write_user_from_seller_to_database(username, password, Token_seller, token, CreatedDate, ExpiredDate):
     '''this function create user that seller sells on database'''
@@ -133,6 +159,46 @@ def read_users_from_database():
     db.close()
     return cur.fetchall()
 
+def read_all_sellers_from_database():
+    '''this function return all users information from database'''
+
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'SELECT * FROM sellers;'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchall()
+
+def read_one_seller_from_database_with_token_or_404(sellertoken):
+    '''this function return all users information from database'''
+
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'SELECT * FROM sellers where sellertoken = "{sellertoken}";'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchone()
+
+def read_one_seller_from_database_or_404(username):
+    '''this function return all users information from database'''
+
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'SELECT * FROM sellers where selleruser = "{username}";'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchone()
+
+def read_resellers_for_Seller_from_database_or_404(selleruser):
+    '''this function return all users information from database'''
+
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'SELECT * FROM sellers where Reseller = "{selleruser}";'
+    cur.execute(qury)
+    db.close()
+    return cur.fetchall()
+
 def read_one_users_or_404_from_database(email):
     '''this function return all users information from database'''
 
@@ -168,6 +234,36 @@ def delete_user(token,token_seller):
     db = connect_to_database()
     cur = db.cursor()                       
     qury = f'DELETE FROM users WHERE phone = "{token_seller}" AND token = "{token}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
+def delete_user_with_token(token):
+
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'DELETE FROM users WHERE token = "{token}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
+def delete_seller(seller):
+
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'DELETE FROM sellers WHERE selleruser = "{seller}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
+def delete_reseller_for_seller(seller,reseller):
+
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'DELETE FROM sellers WHERE selleruser = "{reseller}" AND Reseller = "{seller}";'
     cur.execute(qury)
     db.commit()
     db.close()    

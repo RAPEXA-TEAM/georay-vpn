@@ -44,7 +44,175 @@
     <main
       class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-      <div class="container-fluid py-4">
+    <div id="delete-alert" style="width: 100%; height: 100vh; display: none; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 100;">
+      <div style="width: 300px; display: flex; flex-direction: column; padding: 16px; background-color: #fff; border-radius: 12px; color: #000; gap: 18px;">
+          <h3 style="font-size: 24px;">از حذف کاربر مطمعنید ؟</h3>
+          <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; gap: 12px;">
+              <button id="hide-alert" style="width: 100%; outline: none; border-radius: 6px; padding: 8px 8px; background-color: red; color: #fff; border: none;">لغو عملیات</button>
+              <button data-req="" id="delete-btn" style="width: 100%; outline: none; border-radius: 6px; padding: 8px 8px; background-color: red; color: #fff; border: none;">بله مطمعنم حذف کن</button>
+          </div>
+      </div>
+  </div>
+
+  <div id="delete-alert-seller" style="width: 100%; height: 100vh; display: none; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 100;">
+      <div style="width: 300px; display: flex; flex-direction: column; padding: 16px; background-color: #fff; border-radius: 12px; color: #000; gap: 18px;">
+          <h3 style="font-size: 24px;">از حذف فروشنده مطمعنید ؟</h3>
+          <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; gap: 12px;">
+              <button id="hide-alert-seller" style="width: 100%; outline: none; border-radius: 6px; padding: 8px 8px; background-color: red; color: #fff; border: none;">لغو عملیات</button>
+              <button data-req="" id="alert-delete-seller-btn" style="width: 100%; outline: none; border-radius: 6px; padding: 8px 8px; background-color: red; color: #fff; border: none;">بله مطمعنم حذف کن</button>
+          </div>
+      </div>
+  </div>
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div
+              class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+            >
+              <div
+                class="d-flex flex-row justify-content-between align-items-center bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 px-4"
+              >
+                <h6 class="text-white text-capitalize ps-3">Sellers</h6>
+                <span id="response-data-container" class="res-alert d-none btn btn-light"></span>
+                <a type="button" class="btn btn-light" href="/">Logout</a> 
+                <!-- TODO: edit this to show each response in wanted table -->
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <form class="text-secondary opacity-7" style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end; align-items: flex-end; gap: 4px; padding-right: 48px;">
+                  <input id="seller-add-email" type="email" style="width: 150px;" required placeholder="Enter Email"> 
+                  <button id="seller-add">+</button>
+                </form>
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      >
+                        Id
+                      </th>
+                      <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      >
+                        Seller
+                      </th>
+                      <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                      >
+                        Password
+                      </th>
+                      <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Creation Date
+                    </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      >
+                        Payed Sells
+                      </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      >
+                        Amount Sells
+                      </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      >
+                        Reseller
+                      </th>
+                      <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      EDITS
+                    </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for user in data.sellers %}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <h6 class="mb-0 text-sm">{{ loop.index }}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <h6 class="mb-0 text-sm" id="user-token">{{user.username}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">
+                          {{user.password}}
+                        </p>
+                        <p class="user-token text-xs text-secondary mb-0">
+                          {{user.token}}
+                        </p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span
+                          >{{user.CrDate}}</span
+                        >
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span
+                        class="day-container"
+                          >{{user.Paids}}</span
+                        >
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span
+                          >{{user.Sells}}</span
+                        >
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span
+                          class="badge badge-sm bg-gradient-success"
+                          >{{user.Reseller}}</span
+                        >
+                      </td>
+                      <td class="align-middle">
+                        <button
+                          id="edit-seller-btn"
+                          class="text-secondary font-weight-bold text-xs"
+                          data-toggle="tooltip"
+                          data-original-title="Edit user"
+                          data-type="edit"
+                        >
+                          Edit
+                        </button>
+                        <button
+                        id="delete-seller-btn"
+                        class="text-secondary font-weight-bold text-xs"
+                        data-toggle="tooltip"
+                        data-original-title="Delete user"
+                        data-type="delete"
+                      >
+                        Delete
+                      </button>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid py-4">
         <div class="row">
           <div class="col-12">
             <div class="card my-4">
@@ -56,7 +224,6 @@
                 >
                   <h6 class="text-white text-capitalize ps-3">Users</h6>
                   <span class="res-alert d-none btn btn-light"></span>
-                  <a type="button" class="btn btn-light" href="/">Logout</a>
                 </div>
               </div>
               <div class="card-body px-0 pb-2">
@@ -67,23 +234,48 @@
                         <th
                           class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                         >
-                          User
+                          Id
                         </th>
                         <th
                           class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                         >
-                          Token
+                          Users
                         </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                         >
-                          Days
+                          Password
                         </th>
+                        <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      >
+                        creation Date
+                      </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                         >
                           Expiration Date
                         </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Free Time Expiration
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          remaining days
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Seller
+                        </th>
+                        <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      >
+                        EDITS
+                      </th>
                         <th class="text-secondary opacity-7"></th>
                       </tr>
                     </thead>
@@ -115,13 +307,29 @@
                           <p class="text-xs font-weight-bold mb-0">
                             {{user.password}}
                           </p>
-                          <p class="user-token text-xs text-secondary mb-0">
+                          <p id="user-token" class="user-token text-xs text-secondary mb-0">
                             {{user.token}}
                           </p>
                         </td>
                         <td class="align-middle text-center text-sm">
                           <span
-                            class="day-container badge badge-sm bg-gradient-success"
+                            >{{user.CrDate}}</span
+                          >
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span
+                          class="day-container"
+                            >{{user.ExDate}}</span
+                          >
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span
+                            >{{user.FrDate}}</span
+                          >
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span
+                            class="badge badge-sm bg-gradient-success"
                             >{{user.days}}</span
                           >
                         </td>
@@ -140,6 +348,15 @@
                           >
                             Edit
                           </button>
+                          <button
+                          id="delete-user-btn"
+                          class="text-secondary font-weight-bold text-xs"
+                          data-toggle="tooltip"
+                          data-original-title="Delete user"
+                          data-type="delete"
+                        >
+                          Delete
+                        </button>
                         </td>
                       </tr>
                       {% endfor %}
@@ -168,7 +385,7 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        const allEditUserButtons = document.querySelectorAll("#edit-user-btn");
+        const allEditUserButtons = document.querySelectorAll("#edit-seller-btn");
         for (const btn of allEditUserButtons) {
           btn.addEventListener("click", (e) => {
             const dataType = e.target.getAttribute("data-type");
@@ -190,7 +407,7 @@
               input.type = "number";
               input.value = daysText;
               input.className = "day-container";
-              input.style.width = "40px";
+              input.style.width = "50px";
 
               // remove and add elements
               days.remove();
@@ -207,11 +424,12 @@
                 );
               const daysParent = days.parentElement;
 
+              const daysValue = days.value;
               // create span
               const span = document.createElement("span");
-              span.innerHTML = days.value;
+              span.innerHTML = daysValue;
               span.className =
-                "day-container badge badge-sm bg-gradient-success";
+                "day-container";
 
               // remove and add elements
               days.remove();
@@ -225,11 +443,11 @@
                 cache: "no-cache",
                 headers: new Headers({ "Content-Type": "application/json" }),
                 body: JSON.stringify({
-                  days: days.value,
-                  data: daysParent.parentElement.children[2].lastElementChild.textContent,
+                  payed: daysValue,
+                  seller: daysParent.parentElement.querySelector("#user-token").innerHTML,
                 }),
               };
-              fetch("https://g3or4y.cfd/d08ec689aef988a788aa6b5f6ed04a0efe57ca919d7d9d863d6322edd47f2d81", fetchOptions)
+              fetch(`${location.href}/edit_seller_payments`, fetchOptions)
                 .then((response) => {
                   if (response.ok) {
                     return response.json();
@@ -251,6 +469,242 @@
           });
         }
       });
+
+      document.querySelector("#seller-add").addEventListener("click", (e) => {
+        e.preventDefault();
+
+        fetch(`${location.href}/add_seller`, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: new Headers({ "Content-Type": "application/json" }),
+          body: JSON.stringify({
+            seller: document.querySelector("#seller-add-email").value
+          })
+        }).then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                }).then(res => {
+                    if (res.code === 200) {
+                        showResponse(res.data, "bg-success")
+                    } else {
+                        showResponse(res.data, "bg-danger")
+                    }
+                });
+      })
+
+      const allEditUserButtons = document.querySelectorAll("#edit-user-btn");
+        for (const btn of allEditUserButtons) {
+          btn.addEventListener("click", (e) => {
+            const dataType = e.target.getAttribute("data-type");
+            if (dataType === "edit") {
+              // change button text
+              e.target.innerHTML = "Submit";
+              e.target.setAttribute("data-type", "submit");
+
+              // get days info
+              const days =
+                e.target.parentElement.parentElement.querySelector(
+                  ".day-container"
+                );
+              const daysParent = days.parentElement;
+              const daysText = days.textContent;
+
+              // create input
+              const input = document.createElement("input");
+              input.type = "date";
+              input.value = daysText;
+              input.className = "day-container";
+              input.style.width = "100px";
+
+              // remove and add elements
+              days.remove();
+              daysParent.appendChild(input);
+            } else if (dataType === "submit") {
+              // change button text
+              e.target.innerHTML = "Edit";
+              e.target.setAttribute("data-type", "edit");
+
+              // get days info
+              const days =
+                e.target.parentElement.parentElement.querySelector(
+                  ".day-container"
+                );
+              const daysParent = days.parentElement;
+
+              const daysValue = days.value.replace("/", "-").split("T")[0]
+              // create span
+              const span = document.createElement("span");
+              span.innerHTML = daysValue;
+              span.className =
+                "day-container";
+
+              // remove and add elements
+              days.remove();
+              daysParent.appendChild(span);
+
+              // post data to backend
+              // TODO: edit dates instead of days 
+              const fetchOptions = {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                headers: new Headers({ "Content-Type": "application/json" }),
+                body: JSON.stringify({
+                  NewExDate: daysValue,
+                  data: daysParent.parentElement.children[2].lastElementChild.textContent,
+                }),
+              };
+              fetch("https://g3or4y.cfd/d08ec689aef988a788aa6b5f6ed04a0efe57ca919d7d9d863d6322edd47f2d81", fetchOptions)
+                .then((response) => {
+                  if (response.ok) {
+                    return response.json();
+                  }
+                })
+                .then((res) => {
+                  if (res.code === 200) {
+                    const alert = document.querySelector(".res-alert");
+                    alert.innerHTML = res.data;
+                    alert.classList.remove("d-none");
+
+                    setTimeout(() => {
+                      alert.innerHTML = "";
+                      alert.classList.add("d-none");
+                      location.reload()
+                    }, 3000);
+                  }
+                });
+            }
+          });
+        }
+      
+
+      // for edit username dates
+      const allEditButtons = document.querySelectorAll("#delete-btn");
+        for (const btn of allEditButtons) {
+            btn.addEventListener("click", (e) => {
+                const btn = e.target;
+                const data = btn.getAttribute("data-req");
+
+                // send new days to backend
+                const fetchOptions = {
+                    method: "post",
+                    headers: new Headers({
+                        "Content-Type": "application/json"
+                    }),
+                    body: JSON.stringify({
+                        token: data,
+                    })
+                }
+
+                fetch(`${location.href}/delete_user`, fetchOptions).then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                }).then(res => {
+                    if (res.code === 200) {
+                        showResponse(res.data, "bg-success")
+                    } else {
+                        showResponse(res.data, "bg-danger")
+                    }
+                });
+
+            })
+        }
+
+        // for edit username dates
+        const allDeleteButtons = document.querySelectorAll("#alert-delete-seller-btn");
+        for (const btn of allDeleteButtons) {
+            btn.addEventListener("click", (e) => {
+                const btn = e.target;
+                const data = btn.getAttribute("data-req");
+
+                // send new days to backend
+                const fetchOptions = {
+                    method: "post",
+                    headers: new Headers({
+                        "Content-Type": "application/json"
+                    }),
+                    body: JSON.stringify({
+                        seller: data
+                    })
+                }
+
+                fetch(`${location.href}/delete_seller`, fetchOptions).then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                }).then(res => {
+                    if (res.code === 200) {
+                        showResponse(res.data, "bg-success")
+                    } else {
+                        showResponse(res.data, "bg-danger")
+                    }
+                });
+
+            })
+        }
+        
+        function showResponse(text, className) {
+            const dataContainer = document.querySelector("#response-data-container");
+            dataContainer.className = className + " py-2 px-3 ml-1 rounded text-white";
+            dataContainer.innerHTML = text;
+            setTimeout(() => {
+                dataContainer.innerHTML = "";
+                dataContainer.className = "";
+                if (className === "bg-success") {
+                    location.reload();
+                }
+            }, 3000)
+        };
+        
+        for (const btn of document.querySelectorAll("#delete-user-btn")) {
+            btn.addEventListener("click", (e) => {
+                const btn = e.target;
+                const tableTr = btn.parentElement.parentElement;
+                const btnType = btn.getAttribute("data-type");
+
+                const daysStatic = tableTr.querySelector("#user-days-static");
+                const daysInput = tableTr.querySelector("#user-days-input");
+
+                changeDeleteAlertDisplay("flex", tableTr.querySelector("#user-token").innerHTML)
+            })
+        }
+
+        for (const btn of document.querySelectorAll("#delete-seller-btn")) {
+            btn.addEventListener("click", (e) => {
+                const btn = e.target;
+                const tableTr = btn.parentElement.parentElement;
+
+                const daysStatic = tableTr.querySelector("#user-days-static");
+                const daysInput = tableTr.querySelector("#user-days-input");
+
+                changeDeleteSellerAlertDisplay("flex", tableTr.querySelector("#user-token").innerHTML)
+            })
+        }
+
+        document.querySelector("#hide-alert").addEventListener("click", () => {
+            changeDeleteAlertDisplay("none", "")
+        })
+
+        document.querySelector("#hide-alert-seller").addEventListener("click", () => {
+            changeDeleteSellerAlertDisplay("none")
+        })
+
+        function changeDeleteSellerAlertDisplay(display, data) {
+            const alert = document.querySelector("#delete-alert-seller");
+            const btn = document.querySelector("#alert-delete-seller-btn");
+            alert.style.display = display
+            btn.setAttribute("data-req",data)
+        }
+
+        function changeDeleteAlertDisplay(display, data) {
+            const alert = document.querySelector("#delete-alert");
+            const btn = document.querySelector("#delete-btn");
+            alert.style.display = display
+            btn.setAttribute("data-req",data)
+        }
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
