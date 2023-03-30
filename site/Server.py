@@ -762,6 +762,6 @@ def read_sellers():
             Mysql.write_seller_to_database(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), None)
 
 if __name__ == "__main__":
-    app.run(CONFIG.HOST,CONFIG.RUNNING_PORT,debug=CONFIG.DEBUG_MODE)
+    #app.run(CONFIG.HOST,CONFIG.RUNNING_PORT,debug=CONFIG.DEBUG_MODE)
 
-    #read_sellers()
+    read_sellers()
