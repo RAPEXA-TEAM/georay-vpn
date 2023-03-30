@@ -139,7 +139,7 @@ def handle_seller_add_reseller():
         for username_db, password_db in Sellers.items():  
             Tokens.append(Helper.seller_hash(username_db,password_db))
 
-        if Helper.Check_Seller(Token) and Token_seller in Tokens:
+        if Helper.Check_Seller(reseller) and Token_seller in Tokens:
 
             if Mysql.write_seller_to_database(reseller.strip(), password, Token, CreatedDate, "1", "0", seller):
                 ret = {"code" : 200, "data" : f"add reseller {reseller.strip()} successfully for seller {seller.strip()}!"}

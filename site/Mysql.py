@@ -103,19 +103,14 @@ def write_user_to_database(username, password, phone, email, token, verified, Cr
 
 def write_seller_to_database(selleruser, sellerpassword, sellertoken, CreatedDate, Paidusers, Sellusers, Reseller=None):
     '''this function create seller and reseller on database'''
-    try:
 
-        db = connect_to_database()
-        cur = db.cursor()
-        qury = f'INSERT INTO sellers (selleruser, sellerpassword, sellertoken, CreatedDate, Paidusers, Sellusers, Reseller) VALUES ("{selleruser}", "{sellerpassword}", "{sellertoken}", "{CreatedDate}", "{Paidusers}", "{Sellusers}", "{Reseller}");'
-        cur.execute(qury)
-        db.commit()
-        db.close()    
-        return True
-
-    except:
-
-        return False
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f'INSERT INTO sellers (selleruser, sellerpassword, sellertoken, CreatedDate, Paidusers, Sellusers, Reseller) VALUES ("{selleruser}", "{sellerpassword}", "{sellertoken}", "{CreatedDate}", "{Paidusers}", "{Sellusers}", "{Reseller}");'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
 
 def write_user_from_seller_to_database(username, password, Token_seller, token, CreatedDate, ExpiredDate):
     '''this function create user that seller sells on database'''
