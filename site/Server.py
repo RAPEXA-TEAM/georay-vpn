@@ -735,15 +735,15 @@ def Read_Sellers_payed_from_csv(Seller):
     import csv
     
     with open("Sellers.csv", newline='') as csvfile:
-            spamreader = csv.reader(csvfile)
+        spamreader = csv.reader(csvfile)
             
-            for row in spamreader:
+        for row in spamreader:
 
-                if Seller == row[0]:
+            if Seller == str(row[0]):
 
-                    return row[2]
-
-                return None
+                return row[2]
+                
+        return None
 
 def read_sellers():
 
@@ -755,11 +755,13 @@ def read_sellers():
             
             current_date, Expired_date = Helper.free_plan_dates()
             Mysql.write_seller_to_database(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), "mohsen")
-            
+            print(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), "mohsen")
+
         else:
 
             current_date, Expired_date = Helper.free_plan_dates()
             Mysql.write_seller_to_database(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), None)
+            print(username, password, Helper.seller_hash(username,password), current_date, Read_Sellers_payed_from_csv(username), Read_Sellers_payed_from_csv(username), None)
 
 if __name__ == "__main__":
     #app.run(CONFIG.HOST,CONFIG.RUNNING_PORT,debug=CONFIG.DEBUG_MODE)
