@@ -110,7 +110,7 @@ def Handle_Seller():
         username = request.json['username']
         password = request.json['password']
 
-        if Helper.Check_Seller(username, password):
+        if Helper.Check_Seller_Login(username, password):
 
             token = Helper.seller_hash(username,password)
             ret = {"code" : 200 , "Token" : token}

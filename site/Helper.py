@@ -201,7 +201,7 @@ def Read_free_servers():
     
     return Servers
 
-def Check_Seller(username,password):
+def Check_Seller_Login(username,password):
     Sellers = Read_Sellers()
     for username_for, password_for in Sellers.items():
         if username_for == username and password_for == password:
