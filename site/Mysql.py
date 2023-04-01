@@ -224,6 +224,16 @@ def read_users_for_seller_from_database(Token_seller):
     db.close()
     return cur.fetchall()
 
+def read_users_count_for_seller_from_database(Token_seller):
+    '''this function return all users information that one seller sells'''
+
+    db = connect_to_database()
+    cur = db.cursor()
+    qury = f"SELECT count(*) FROM users WHERE phone = '{Token_seller}' AND email = '{Token_seller}';"
+    cur.execute(qury)
+    db.close()
+    return cur.fetchone()
+
 def delete_user(token,token_seller):
 
     db = connect_to_database()

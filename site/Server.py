@@ -325,9 +325,11 @@ def Handle_Sellers():
 
         for seller in allsellers:
             
-            selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers, Reseller = seller
+            selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers_db, Reseller = seller
+            Sellusers,=Mysql.read_users_count_for_seller_from_database(sellertoken)
 
-            Sellerslist.append({'username' : selleruser, 'password' : sellerpassword,'CrDate' : sellerCreatedDate, 'token' : sellertoken, 'Paids' : Paidusers, 'Sells' : Sellusers , "Reseller" : Reseller})
+            Sellerslist.append({'username' : selleruser, 'password' : sellerpassword,'CrDate' : sellerCreatedDate, 'token' : sellertoken, 'Paids' : Paidusers, 'Sells' : str(Sellusers) , "Reseller" : Reseller})
+            
             reseller_sells += int(Sellusers)
             seller_payed += int(Paidusers)
 
@@ -491,9 +493,10 @@ def handle_admin_page():
 
     for Seller in all_sellers:
         
-        selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers, Reseller = Seller
+        selleruser, sellerpassword, sellertoken, sellerCreatedDate, Paidusers, Sellusers_db, Reseller = Seller
+        Sellusers,=Mysql.read_users_count_for_seller_from_database(sellertoken)
 
-        Sellers.append({'username' : selleruser, 'password' : sellerpassword,'CrDate' : sellerCreatedDate, 'token' : sellertoken, 'Paids' : Paidusers, 'Sells' : Sellusers , "Reseller" : Reseller})
+        Sellers.append({'username' : selleruser, 'password' : sellerpassword,'CrDate' : sellerCreatedDate, 'token' : sellertoken, 'Paids' : Paidusers, 'Sells' : str(Sellusers) , "Reseller" : Reseller})
 
     return render_template("admin.html", data = {"users" : users, "sellers" : Sellers})   
 
