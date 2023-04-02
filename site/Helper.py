@@ -137,7 +137,7 @@ def Check_Free_Plan_Time(username):
 
     if user != None:
 
-        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
 
         if FreeTimeExpired != None:
 
@@ -215,7 +215,7 @@ def Check_User_Reverse(token):
 
     if user != None:
 
-        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
 
         if token == token_db:
 
@@ -231,7 +231,7 @@ def Check_User(email,token):
 
     if user != None:
 
-        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+        user_db, password_db, phone_number, email_db, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
         
         if token == token_db:
                
@@ -371,6 +371,14 @@ def calculate_new_expiration_date(value):
     date = str(New_Expired_Day_Date).split(" ")[0]
 
     return date
+
+def return_usage(usage):
+
+    if usage == None:
+
+        return "0"
+    
+    return usage
 
 def app_data_in_lang(lang):
     
