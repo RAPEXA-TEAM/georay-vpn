@@ -47,6 +47,16 @@ def update_user_password(username, password):
     db.close()    
     return True
 
+def update_user_usage_from_database(username,usage):
+
+    db = connect_to_database()
+    cur = db.cursor()                       
+    qury = f'UPDATE users SET usagee = "{usage}" where user = "{username}";'
+    cur.execute(qury)
+    db.commit()
+    db.close()    
+    return True
+
 def add_user_device_to_database(email, Device, OS):
     '''this function update user expired time on database'''
     
@@ -95,7 +105,7 @@ def write_user_to_database(username, password, phone, email, token, verified, Cr
     
     db = connect_to_database()
     cur = db.cursor()                
-    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired) VALUES ("{username}", "{password}", "{phone}", "{email}", "{token}", "{verified}", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL);'
+    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired, usagee) VALUES ("{username}", "{password}", "{phone}", "{email}", "{token}", "{verified}", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL, "0");'
     cur.execute(qury)
     db.commit()
     db.close()    
@@ -117,7 +127,7 @@ def write_user_from_seller_to_database(username, password, Token_seller, token, 
     
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "{token}", "1", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL);'
+    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired, usagee) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "{token}", "1", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL, "0");'
     cur.execute(qury)
     db.commit()
     db.close()    
