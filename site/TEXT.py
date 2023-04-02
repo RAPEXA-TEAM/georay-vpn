@@ -9,6 +9,7 @@ CREATE_USER_CORRECTLY                   = "user created successfully"
 CREATE_USER_CORRECTLY_NOT_VERIFIED      = "user created successfully but not verified"
 PAYMENT_SUCCESSFULLY                    = "successful payment"   
 DEVICE_AND_OS_SET_CORRECTLY             = "Device and OS set correctly for this user"
+USED_ONE_GIG_MORE                       = "Used one more Gigabyte for this user"
 
 # TEXT ERROR
 
