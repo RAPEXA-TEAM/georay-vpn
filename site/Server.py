@@ -530,7 +530,7 @@ def handle_admin_page():
         exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
         if verified != "0":
-            users.append({'username' : user_db, 'password' : password_db,'phone' : Helper.Read_Sellers_from_token(phone_number), 'days' : exdays, 'ExDate' : expierd_date, 'CrDate' : created_date, 'FrDate' : FreeTimeExpired , 'token' : token, 'Device' : Device, 'OS' : Device_OS})
+            users.append({'username' : user_db, 'password' : password_db,'phone' : Helper.Read_Sellers_from_token(phone_number), 'days' : exdays, 'ExDate' : expierd_date, 'CrDate' : created_date, 'FrDate' : FreeTimeExpired , 'token' : token, 'Device' : Device, 'OS' : Device_OS, 'usage' : Helper.return_usage(usage_db)})
         
         else:
             continue
