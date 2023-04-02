@@ -55,7 +55,7 @@ def logout_apk():
 
         if user != None:
 
-            user_db, password_db, phone_number, email, token, verify, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+            user_db, password_db, phone_number, email, token, verify, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage_db = user
             
             if (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET):
 
@@ -67,6 +67,53 @@ def logout_apk():
 
                     return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
             
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
+        
+        return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
+    
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
+
+@app.route(Routes.ROUTE_UPDATE_DATA_USAGE, methods=['POST','GET'])
+def update_user_usage():
+    '''this function is used to update one gig more user'''
+
+    if request.method == 'POST':
+        
+        username = request.json["email"]
+        
+        user = Mysql.read_one_users_or_404_from_database(username)
+
+        if user != None:
+
+            user_db, password_db, phone_number, email, token, verify, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage_db = user
+            
+            if usage_db is not None:
+
+                usage = int(usage_db) + 1
+
+                if username == user_db:
+
+                    if Mysql.update_user_usage_from_database(username,str(usage)):
+
+                        return jsonify({"code" : 200, "data" : TEXT.USED_ONE_GIG_MORE})
+                    
+                    else:
+
+                        return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+            else:
+
+                usage = 1
+
+                if username == user_db:
+
+                    if Mysql.update_user_usage_from_database(username,str(usage)):
+
+                        return jsonify({"code" : 200, "data" : TEXT.USED_ONE_GIG_MORE})
+                    
+                    else:
+
+                        return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+
             return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
         
         return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
@@ -257,7 +304,7 @@ def Handle_Sellers_json():
 
         for user in all_users:
 
-            user_db, password_db, Token_seller, Token_seller, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired= user
+            user_db, password_db, Token_seller, Token_seller, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
 
             exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
@@ -316,7 +363,7 @@ def Handle_Sellers():
 
         for user in all_users:
             
-            user_db, password_db, Token_seller, Token_seller, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired= user
+            user_db, password_db, Token_seller, Token_seller, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
             
             exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
@@ -352,7 +399,7 @@ def handle_make_payment_hash():
 
         if user != None:
 
-            user_db, password_db, phone_number, email, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+            user_db, password_db, phone_number, email, token_db, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
 
             if token == token_db:
 
@@ -478,7 +525,7 @@ def handle_admin_page():
     users = []
     for user in all_users:
         
-        user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+        user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage_db = user
     
         exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
@@ -583,7 +630,7 @@ def handle_change_password():
 
         if user != None:
 
-            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
             
             if username == user_db and password == password_db:
 
@@ -616,7 +663,7 @@ def handle_Free_Plan_By_Adds():
 
         if user != None:
 
-            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
             
             if username == user_db and password == password_db and Device == Device_GET and Device_OS == Device_OS_GET:
                 
@@ -668,13 +715,13 @@ def handle_login_user():
 
         if user != None:
 
-            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired = user
+            user_db, password_db, phone_number, email, token, verified, Device, Device_OS , created_date, expierd_date, FreeTimeExpired, usage = user
 
             exdays = Helper.Calculate_expired_days_from_date(expierd_date)
 
             if verified != "0":
 
-                user_data[username] = {'password' : password_db, 'username' : user_db, 'days' : exdays, 'token' : token, 'Device' : Device, 'OS' : Device_OS} 
+                user_data[username] = {'password' : password_db, 'username' : user_db, 'days' : exdays, 'token' : token, 'Device' : Device, 'OS' : Device_OS, 'usage' : Helper.return_usage(usage)} 
 
                 if Device is not None and Device_OS is not None:
 
@@ -686,7 +733,7 @@ def handle_login_user():
 
                     update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
 
-                    if (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and int(exdays) > 0):
+                    if (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and int(exdays) > 0 and int(Helper.return_usage(usage)) < 20):
 
                         prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
                         ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
