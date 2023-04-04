@@ -80,6 +80,7 @@ def update_user_usage():
     if request.method == 'POST':
         
         username = request.json["email"]
+        password = request.json["password"]
         
         user = Mysql.read_one_users_or_404_from_database(username)
 
@@ -91,7 +92,7 @@ def update_user_usage():
 
                 usage = int(usage_db) + 1
 
-                if username == user_db:
+                if username == user_db and password == password_db:
 
                     if Mysql.update_user_usage_from_database(username,str(usage)):
 
@@ -100,11 +101,14 @@ def update_user_usage():
                     else:
 
                         return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+            
+                return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
+            
             else:
 
                 usage = 1
 
-                if username == user_db:
+                if username == user_db and password == password_db:
 
                     if Mysql.update_user_usage_from_database(username,str(usage)):
 
@@ -113,7 +117,7 @@ def update_user_usage():
                     else:
 
                         return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
-
+            
             return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
         
         return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
