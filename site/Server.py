@@ -732,6 +732,7 @@ def handle_login_user():
                     Servers_v = Helper.Read_servers()
                     Servers_v_MTN = Helper.Read_servers_irancell()
                     Servers_v_MCI = Helper.Read_servers_hamrah()
+                    Servers_v_MKH = Helper.Read_servers_MOKH()
                     Servers_free_v = Helper.Read_free_servers()
                     servers_o = [] #TODO: add it for next update
 
@@ -740,13 +741,13 @@ def handle_login_user():
                     if (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and int(exdays) > 0 and int(Helper.return_usage(usage)) < 20):
 
                         prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI, "MKH" : Servers_v_MKH , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
                         return jsonify(ret)
                     
                     elif (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and Helper.Check_Free_Plan_Time(username)):
 
                         prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI, "MKH" : Servers_v_MKH , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
                         return jsonify(ret)
 
                     elif (Device != Device_GET or Device_OS != Device_OS_GET):

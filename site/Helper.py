@@ -189,6 +189,17 @@ def Read_servers_hamrah():
     
     return Servers
 
+def Read_servers_MOKH():
+
+    Servers = []
+
+    with open(CONFIG.PATH_SERVERS_MKH, newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            Servers.append(row[1])
+
+    return Servers
+
 def Read_free_servers():
     '''this function is used to read the Free Saw Adds servers from the csv file'''
 
