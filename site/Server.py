@@ -34,7 +34,7 @@ app.config.update(
 
 # ROUTER
 
-@app.route('/download_apk')
+@app.route(Routes.ROUTE_DOWNLOAD_APK)
 def downloadapk ():
     '''this function will download the apk file'''
 

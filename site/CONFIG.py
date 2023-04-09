@@ -39,9 +39,9 @@ PRICE_TRE_MONTH = 150000
 
 # Update version
 
-VERSION       = "0.2.0"
+VERSION       = "0.4.0"
 VERSION_TYPE  = "0" # 0 : False, 1 : True
-DOWNLOAD_LINK = ""
+DOWNLOAD_LINK = "https://g3or4y.cfd/download_apk"
 
 # Config Production
 # /var/www/vpn/site/

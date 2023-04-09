@@ -8,6 +8,7 @@ ROUTE_ADMIN_DEL_SELLER    = "/d08ec689aef988a788aa6b5f6ed04a0efe57ca919d7d9d863d
 ROUTE_ADMIN_ADD_SELLER    = "/d08ec689aef988a788aa6b5f6ed04a0efe57ca919d7d9d863d6322edd47f2d81/add_seller"
 ROUTE_ADMIN_EDI_SELLER    = "/d08ec689aef988a788aa6b5f6ed04a0efe57ca919d7d9d863d6322edd47f2d81/edit_seller_payments"
 ROUTE_MAIN                = "/"
+ROUTE_DOWNLOAD_APK        = "/download_apk"
 ROUTE_LOGOUT              = "/logout"
 ROUTE_LOGOUT_APK          = "/logout_apk"
 ROUTE_UPDATE              = "/update"
