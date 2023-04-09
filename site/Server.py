@@ -2,7 +2,7 @@
 
 # import libraries that required for the service
 
-from flask import Flask, jsonify, request, render_template, redirect, url_for
+from flask import Flask, jsonify, request, render_template, redirect, url_for, send_file
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -33,6 +33,12 @@ app.config.update(
 )
 
 # ROUTER
+
+@app.route('/download_apk')
+def downloadapk ():
+    '''this function will download the apk file'''
+
+    return send_file(CONFIG.PATH_APK, as_attachment=True)
 
 @app.route(Routes.ROUTE_LOGOUT)
 def logout():
