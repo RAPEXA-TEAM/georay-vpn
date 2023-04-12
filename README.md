@@ -15,4 +15,3 @@ Pro v2ray vpn with user management and resseler management
 9. CREATE TABLE txids (txid VARCHAR(255) NOT NULL, days VARCHAR(255) NOT NULL, time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE (txid));
 
 ALTER TABLE users ADD usagee varchar(255);
-
