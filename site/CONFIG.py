@@ -15,8 +15,8 @@ ALTER_PASSWORD = "georayadminpassword"
 # MySQL Configs
 
 MYSQL_HOST    = "127.0.0.1"
-MYSQL_USER    = "selleruserr"
-MYSQL_PASS    = "Sellerpass1!"
+MYSQL_USER    = "selleruserrr"
+MYSQL_PASS    = "Sellerpass1!!"
 MYSQL_DATABAS = "sells"
 
 # Smtp Email Configs
