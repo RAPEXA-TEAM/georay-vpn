@@ -748,35 +748,35 @@ def handle_login_user():
 
                         prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
                         ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI, "MKH" : Servers_v_MKH , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
-                        return jsonify(ret)
+                        return jsonify(ret), 200
                     
                     elif (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and Helper.Check_Free_Plan_Time(username)):
 
                         prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
                         ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI, "MKH" : Servers_v_MKH , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
-                        return jsonify(ret)
+                        return jsonify(ret), 200
 
                     elif (Device != Device_GET or Device_OS != Device_OS_GET):
 
                         ret = {"code" : 202, "data" : TEXT.ERROR_YOU_HAVE_AN_OTHER_DEVICE_LOGIN, "Devices" : [{'os': Device_OS, 'Device': Device}]}
-                        return jsonify(ret)
+                        return jsonify(ret), 202
 
                     else:
 
                         ret = {"code" : 407, "data" : TEXT.ERROR_DONE_EXPIRE_TIME, "AddsServer" : Servers_free_v, "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI}                   
-                        return jsonify(ret)    
+                        return jsonify(ret), 407
 
                 elif Mysql.add_user_device_to_database(username, Device_GET, Device_OS_GET):
 
-                    return jsonify({"code" : 201, "data" : TEXT.DEVICE_AND_OS_SET_CORRECTLY})
+                    return jsonify({"code" : 201, "data" : TEXT.DEVICE_AND_OS_SET_CORRECTLY}), 201
 
-                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE}), 403
 
-            return jsonify({"code" : 406, "data" : TEXT.ERROR_USER_NOT_VERIFIED})
+            return jsonify({"code" : 406, "data" : TEXT.ERROR_USER_NOT_VERIFIED}), 406
 
-        return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
+        return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST}) , 404
 
-    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
+    return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID}) , 402
 
 if __name__ == "__main__":
     
