@@ -105,7 +105,7 @@ def write_user_to_database(username, password, phone, email, token, verified, Cr
     
     db = connect_to_database()
     cur = db.cursor()                
-    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired, usagee) VALUES ("{username}", "{password}", "{phone}", "{email}", "{token}", "{verified}", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL, "0");'
+    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired, usagee) VALUES ("{username}", "{password}", "{phone}", "{email}", "{token}", "{verified}", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", "{ExpiredDate}", "0");'
     cur.execute(qury)
     db.commit()
     db.close()    
