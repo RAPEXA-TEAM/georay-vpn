@@ -44,7 +44,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/login",
+							"raw": "http://dv.d4rk4pp.sbs/login",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -93,7 +93,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/usage",
+							"raw": "http://dv.d4rk4pp.sbs/usage",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -142,7 +142,7 @@
 							}
 						},
 						"url": {
-							"raw": "hhttps://g3or4y.cfd/ads",
+							"raw": "hhttp://dv.d4rk4pp.sbs/ads",
 							"protocol": "hhttps",
 							"host": [
 								"g3or4y",
@@ -191,7 +191,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/change_password",
+							"raw": "http://dv.d4rk4pp.sbs/change_password",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -240,7 +240,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/logout_apk",
+							"raw": "http://dv.d4rk4pp.sbs/logout_apk",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -289,7 +289,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/register",
+							"raw": "http://dv.d4rk4pp.sbs/register",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -338,7 +338,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/makepaymenthash",
+							"raw": "http://dv.d4rk4pp.sbs/makepaymenthash",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -387,7 +387,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/payment",
+							"raw": "http://dv.d4rk4pp.sbs/payment",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -439,7 +439,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/update/fa",
+							"raw": "http://dv.d4rk4pp.sbs/update/fa",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -494,7 +494,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/seller",
+							"raw": "http://dv.d4rk4pp.sbs/seller",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -543,7 +543,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/add_sell",
+							"raw": "http://dv.d4rk4pp.sbs/add_sell",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -592,7 +592,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"raw": "http://dv.d4rk4pp.sbs/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "https",
 							"host": [
 								"g3or4y",
@@ -650,7 +650,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://g3or4y.cfd/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
+							"raw": "http://dv.d4rk4pp.sbs/sells_json?Token=6b3fb46606c862e9e280e36b6f76b204fab032d0574751ec0ff16bdad83c49d2",
 							"protocol": "https",
 							"host": [
 								"g3or4y",

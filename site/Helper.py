@@ -28,7 +28,7 @@ def Send_Registration_Email(username,password,token):
     text = f"""\
     Hi,
     Check out the link below To register your Georay VPN account:
-    https://g3or4y.cfd/Authentication?Token={token}
+    http://dv.d4rk4pp.sbs/Authentication?Token={token}
     \n
     username: {username}
     password: {password}
@@ -39,7 +39,7 @@ def Send_Registration_Email(username,password,token):
     <body>
         <p>Hi,<br>
         Check out the link below To register your Georay VPN account:</p>
-        <p><a href="https://g3or4y.cfd/Authentication?Token={token}">Register Now!</a></p>
+        <p><a href="http://dv.d4rk4pp.sbs/Authentication?Token={token}">Register Now!</a></p>
         <br>
         <p>Username: {username}</p>
         <p>Password: {password}</p>
