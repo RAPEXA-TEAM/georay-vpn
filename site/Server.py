@@ -570,28 +570,23 @@ def handle_create_user():
         
         token = Helper.generate_token(email)
 
-        try :
-            if Helper.Check_User(email,token) and password == rpassword:
-                
-                Helper.Send_Registration_Email(username,password,token)
-
-                current_date, Expired_date = Helper.free_plan_dates()
-
-                if Mysql.write_user_to_database(username, password, phone, email, token, "0", current_date, Expired_date):
-                    
-                    return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY_NOT_VERIFIED})
-                
-                else :
-                
-                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+        if Helper.Check_User(email,token) and password == rpassword:
             
-            else:
+            Helper.Send_Registration_Email(username,password,token)
+
+            current_date, Expired_date = Helper.free_plan_dates()
+
+            if Mysql.write_user_to_database(username, password, phone, email, token, "0", current_date, Expired_date):
+                
+                return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY_NOT_VERIFIED})
             
-                return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
-
-        except:
-
-            return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
+            else :
+            
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+        
+        else:
+        
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
     return render_template("register.html")
 
