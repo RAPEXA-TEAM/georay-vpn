@@ -254,24 +254,19 @@ def handle_add_sell():
         for username_db, password_db in Sellers.items():  
             Tokens.append(Helper.seller_hash(username_db,password_db))
 
-        try :
+        if Helper.Check_User(email,token) and Token_seller in Tokens:
             
-            if Helper.Check_User(email,token) and Token_seller in Tokens:
-                
-                CreatedDate, ExpiredDate = Helper.monthly_plan_dates()
+            CreatedDate, ExpiredDate = Helper.monthly_plan_dates()
 
-                if Mysql.write_user_from_seller_to_database(email, password, Token_seller, token, CreatedDate, ExpiredDate):
+            if Mysql.write_user_from_seller_to_database(email, password, Token_seller, token, CreatedDate, ExpiredDate):
+        
+                return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY})
             
-                    return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY})
-                
-                else :
-                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
-            
-            else:
-                return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
-
-        except:
-            return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
+            else :
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+        
+        else:
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
     return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
