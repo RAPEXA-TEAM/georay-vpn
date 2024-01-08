@@ -127,7 +127,7 @@ def write_user_from_seller_to_database(username, password, Token_seller, token, 
     
     db = connect_to_database()
     cur = db.cursor()                       
-    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired, usagee) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "{token}", "1", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", NULL, "0");'
+    qury = f'INSERT INTO users (user, password, phone, email, token, verified, Device, OS, CreatedDate, ExpiredDate, FreeTimeExpired, usagee) VALUES ("{username}", "{password}", "{Token_seller}", "{Token_seller}", "{token}", "1", NULL, NULL, "{CreatedDate}", "{ExpiredDate}", "{ExpiredDate}", "0");'
     cur.execute(qury)
     db.commit()
     db.close()    
