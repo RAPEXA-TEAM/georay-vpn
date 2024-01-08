@@ -50,7 +50,7 @@ Responses :
 
 ----------------------------------------------------------------
 
-Url : georay.store/sells_json
+Url : dv.d4rk4pp.sbs/sells_json
 
 Method : POST
 
