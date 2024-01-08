@@ -47,12 +47,12 @@ DOWNLOAD_LINK = "http://dv.d4rk4pp.sbs/"
 # /var/www/vpn/site/
 # PATH_EXPIRATION = '/var/www/vpn/site/Expiration.py'
 
-PATH_SERVERS        = '/var/www/vpn/site/Servers.csv'
-PATH_FREE_SERVER    = '/var/www/vpn/site/ServerFree.csv'
-PATH_SERVERS_MTN    = "/var/www/vpn/site/ServersMTN.csv"
-PATH_SERVERS_MCI    = "/var/www/vpn/site/ServersMCI.csv"
-PATH_SERVERS_MKH    = "/var/www/vpn/site/ServersMOKH.csv"
-PATH_APK            = "/var/www/vpn/site/georay4.apk"
+PATH_SERVERS        = '/var/www/vpn/vpn/site/Servers.csv'
+PATH_FREE_SERVER    = '/var/www/vpn/vpn/site/ServerFree.csv'
+PATH_SERVERS_MTN    = "/var/www/vpn/vpn/site/ServersMTN.csv"
+PATH_SERVERS_MCI    = "/var/www/vpn/vpn/site/ServersMCI.csv"
+PATH_SERVERS_MKH    = "/var/www/vpn/vpn/site/ServersMOKH.csv"
+PATH_APK            = "/var/www/vpn/vpn/site/georay4.apk"
 RUNNING_PORT        = 80
 DEBUG_MODE          = False
 
