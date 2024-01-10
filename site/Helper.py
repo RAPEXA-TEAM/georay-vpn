@@ -177,6 +177,18 @@ def Read_servers_irancell():
     
     return Servers
 
+def Read_servers_DNSs():
+    '''this function is used to read the DNS servers from the csv file'''
+
+    Servers = []
+
+    with open(CONFIG.PATH_SERVERS_DNS, newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            Servers.append(row[1])
+    
+    return Servers
+
 def Read_servers_hamrah():
     '''this function is used to read the hamrah aval servers from the csv file'''
 

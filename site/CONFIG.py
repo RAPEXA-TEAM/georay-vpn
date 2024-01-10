@@ -52,6 +52,7 @@ PATH_FREE_SERVER    = '/var/www/vpn/vpn/site/ServerFree.csv'
 PATH_SERVERS_MTN    = "/var/www/vpn/vpn/site/ServersMTN.csv"
 PATH_SERVERS_MCI    = "/var/www/vpn/vpn/site/ServersMCI.csv"
 PATH_SERVERS_MKH    = "/var/www/vpn/vpn/site/ServersMOKH.csv"
+PATH_SERVERS_DNS    = "/var/www/vpn/vpn/site/ServersDns.csv"
 PATH_APK            = "/var/www/vpn/vpn/site/georay4.apk"
 RUNNING_PORT        = 80
 DEBUG_MODE          = False
