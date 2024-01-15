@@ -378,8 +378,7 @@ def generate_token(email):
     return hashlib.sha256(f"{email}-georay".encode('utf-8')).hexdigest()
 
 def seller_hash(username,password):
-    #return hashlib.sha256(("{"+str(username)+"}{"+str(password)+"}-georay").encode("utf-8")).hexdigest()
-    return hashlib.sha256(("{"+str(username)+"}-georay").encode("utf-8")).hexdigest()
+    return hashlib.sha256(("{"+str(username)+"}{"+str(password)+"}-georay").encode("utf-8")).hexdigest()
 
 def reseller_hash_from_seller(username):
     return hashlib.sha256(("{"+str(username)+"}-georay").encode("utf-8")).hexdigest()
