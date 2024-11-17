@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd/update/<lng>
+Url : http://dv.d4rk4pp.sbs/update/<lng>
 
 NOTICE: <lng> is optional if there is n lng data will be in english format persian and english is fast becuase they are in our server but other languages are will take 10 sec cuase it use google api translation
 

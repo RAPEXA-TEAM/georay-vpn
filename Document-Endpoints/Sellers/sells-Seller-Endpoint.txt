@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd/sells_json?Token=<token-seller>
+Url : http://dv.d4rk4pp.sbs/sells_json?Token=<token-seller>
 
 Method : GET
 
@@ -50,7 +50,7 @@ Responses :
 
 ----------------------------------------------------------------
 
-Url : georay.store/sells_json
+Url : dv.d4rk4pp.sbs/sells_json
 
 Method : POST
 

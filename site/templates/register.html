@@ -84,7 +84,7 @@
               email,
           }),
         };
-        fetch("https://g3or4y.cfd/register", fetchOptions)
+        fetch("http://dv.d4rk4pp.sbs/register", fetchOptions)
           .then((response) => {
             if (response.ok) {
               return response.json();
@@ -94,7 +94,7 @@
             if (res.code === 200) {
               showAlert(res.data, "alert-warning");
               setTimeout(() => {
-                window.location.href = "http://georay.store";
+                window.location.href = "http://dv.d4rk4pp.sbs";
               }, 3000);
             } else {
               showAlert(res.data);

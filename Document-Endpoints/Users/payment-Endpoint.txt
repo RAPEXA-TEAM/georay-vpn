@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd/payment
+Url : http://dv.d4rk4pp.sbs/payment
 
 Method : POST
 

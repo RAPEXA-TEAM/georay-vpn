@@ -244,24 +244,19 @@ def handle_add_sell():
         for username_db, password_db in Sellers.items():  
             Tokens.append(Helper.seller_hash(username_db,password_db))
 
-        try :
+        if Helper.Check_User(email,token) and Token_seller in Tokens:
             
-            if Helper.Check_User(email,token) and Token_seller in Tokens:
-                
-                CreatedDate, ExpiredDate = Helper.monthly_plan_dates()
+            CreatedDate, ExpiredDate = Helper.monthly_plan_dates()
 
-                if Mysql.write_user_from_seller_to_database(email, password, Token_seller, token, CreatedDate, ExpiredDate):
+            if Mysql.write_user_from_seller_to_database(email, password, Token_seller, token, CreatedDate, ExpiredDate):
+        
+                return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY})
             
-                    return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY})
-                
-                else :
-                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
-            
-            else:
-                return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
-
-        except:
-            return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
+            else :
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+        
+        else:
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
     return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
@@ -558,28 +553,23 @@ def handle_create_user():
         
         token = Helper.generate_token(email)
 
-        try :
-            if Helper.Check_User(email,token) and password == rpassword:
-                
-                Helper.Send_Registration_Email(username,password,token)
-
-                current_date, Expired_date = Helper.free_plan_dates()
-
-                if Mysql.write_user_to_database(username, password, phone, email, token, "0", current_date, Expired_date):
-                    
-                    return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY_NOT_VERIFIED})
-                
-                else :
-                
-                    return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+        if Helper.Check_User(email,token) and password == rpassword:
             
-            else:
+            Helper.Send_Registration_Email(username,password,token)
+
+            current_date, Expired_date = Helper.free_plan_dates()
+
+            if Mysql.write_user_to_database(username, password, phone, email, token, "0", current_date, Expired_date):
+                
+                return jsonify({"code" : 200, "data" : TEXT.CREATE_USER_CORRECTLY_NOT_VERIFIED})
             
-                return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
-
-        except:
-
-            return jsonify({"code" : 404, "data" : TEXT.ERROR_USER_NOT_EXIST})
+            else :
+            
+                return jsonify({"code" : 403, "data" : TEXT.ERROR_DATABASE})
+        
+        else:
+        
+            return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
     return render_template("register.html")
 
@@ -700,12 +690,13 @@ def handle_login_user():
 
             Servers_v = Helper.Read_servers()
             Servers_v_MTN = Helper.Read_servers_irancell()
+            ServersDns = Helper.Read_servers_DNSs() 
             Servers_v_MCI = Helper.Read_servers_hamrah()
             servers_o = [] #TODO: add it for next update
 
             update_info = {"version" : CONFIG.VERSION , "force" : CONFIG.VERSION_TYPE, "links" : CONFIG.DOWNLOAD_LINK}
             prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-            ret = {"code" : 200, "data" : {'password' : CONFIG.ALTER_PASSWORD, 'username' : CONFIG.ALTER_USERNAME, 'days' : "999", 'token' : "GOD"}, "v2ray" : Servers_v, "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI, "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+            ret = {"code" : 200, "data" : {'password' : CONFIG.ALTER_PASSWORD, 'username' : CONFIG.ALTER_USERNAME, 'days' : "999", 'token' : "GOD"}, "v2ray" : Servers_v, "MTN" : Servers_v_MTN, "DNS" : ServersDns, "MCI" : Servers_v_MCI, "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
             return jsonify(ret)
 
         user = Mysql.read_one_users_or_404_from_database(username)
@@ -725,6 +716,7 @@ def handle_login_user():
 
                     Servers_v = Helper.Read_servers()
                     Servers_v_MTN = Helper.Read_servers_irancell()
+                    ServersDns = Helper.Read_servers_DNSs()
                     Servers_v_MCI = Helper.Read_servers_hamrah()
                     Servers_v_MKH = Helper.Read_servers_MOKH()
                     Servers_free_v = Helper.Read_free_servers()
@@ -735,13 +727,13 @@ def handle_login_user():
                     if (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and int(exdays) > 0 and int(Helper.return_usage(usage)) < 20):
 
                         prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI, "MKH" : Servers_v_MKH , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "DNS" : ServersDns, "MCI" : Servers_v_MCI, "MKH" : Servers_v_MKH , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
                         return jsonify(ret), 200
                     
                     elif (username == user_db and passw == password_db and Device == Device_GET and Device_OS == Device_OS_GET and Helper.Check_Free_Plan_Time(username)):
 
                         prices = {"1month" : CONFIG.PRICE_ONE_MONTH, "2month" : CONFIG.PRICE_TWO_MONTH, "3month" : CONFIG.PRICE_TRE_MONTH}
-                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "MCI" : Servers_v_MCI, "MKH" : Servers_v_MKH , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
+                        ret = {"code" : 200, "data" : user_data[username], "v2ray" : Servers_v , "MTN" : Servers_v_MTN, "DNS" : ServersDns, "MCI" : Servers_v_MCI, "MKH" : Servers_v_MKH , "openconnect" : servers_o, "prices" : prices, "update_info" : update_info}
                         return jsonify(ret), 200
 
                     elif (Device != Device_GET or Device_OS != Device_OS_GET):

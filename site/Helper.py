@@ -28,7 +28,7 @@ def Send_Registration_Email(username,password,token):
     text = f"""\
     Hi,
     Check out the link below To register your Georay VPN account:
-    https://g3or4y.cfd/Authentication?Token={token}
+    http://dv.d4rk4pp.sbs/Authentication?Token={token}
     \n
     username: {username}
     password: {password}
@@ -39,7 +39,7 @@ def Send_Registration_Email(username,password,token):
     <body>
         <p>Hi,<br>
         Check out the link below To register your Georay VPN account:</p>
-        <p><a href="https://g3or4y.cfd/Authentication?Token={token}">Register Now!</a></p>
+        <p><a href="http://dv.d4rk4pp.sbs/Authentication?Token={token}">Register Now!</a></p>
         <br>
         <p>Username: {username}</p>
         <p>Password: {password}</p>
@@ -171,6 +171,18 @@ def Read_servers_irancell():
     Servers = []
 
     with open(CONFIG.PATH_SERVERS_MTN, newline='') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            Servers.append(row[1])
+    
+    return Servers
+
+def Read_servers_DNSs():
+    '''this function is used to read the DNS servers from the csv file'''
+
+    Servers = []
+
+    with open(CONFIG.PATH_SERVERS_DNS, newline='') as csvfile:
         spamreader = csv.reader(csvfile)
         for row in spamreader:
             Servers.append(row[1])
@@ -366,7 +378,9 @@ def generate_token(email):
     return hashlib.sha256(f"{email}-georay".encode('utf-8')).hexdigest()
 
 def seller_hash(username,password):
-    return hashlib.sha256(("{"+str(username)+"}{"+str(password)+"}-georay").encode("utf-8")).hexdigest()
+
+    #return hashlib.sha256(("{"+str(username)+"}{"+str(password)+"}-georay").encode("utf-8")).hexdigest()
+    return hashlib.sha256(("{"+str(username)+"}-georay").encode("utf-8")).hexdigest()
 
 def reseller_hash_from_seller(username):
     return hashlib.sha256(("{"+str(username)+"}-georay").encode("utf-8")).hexdigest()

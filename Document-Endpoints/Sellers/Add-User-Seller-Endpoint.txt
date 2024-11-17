@@ -1,4 +1,4 @@
-Url : https://g3or4y.cfd/add_sell
+Url : http://dv.d4rk4pp.sbs/add_sell
 
 Method : POST
 

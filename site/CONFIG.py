@@ -15,8 +15,8 @@ ALTER_PASSWORD = "georayadminpassword"
 # MySQL Configs
 
 MYSQL_HOST    = "127.0.0.1"
-MYSQL_USER    = "selleruserrr"
-MYSQL_PASS    = "Sellerpass1!!"
+MYSQL_USER    = "selleruserr"
+MYSQL_PASS    = "Sellerpass1!"
 MYSQL_DATABAS = "sells"
 
 # Smtp Email Configs
@@ -39,20 +39,21 @@ PRICE_TRE_MONTH = 150000
 
 # Update version
 
-VERSION       = "0.4.0"
+VERSION       = "0.2.0"
 VERSION_TYPE  = "0" # 0 : False, 1 : True
-DOWNLOAD_LINK = "https://g3or4y.cfd/"
+DOWNLOAD_LINK = "http://dv.d4rk4pp.sbs/"
 
 # Config Production
 # /var/www/vpn/site/
 # PATH_EXPIRATION = '/var/www/vpn/site/Expiration.py'
 
-PATH_SERVERS        = '/var/www/vpn/site/Servers.csv'
-PATH_FREE_SERVER    = '/var/www/vpn/site/ServerFree.csv'
-PATH_SERVERS_MTN    = "/var/www/vpn/site/ServersMTN.csv"
-PATH_SERVERS_MCI    = "/var/www/vpn/site/ServersMCI.csv"
-PATH_SERVERS_MKH    = "/var/www/vpn/site/ServersMOKH.csv"
-PATH_APK            = "/var/www/vpn/site/georay4.apk"
+PATH_SERVERS        = '/var/www/vpn/vpn/site/Servers.csv'
+PATH_FREE_SERVER    = '/var/www/vpn/vpn/site/ServerFree.csv'
+PATH_SERVERS_MTN    = "/var/www/vpn/vpn/site/ServersMTN.csv"
+PATH_SERVERS_MCI    = "/var/www/vpn/vpn/site/ServersMCI.csv"
+PATH_SERVERS_MKH    = "/var/www/vpn/vpn/site/ServersMOKH.csv"
+PATH_SERVERS_DNS    = "/var/www/vpn/vpn/site/ServersDns.csv"
+PATH_APK            = "/var/www/vpn/vpn/site/georay4.apk"
 RUNNING_PORT        = 80
 DEBUG_MODE          = False
 
