@@ -4,8 +4,6 @@
 
 from flask import Flask, jsonify, request, render_template, redirect, url_for, send_file
 from flask_cors import CORS
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 
 import Mysql      #SERVER MYSQL
 import CONFIG     #SERVER CONGIG
@@ -16,12 +14,6 @@ import TEXT       #SERVER RESPONSE
 # Flask app configuration
 
 app = Flask(__name__)
-limiter = Limiter(
-    get_remote_address,
-    app=app,
-    default_limits=["200 per day", "50 per hour"],
-    storage_uri="memory://",
-)
 
 # CORS
 CORS(app)
@@ -158,7 +150,6 @@ def handle_update(lng):
     return jsonify(ret)
 
 @app.route(Routes.ROUTE_SELLER, methods=['POST','GET'])
-@limiter.limit("50 per day")
 def Handle_Seller():
     '''this function is used to handle the seller login page'''
 
@@ -236,7 +227,6 @@ def handle_seller_delete_reseller():
     return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
 @app.route(Routes.ROUTE_ADD_SELL, methods=['POST', 'GET'])
-@limiter.limit("100 per day")
 def handle_add_sell():
     '''this function is used to handle the add user from seller page'''
 
@@ -276,7 +266,6 @@ def handle_add_sell():
     return jsonify({"code" : 402, "data" : TEXT.ERROR_REQUEST_NOT_VALID})
 
 @app.route(Routes.ROUTE_SELLS_APK, methods=['POST','GET'])
-@limiter.limit("100 per day")
 def Handle_Sellers_json():
     '''this function is used to handle the sells from one seller in json format'''
 
@@ -328,7 +317,6 @@ def Handle_Sellers_json():
         return jsonify({"code" : 401, "data" : TEXT.ERROR_USER_OR_PASS_WRONG})
 
 @app.route(Routes.ROUTE_SELLS_WEB, methods=['POST','GET'])
-@limiter.limit("100 per day")
 def Handle_Sellers():
     '''this function is used to handle the sells from one seller'''
 
